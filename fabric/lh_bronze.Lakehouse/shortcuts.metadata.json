@@ -1,1 +1,92 @@
-[]
+[
+  {
+    "name": "weather_location",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/ref/weather_location",
+        "itemId": "4253bc10-6b78-9c2c-418e-f4d629e2304e",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "MountedRelationalDatabase"
+      }
+    }
+  },
+  {
+    "name": "production_type",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/ref/production_type",
+        "itemId": "4253bc10-6b78-9c2c-418e-f4d629e2304e",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "MountedRelationalDatabase"
+      }
+    }
+  },
+  {
+    "name": "interconnector",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/ref/interconnector",
+        "itemId": "4253bc10-6b78-9c2c-418e-f4d629e2304e",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "MountedRelationalDatabase"
+      }
+    }
+  },
+  {
+    "name": "dataset_area",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/ref/dataset_area",
+        "itemId": "4253bc10-6b78-9c2c-418e-f4d629e2304e",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "MountedRelationalDatabase"
+      }
+    }
+  },
+  {
+    "name": "country",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/ref/country",
+        "itemId": "4253bc10-6b78-9c2c-418e-f4d629e2304e",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "MountedRelationalDatabase"
+      }
+    }
+  },
+  {
+    "name": "area",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/ref/area",
+        "itemId": "4253bc10-6b78-9c2c-418e-f4d629e2304e",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "MountedRelationalDatabase"
+      }
+    }
+  },
+  {
+    "name": "business",
+    "path": "/Files",
+    "target": {
+      "type": "AdlsGen2",
+      "adlsGen2": {
+        "connectionId": "ad7da06a-3d10-41a4-8cac-3261a2265d2f",
+        "location": "https://stenergyrm.dfs.core.windows.net",
+        "subpath": "/landing/business"
+      }
+    }
+  }
+]
