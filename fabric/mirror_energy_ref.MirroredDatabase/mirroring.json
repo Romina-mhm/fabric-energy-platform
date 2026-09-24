@@ -1,0 +1,23 @@
+{
+  "properties": {
+    "source": {
+      "type": "AzureSqlDatabase",
+      "typeProperties": {
+        "connection": "b9d50b1b-92b3-4647-a845-cf08448f6955",
+        "landingZone": {
+          "type": "MountedRelationalDatabase",
+          "typeProperties": {}
+        }
+      }
+    },
+    "target": {
+      "type": "MountedRelationalDatabase",
+      "typeProperties": {
+        "defaultSchema": "dbo",
+        "format": "Delta",
+        "retentionInDays": 1,
+        "enableDeltaChangeDataFeed": false
+      }
+    }
+  }
+}
