@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "pl_bronze_holidays"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "5952f8d4-465a-9562-424d-7e4b5561727e"
+  }
+}

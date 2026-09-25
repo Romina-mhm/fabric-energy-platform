@@ -1,0 +1,192 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "v_year",
+          "value": "@if(empty(pipeline().parameters.year), formatDateTime(utcNow(), 'yyyy'), pipeline().parameters.year)"
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "set_year",
+        "dependsOn": []
+      },
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "LakehouseTableSource"
+          },
+          "datasetSettings": {
+            "type": "LakehouseTable",
+            "typeProperties": {
+              "table": "country"
+            },
+            "schema": [],
+            "linkedService": {
+              "name": "lh_bronze",
+              "properties": {
+                "type": "Lakehouse",
+                "typeProperties": {
+                  "artifactId": "0a7c6fb8-0ebf-9ebb-4546-f37f82f9a133",
+                  "workspaceId": "00000000-0000-0000-0000-000000000000",
+                  "rootFolder": "Tables"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          },
+          "firstRowOnly": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "lkp_countries",
+        "dependsOn": [
+          {
+            "activity": "set_year",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Filter",
+        "typeProperties": {
+          "items": {
+            "value": "@activity('lkp_countries').output.value",
+            "type": "Expression"
+          },
+          "condition": {
+            "value": "@equals(item().is_active, true)",
+            "type": "Expression"
+          }
+        },
+        "name": "flt_active",
+        "dependsOn": [
+          {
+            "activity": "lkp_countries",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "batchCount": 4,
+          "items": {
+            "value": "@activity('flt_active').output.Value",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "RestSource",
+                  "requestMethod": "GET",
+                  "paginationRules": {
+                    "supportRFC5988": "true"
+                  },
+                  "httpRequestTimeout": "00:01:40",
+                  "requestInterval": "00.00:00:00.010",
+                  "datasetSettings": {
+                    "type": "RestResource",
+                    "typeProperties": {
+                      "relativeUrl": "@concat('PublicHolidays/', variables('v_year'), '/', item().country_code)"
+                    },
+                    "schema": [],
+                    "externalReferences": {
+                      "connection": "cd325be5-c034-46ab-a3ed-cb476d288951"
+                    },
+                    "annotations": []
+                  }
+                },
+                "sink": {
+                  "type": "JsonSink",
+                  "formatSettings": {
+                    "type": "JsonWriteSettings",
+                    "filePattern": "arrayOfObjects"
+                  },
+                  "storeSettings": {
+                    "type": "LakehouseWriteSettings"
+                  },
+                  "datasetSettings": {
+                    "type": "Json",
+                    "typeProperties": {
+                      "location": {
+                        "type": "LakehouseLocation",
+                        "folderPath": {
+                          "value": "@concat('raw/holidays/', variables('v_year'))",
+                          "type": "Expression"
+                        },
+                        "fileName": {
+                          "value": "@concat('public_holidays__', item().country_code, '__', variables('v_year'), '.json')",
+                          "type": "Expression"
+                        }
+                      }
+                    },
+                    "schema": {},
+                    "linkedService": {
+                      "name": "lh_bronze",
+                      "properties": {
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "artifactId": "0a7c6fb8-0ebf-9ebb-4546-f37f82f9a133",
+                          "workspaceId": "00000000-0000-0000-0000-000000000000",
+                          "rootFolder": "Files"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "enableStaging": false
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "copy_holidays",
+              "dependsOn": []
+            }
+          ]
+        },
+        "name": "for_each_country",
+        "dependsOn": [
+          {
+            "activity": "flt_active",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ],
+    "parameters": {
+      "year": {
+        "type": "string"
+      }
+    },
+    "variables": {
+      "v_year": {
+        "type": "String"
+      }
+    }
+  }
+}
