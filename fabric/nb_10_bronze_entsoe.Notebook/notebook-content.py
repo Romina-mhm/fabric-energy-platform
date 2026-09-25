@@ -22,7 +22,7 @@
 
 # CELL ********************
 
-mode = "backfill"            # "test" (3 days, no watermark update) | "backfill" | "incremental"
+mode = "incremental"            # "test" (3 days, no watermark update) | "backfill" | "incremental"
 test_days = 3
 backfill_start = "2024-01-01"
 repull_days = 3          # incremental: re-download the last N days to catch ENTSO-E corrections
@@ -93,7 +93,7 @@ if "crossborder_flow" in wanted:
     targets += [("crossborder_flow", f"{r.from_area_code}>{r.to_area_code}") for r in flow_jobs]
 
 print(f"{len(targets)} dataset/area targets")
-display(pd.DataFrame(targets, columns=["dataset", "area_key"]).groupby("dataset").size())
+print(pd.DataFrame(targets, columns=["dataset", "area_key"]).groupby("dataset").size().to_string())
 
 # METADATA ********************
 
@@ -134,6 +134,29 @@ jobs = [(ds, key, s, e)
         for ds, key in targets
         for s, e in month_chunks(window_start(ds, key), window_end(ds))]
 print(f"{len(jobs)} API calls planned")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# Resume support: a backfill skips monthly chunks that an earlier run already downloaded
+if mode == "backfill":
+    done = spark.sql("""
+        SELECT dataset, area_key, request_start_utc, request_end_utc
+        FROM ctl_ingest_log
+        WHERE source = 'entsoe' AND status IN ('ok', 'no_data')
+    """).collect()
+    done_keys = {(r.dataset, r.area_key,
+                  pd.Timestamp(r.request_start_utc).tz_localize("UTC"),
+                  pd.Timestamp(r.request_end_utc).tz_localize("UTC")) for r in done}
+    before = len(jobs)
+    jobs = [j for j in jobs if (j[0], j[1], j[2], j[3]) not in done_keys]
+    print(f"Resume: {before - len(jobs)} chunks already done, {len(jobs)} left to download")
 
 # METADATA ********************
 
@@ -218,13 +241,44 @@ print(f"Finished: {len(results)} calls")
 
 if mode == "test":
     print("Test mode: watermark not updated")
-else:
+
+elif mode == "backfill":
+    # Use the log of ALL runs: a key advances only if the latest attempt of every
+    # monthly backfill chunk succeeded (ok / no_data)
+    spark.sql("""
+        MERGE INTO ctl_watermark t
+        USING (
+            WITH latest AS (
+                SELECT dataset, area_key, request_start_utc, request_end_utc, status,
+                       ROW_NUMBER() OVER (PARTITION BY dataset, area_key, request_start_utc, request_end_utc
+                                          ORDER BY ingested_at_utc DESC) AS rn
+                FROM ctl_ingest_log
+                WHERE source = 'entsoe'
+                  AND date_format(request_start_utc, 'dd HH:mm') = '01 00:00'   -- monthly backfill chunks only
+            )
+            SELECT 'entsoe' AS source, dataset, area_key,
+                   LEAST(MAX(request_end_utc), current_timestamp()) AS loaded_until_utc,
+                   current_timestamp() AS updated_at_utc
+            FROM latest
+            WHERE rn = 1
+            GROUP BY dataset, area_key
+            HAVING SUM(CASE WHEN status = 'error' THEN 1 ELSE 0 END) = 0
+        ) s
+        ON t.source = s.source AND t.dataset = s.dataset AND t.area_key = s.area_key
+        WHEN MATCHED THEN UPDATE SET t.loaded_until_utc = s.loaded_until_utc,
+                                     t.updated_at_utc  = s.updated_at_utc
+        WHEN NOT MATCHED THEN INSERT *
+    """)
+    spark.sql("""SELECT dataset, COUNT(*) AS keys, MIN(loaded_until_utc) AS min_loaded_until
+                 FROM ctl_watermark WHERE source = 'entsoe' GROUP BY dataset""").show(truncate=False)
+    
+else:  # incremental
     res = pd.DataFrame(results)
     summary = (res.assign(is_error=res.status.eq("error"))
                   .groupby(["dataset", "area_key"])
                   .agg(errors=("is_error", "sum"), max_end=("request_end_utc", "max"))
                   .reset_index())
-    ok = summary[summary.errors == 0]          # only advance keys with no failed chunk
+    ok = summary[summary.errors == 0]
     wm_rows = [(r.dataset, r.area_key, min(pd.Timestamp(r.max_end), now_utc).to_pydatetime())
                for r in ok.itertuples()]
     if wm_rows:
@@ -233,14 +287,13 @@ else:
         spark.sql("""
             MERGE INTO ctl_watermark t
             USING (SELECT 'entsoe' AS source, dataset, area_key, loaded_until_utc,
-                          current_timestamp() AS updated_at_utc
-                   FROM wm_updates) s
+                          current_timestamp() AS updated_at_utc FROM wm_updates) s
             ON t.source = s.source AND t.dataset = s.dataset AND t.area_key = s.area_key
             WHEN MATCHED THEN UPDATE SET t.loaded_until_utc = s.loaded_until_utc,
                                          t.updated_at_utc  = s.updated_at_utc
             WHEN NOT MATCHED THEN INSERT *
         """)
-    print(f"Watermark advanced for {len(wm_rows)} keys; {len(summary) - len(ok)} keys kept back due to errors")
+    print(f"Watermark advanced for {len(wm_rows)} keys")
 
 # METADATA ********************
 
@@ -251,9 +304,26 @@ else:
 
 # CELL ********************
 
+import json
+
 res = pd.DataFrame(results)
-display(res.groupby(["dataset", "status"]).size().unstack(fill_value=0))
-display(res[res.status == "error"][["dataset", "area_key", "error_message"]])
+if res.empty:
+    summary = {"calls": 0, "note": "nothing to download (all chunks already done)"}
+    print(summary["note"])
+else:
+    counts = res.groupby(["dataset", "status"]).size().unstack(fill_value=0)
+    print(counts.to_string())
+    errors = res[res.status == "error"]
+    print(f"\n{len(errors)} errors")
+    if len(errors):
+        print(errors[["dataset", "area_key", "error_message"]].head(50).to_string())
+    summary = {"calls": int(len(res)),
+               "ok": int((res.status == "ok").sum()),
+               "no_data": int((res.status == "no_data").sum()),
+               "errors": int(len(errors))}
+
+# The exit value appears in the pipeline's Notebook activity output
+notebookutils.notebook.exit(json.dumps(summary))
 
 # METADATA ********************
 
