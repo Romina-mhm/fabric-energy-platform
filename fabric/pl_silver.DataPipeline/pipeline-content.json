@@ -1,0 +1,113 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "cc3271bf-d264-b5d9-4e9f-f8c84edba411",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "mode": {
+              "value": "incremental",
+              "type": "string"
+            }
+          },
+          "sessionTag": "silver"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Silver ENTSO-E",
+        "dependsOn": []
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "6dd1a733-7dbb-adf5-461f-de791107cde9",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "mode": {
+              "value": "incremental",
+              "type": "string"
+            }
+          },
+          "sessionTag": "silver"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Silver weather",
+        "dependsOn": [
+          {
+            "activity": "Silver ENTSO-E",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "66a82ee5-9e9a-a548-445e-2e9c65880efc",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "sessionTag": "silver"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Silver holidays",
+        "dependsOn": [
+          {
+            "activity": "Silver weather",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "cedc5eef-fa86-b8ef-48d0-bfdb72a95624",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "run_optimize": {
+              "value": true,
+              "type": "bool"
+            }
+          },
+          "sessionTag": "silver"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Silver DQ",
+        "dependsOn": [
+          {
+            "activity": "Silver holidays",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
