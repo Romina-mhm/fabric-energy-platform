@@ -284,6 +284,7 @@ def shape(dataset, df):
     raise ValueError(dataset)
 
 def merge_into(table, keys, src):
+    v_before = DeltaTable.forName(spark, table).history(1).select("version").first()[0]
     target_cols = [f.name for f in spark.table(table).schema]
     value_cols = [c for c in target_cols if c not in keys and c not in LINEAGE]
     on = " AND ".join(f"t.{k} = s.{k}" for k in keys)
@@ -293,7 +294,12 @@ def merge_into(table, keys, src):
         .whenMatchedUpdate(condition=changed, set={c: f"s.{c}" for c in target_cols if c not in keys})
         .whenNotMatchedInsertAll()
         .execute())
-    m = spark.sql(f"DESCRIBE HISTORY {table} LIMIT 1").select("operationMetrics").first()[0]
+    # only trust metrics if this MERGE actually committed a new version
+    h = DeltaTable.forName(spark, table).history(1).select("version", "operationMetrics").first()
+    if h.version == v_before:
+        return {"numTargetRowsInserted": "0", "numTargetRowsUpdated": "0",
+                "numSourceRows": "no commit (nothing changed)"}
+    m = h.operationMetrics
     return {k: m.get(k) for k in ("numTargetRowsInserted", "numTargetRowsUpdated", "numSourceRows")}
 
 # METADATA ********************
