@@ -1,0 +1,68 @@
+[
+  {
+    "uniqueIdentifier": "fd248224-6303-4e39-b1c1-dd0b7f7ad8e6",
+    "payload": {
+      "name": "pl_master",
+      "description": "Container Description",
+      "type": "rthSubscriptions"
+    },
+    "type": "container-v1"
+  },
+  {
+    "uniqueIdentifier": "c2469e88-6ff4-473d-8f09-1cb8a25239f9",
+    "payload": {
+      "name": "energy-dev event",
+      "connection": {
+        "scope": "Artifact",
+        "tenantId": "94142237-7141-46e8-9d66-7bbdaddd1da6",
+        "workspaceId": "a9b50eeb-8564-4e09-ac18-87c3583d27a3",
+        "artifactId": "297003fa-9550-4bae-b423-7a5fea148db9",
+        "eventGroupType": "Microsoft.Fabric.JobEvents"
+      },
+      "filterSettings": {
+        "eventTypes": [
+          {
+            "name": "Microsoft.Fabric.JobEvents.ItemJobFailed"
+          }
+        ],
+        "filters": []
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "fd248224-6303-4e39-b1c1-dd0b7f7ad8e6"
+      }
+    },
+    "type": "realTimeHubSource-v1"
+  },
+  {
+    "uniqueIdentifier": "6dedc592-41d8-47a2-b12f-52fe307a38d9",
+    "payload": {
+      "name": "energy-dev event",
+      "parentContainer": {
+        "targetUniqueIdentifier": "fd248224-6303-4e39-b1c1-dd0b7f7ad8e6"
+      },
+      "definition": {
+        "type": "Event",
+        "instance": "{\"steps\":[{\"id\":\"aca4a25b-e122-4337-aec7-b85c83fe654b\",\"name\":\"SourceEventStep\",\"rows\":[{\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"c2469e88-6ff4-473d-8f09-1cb8a25239f9\"}],\"kind\":\"SourceReference\",\"name\":\"SourceSelector\"}]}],\"templateId\":\"SourceEvent\",\"templateVersion\":\"1.3.0\"}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "b3b3875f-e386-42ca-8a35-67f3bddc800e",
+    "payload": {
+      "name": "Set alert",
+      "parentContainer": {
+        "targetUniqueIdentifier": "fd248224-6303-4e39-b1c1-dd0b7f7ad8e6"
+      },
+      "definition": {
+        "type": "Rule",
+        "instance": "{\"templateId\":\"EventTrigger\",\"templateVersion\":\"1.3.0\",\"steps\":[{\"name\":\"FieldsDefaultsStep\",\"id\":\"c5f416ca-d209-4335-9d05-92451f642a7b\",\"rows\":[{\"name\":\"EventSelector\",\"kind\":\"Event\",\"arguments\":[{\"kind\":\"EventReference\",\"type\":\"complex\",\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"6dedc592-41d8-47a2-b12f-52fe307a38d9\"}],\"name\":\"event\"}]}]},{\"name\":\"EventDetectStep\",\"id\":\"1991c96f-3272-4fbb-9465-085199adf35a\",\"rows\":[{\"name\":\"OnEveryValue\",\"kind\":\"OnEveryValue\",\"arguments\":[]}]},{\"name\":\"ActStep\",\"id\":\"c3dfa1c9-b125-4d97-a6e7-b602ed58601c\",\"rows\":[{\"name\":\"TeamsBinding\",\"kind\":\"TeamsMessage\",\"arguments\":[{\"name\":\"messageLocale\",\"type\":\"string\",\"value\":\"en-us\"},{\"name\":\"recipients\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"RM@rgharemohammadigmail.onmicrosoft.com\"}]},{\"name\":\"headline\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"pl_master failed\"}]},{\"name\":\"optionalMessage\",\"type\":\"array\",\"values\":[]},{\"name\":\"additionalInformation\",\"type\":\"array\",\"values\":[]}]}]}]}",
+        "settings": {
+          "shouldRun": true,
+          "shouldApplyRuleOnUpdate": false
+        }
+      }
+    },
+    "type": "timeSeriesView-v1"
+  }
+]
