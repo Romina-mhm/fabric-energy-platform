@@ -2,6 +2,22 @@
 
 All notable changes to this project are documented here.
 
+## [0.4.0] - 2026-09-28 — Gold layer & orchestration
+### Added
+- `wh_gold` Fabric Warehouse with star schema (schemas `dim`, `fact`, `ops`)
+- Dimensions via CTAS: date, hour, country, area, production type (with emission factors), holiday
+- Hourly facts: load, generation by fuel, carbon intensity (renewable %, low-carbon %, gCO2e/kWh, factor coverage %), day-ahead price, cross-border flow, weather
+- Incremental delete-insert stored procedures per fact (default window: last 7 days, transactional)
+- `ops.usp_load_gold`: one entry point (dims → facts) with a Silver-vs-Gold reconciliation gate that fails the run on mismatch; results logged to `ops.gold_run_log`
+- `pl_master` pipeline: Bronze ENTSO-E → Bronze weather → monthly holidays (If Condition) → Silver → Gold; daily schedule 06:00 Europe/Rome
+- Failure-alert path (On fail + On skip from last step), currently deactivated
+### Business rules
+- Hourly price = official hourly auction price where it exists, else average of 15-min prices (handles DE_LU dual publication)
+- Energy = SUM(MWh) per hour; flows use one resolution per border-hour to avoid double counting
+- Carbon intensity reported with factor coverage % instead of treating unclassified generation as zero-carbon
+### Known limitations
+- ENTSO-E under-reports Dutch rooftop solar and classifies ~33% of NL generation as "Other" → NL renewable share is understated; shown with coverage %
+
 ## [0.3.0] - 2026-09-26 — Silver layer
 ### Added
 - ENTSO-E XML parser (positions → UTC timestamps, A03 forward-fill, generation vs consumption) running distributed on Spark executors
