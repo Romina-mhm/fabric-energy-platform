@@ -23,6 +23,8 @@
 # CELL ********************
 
 run_optimize = True
+check_days = 7
+full_check = False
 
 # METADATA ********************
 
@@ -80,6 +82,21 @@ KEYS = {
 
 # CELL ********************
 
+def scope(t):
+    df = spark.table(t)
+    if full_check or "ts_utc" not in df.columns:
+        return df
+    return df.filter(F.col("ts_utc") >= F.date_sub(F.current_date(), check_days))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
 for t, keys in KEYS.items():
     d = spark.table(t).groupBy(*keys).count().filter("count > 1").count()
     add("unique_key", t, ",".join(keys), d, "= 0", "PASS" if d == 0 else "FAIL")
@@ -127,7 +144,7 @@ for t, c, lo, hi in RANGES:
 # CELL ********************
 
 def completeness(t, scope_cols):
-    df = (spark.table(t)
+    df = (scope(t)
                .withColumn("d", F.to_date("ts_utc"))
                .filter(F.col("d") < F.date_sub(F.current_date(), 1))          # skip days still arriving
                .select(*scope_cols, "d", "resolution_minutes", "ts_utc").distinct())
@@ -203,7 +220,8 @@ optimize_log = {}
 if run_optimize:
     for t in list(KEYS) + ["dq_quarantine", "dq_check_result"]:
         before = spark.sql(f"DESCRIBE DETAIL {t}").select("numFiles").first()[0]
-        spark.sql(f"OPTIMIZE {t} VORDER")
+        if before > 20:
+           spark.sql(f"OPTIMIZE {t} VORDER")
         after = spark.sql(f"DESCRIBE DETAIL {t}").select("numFiles").first()[0]
         optimize_log[t] = f"{before} -> {after} files"
         print(f"{t}: {before} -> {after} files")

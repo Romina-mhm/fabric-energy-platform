@@ -87,6 +87,13 @@
             "run_optimize": {
               "value": true,
               "type": "bool"
+            },
+            "full_check": {
+              "value": {
+                "value": "@equals(dayOfWeek(utcNow()), 0)",
+                "type": "Expression"
+              },
+              "type": "bool"
             }
           },
           "sessionTag": "silver"
