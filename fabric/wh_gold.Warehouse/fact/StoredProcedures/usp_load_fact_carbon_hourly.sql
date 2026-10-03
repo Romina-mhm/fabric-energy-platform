@@ -1,4 +1,4 @@
-CREATE   PROCEDURE fact.usp_load_fact_carbon_hourly
+CREATE     PROCEDURE fact.usp_load_fact_carbon_hourly
     @from_date date = NULL
 AS
 BEGIN
@@ -25,7 +25,7 @@ BEGIN
                SUM(f.generation_mwh)                                                AS total_mwh,
                SUM(CASE WHEN p.is_renewable = 1        THEN f.generation_mwh ELSE 0 END) AS renewable_mwh,
                SUM(CASE WHEN p.is_low_carbon = 1       THEN f.generation_mwh ELSE 0 END) AS low_carbon_mwh,
-               SUM(CASE WHEN p.has_emission_factor = 1 THEN f.generation_mwh ELSE 0 END) AS covered_mwh,
+               SUM(CASE WHEN f.co2e_kg IS NOT NULL THEN f.generation_mwh ELSE 0 END) AS covered_mwh,
                SUM(f.co2e_kg)                                                       AS co2e_kg
         FROM fact.fact_generation_hourly f
         JOIN dim.dim_production_type p ON p.psr_type_code = f.psr_type_code

@@ -1,5 +1,5 @@
 /* ---------- ONE entry point for the pipeline: dims -> facts -> reconciliation ---------- */
-CREATE   PROCEDURE ops.usp_load_gold
+CREATE     PROCEDURE ops.usp_load_gold
     @from_date date = NULL          -- NULL = each fact uses its own recent window
 AS
 BEGIN
@@ -8,12 +8,14 @@ BEGIN
     DECLARE @check_from date = COALESCE(@from_date, DATEADD(day, -7, CAST(SYSUTCDATETIME() AS date)));
 
     EXEC dim.usp_refresh_dims;
+    EXEC dim.usp_scd2_emission_factor;
     EXEC fact.usp_load_fact_load_hourly       @from_date;
     EXEC fact.usp_load_fact_generation_hourly @from_date;
     EXEC fact.usp_load_fact_carbon_hourly     @from_date;   -- must run after generation
     EXEC fact.usp_load_fact_price_hourly      @from_date;
     EXEC fact.usp_load_fact_flow_hourly       @from_date;
     EXEC fact.usp_load_fact_weather_hourly    @from_date;
+    
 
     -- reconciliation: Gold load MWh must equal Silver (tolerance = decimal rounding)
     DECLARE @gold   decimal(18,3) = (SELECT SUM(load_mwh)   FROM fact.fact_load_hourly    WHERE ts_hour_utc >= @check_from);

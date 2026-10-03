@@ -16,7 +16,7 @@ BEGIN
         CAST(DATEPART(hour, g.ts_hour) AS smallint),
         g.ts_hour, g.area_code, a.country_code, g.psr_type_code,
         CAST(g.gen_mwh AS decimal(14,3)),
-        CAST(g.co2e_kg AS decimal(18,3)),
+        CAST(g.gen_mwh * ef.lifecycle_gco2e_per_kwh AS decimal(18,3)),   -- MWh x g/kWh = kg; NULL if no factor
         g.coverage_minutes,
         CAST(SYSUTCDATETIME() AS datetime2(0))
     FROM (
@@ -24,14 +24,17 @@ BEGIN
                s.area_code,
                CAST(s.psr_type_code AS char(3)) AS psr_type_code,
                SUM(s.energy_mwh)         AS gen_mwh,
-               SUM(s.co2e_kg)            AS co2e_kg,
                SUM(s.resolution_minutes) AS coverage_minutes
         FROM lh_silver.dbo.silver_generation s
-        WHERE s.direction = 'generation'            -- NL/FR self-consumption rows excluded
+        WHERE s.direction = 'generation'
           AND s.ts_utc >= @from_date
         GROUP BY CAST(DATETRUNC(hour, s.ts_utc) AS datetime2(0)), s.area_code, s.psr_type_code
     ) g
-    JOIN dim.dim_area a ON a.area_code = g.area_code;
+    JOIN dim.dim_area a ON a.area_code = g.area_code
+    LEFT JOIN dim.dim_emission_factor ef            -- the version valid at that hour
+           ON ef.psr_type_code = g.psr_type_code
+          AND g.ts_hour >= ef.valid_from
+          AND (ef.valid_to IS NULL OR g.ts_hour < ef.valid_to);
     COMMIT TRANSACTION;
 END;
 
