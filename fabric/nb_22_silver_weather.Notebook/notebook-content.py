@@ -48,7 +48,6 @@ BRONZE_ABFS = f"abfss://{ws_id}@onelake.dfs.fabric.microsoft.com/{lh_id}"
 VARS = ["temperature_2m", "wind_speed_10m", "wind_speed_100m",
         "shortwave_radiation", "cloud_cover", "precipitation"]
 COUNTRY_VARS = ["temperature_2m", "wind_speed_100m", "shortwave_radiation", "cloud_cover", "precipitation"]
-LINEAGE = {"_source_file", "_bronze_ingested_at", "_silver_updated_at"}
 STATE_KEY = "open_meteo_weather"
 
 log = spark.read.format("delta").load(f"{BRONZE_ABFS}/Tables/ctl_ingest_log")
@@ -79,32 +78,7 @@ files.groupBy("data_source").count().show()
 
 # CELL ********************
 
-def align(df, table):
-    target = spark.table(table).schema
-    missing = [f.name for f in target if f.name not in df.columns]
-    if missing:
-        raise ValueError(f"{table}: source is missing columns {missing}")
-    return df.select([F.col(f.name).cast(f.dataType).alias(f.name) for f in target])
-
-def merge_into(table, keys, src, extra_guard=None):
-    v_before = DeltaTable.forName(spark, table).history(1).select("version").first()[0]
-    target_cols = [f.name for f in spark.table(table).schema]
-    value_cols = [c for c in target_cols if c not in keys and c not in LINEAGE]
-    on = " AND ".join(f"t.{k} = s.{k}" for k in keys)
-    changed = "(" + " OR ".join(f"NOT (t.{c} <=> s.{c})" for c in value_cols) + ")"
-    cond = f"{extra_guard} AND {changed}" if extra_guard else changed
-    (DeltaTable.forName(spark, table).alias("t")
-        .merge(src.alias("s"), on)
-        .whenMatchedUpdate(condition=cond, set={c: f"s.{c}" for c in target_cols if c not in keys})
-        .whenNotMatchedInsertAll()
-        .execute())
-    # only trust metrics if this MERGE actually committed a new version
-    h = DeltaTable.forName(spark, table).history(1).select("version", "operationMetrics").first()
-    if h.version == v_before:
-        return {"numTargetRowsInserted": "0", "numTargetRowsUpdated": "0",
-                "numSourceRows": "no commit (nothing changed)"}
-    m = h.operationMetrics
-    return {k: m.get(k) for k in ("numTargetRowsInserted", "numTargetRowsUpdated", "numSourceRows")}
+%run nb_lib_silver
 
 # METADATA ********************
 
@@ -210,36 +184,6 @@ for t in ["silver_weather_hourly", "silver_weather_country_hourly"]:
     summary[t + "_rows"] = spark.table(t).count()
 print(json.dumps(summary, indent=2, default=str))
 notebookutils.notebook.exit(json.dumps(summary, default=str))
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-spark.sql("""
-  SELECT country_code, data_source, COUNT(*) AS rows_, MIN(ts_utc) AS first_ts, MAX(ts_utc) AS last_ts
-  FROM silver_weather_hourly GROUP BY country_code, data_source ORDER BY country_code, data_source
-""").show(truncate=False)
-
-print("duplicate keys:", spark.table("silver_weather_hourly")
-      .groupBy("location_code", "ts_utc").count().filter("count > 1").count())
-
-spark.sql("""
-  SELECT country_code, month(ts_utc) AS m, ROUND(AVG(temperature_2m), 1) AS avg_temp_c,
-         ROUND(AVG(shortwave_radiation), 0) AS avg_solar_wm2, ROUND(AVG(wind_speed_100m), 1) AS avg_wind100_kmh
-  FROM silver_weather_country_hourly
-  WHERE year(ts_utc) = 2025 AND month(ts_utc) IN (1, 7)
-  GROUP BY country_code, month(ts_utc) ORDER BY country_code, m
-""").show()
-
-spark.sql("""
-  SELECT country_code, MIN(archive_share) AS min_share, MAX(archive_share) AS max_share
-  FROM silver_weather_country_hourly GROUP BY country_code ORDER BY country_code
-""").show()
 
 # METADATA ********************
 

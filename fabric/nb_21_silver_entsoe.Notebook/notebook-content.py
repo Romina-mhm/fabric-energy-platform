@@ -50,10 +50,17 @@ BRONZE_ABFS = f"abfss://{ws_id}@onelake.dfs.fabric.microsoft.com/{lh_id}"
 LOG_PATH = f"{BRONZE_ABFS}/Tables/ctl_ingest_log"      # no dbo folder in lh_bronze
 
 log = spark.read.format("delta").load(LOG_PATH)
-(log.filter(F.col("source") == "entsoe")
-    .groupBy("dataset", "status").count()
-    .orderBy("dataset", "status")
-    .show(truncate=False))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+%run nb_lib_silver
 
 # METADATA ********************
 
@@ -143,76 +150,6 @@ print("parser ready")
 
 # CELL ********************
 
-ok = log.filter((F.col("source") == "entsoe") & (F.col("status") == "ok"))
-w_new = Window.partitionBy("dataset").orderBy(F.col("request_start_utc").desc())
-w_old = Window.partitionBy("dataset").orderBy(F.col("request_start_utc").asc())
-samples = (ok.withColumn("rn_new", F.row_number().over(w_new))
-             .withColumn("rn_old", F.row_number().over(w_old))
-             .filter("rn_new = 1 OR rn_old = 1")
-             .select("dataset", "area_key", "file_path", "request_start_utc", "request_end_utc")
-             .orderBy("dataset", "request_start_utc")
-             .collect())
-
-for s in samples:
-    content = (spark.read.format("binaryFile")
-                    .load(f"{BRONZE_ABFS}/{s.file_path}")
-                    .select("content").first()[0])
-    rows = parse_entsoe_xml(bytes(content), s.dataset, s.area_key, s.file_path)
-    ts = [r[4] for r in rows]
-    series = sorted({(r[2], r[3]) for r in rows}, key=str)
-    print(f"\n{s.dataset} | {s.area_key} | request {s.request_start_utc} -> {s.request_end_utc}")
-    print(f"  rows={len(rows)}  resolutions={sorted({r[5] for r in rows})}  "
-          f"ts {min(ts) if ts else None} -> {max(ts) if ts else None}")
-    print(f"  series (psr, direction): {len(series)} -> {series[:8]}")
-    for r in rows[:2]:
-        print("  sample:", r[2], r[3], r[4], r[5], r[6])
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark",
-# META   "frozen": true,
-# META   "editable": false
-# META }
-
-# CELL ********************
-
-files = (ok.filter(F.col("area_key").startswith("NL"))
-           .withColumn("file_name", F.element_at(F.split("file_path", "/"), -1))
-           .select("dataset", "area_key", "file_path", "file_name"))
-paths = [f"{BRONZE_ABFS}/{r.file_path}" for r in files.select("file_path").collect()]
-print("files:", len(paths))
-
-bin_df = (spark.read.format("binaryFile").load(paths)
-               .withColumn("file_name", F.element_at(F.split("path", "/"), -1))
-               .select("file_name", "content"))
-joined = bin_df.join(files, "file_name")
-
-parsed = spark.createDataFrame(
-    joined.rdd.flatMap(lambda r: parse_entsoe_xml(bytes(r.content), r.dataset, r.area_key, r.file_path)),
-    PARSED_SCHEMA).cache()
-
-(parsed.groupBy("dataset", "resolution_minutes")
-       .agg(F.count("*").alias("rows"), F.min("ts_utc").alias("min_ts"), F.max("ts_utc").alias("max_ts"))
-       .orderBy("dataset", "resolution_minutes").show(truncate=False))
-
-keys = ["dataset", "area_key", "psr_type_code", "direction", "ts_utc", "resolution_minutes"]
-dupes = parsed.groupBy(keys).count().filter("count > 1").count()
-print("duplicate keys (expected > 0 from overlapping re-pulls):", dupes)
-parsed.unpersist()
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark",
-# META   "frozen": true,
-# META   "editable": false
-# META }
-
-# CELL ********************
-
 from delta.tables import DeltaTable
 from pyspark import StorageLevel
 
@@ -222,7 +159,6 @@ TARGETS = {
     "day_ahead_price":   ("silver_price",      ["area_code", "ts_utc", "resolution_minutes"]),
     "crossborder_flow":  ("silver_flow",       ["from_area_code", "to_area_code", "ts_utc", "resolution_minutes"]),
 }
-LINEAGE = {"_source_file", "_bronze_ingested_at", "_silver_updated_at"}
 
 PARSED_ING_SCHEMA = T.StructType(PARSED_SCHEMA.fields + [
     T.StructField("_bronze_ingested_at", T.TimestampType(), True)])
@@ -233,14 +169,6 @@ def parse_or_error(r):
                 for x in parse_entsoe_xml(bytes(r.content), r.dataset, r.area_key, r.file_path)]
     except Exception as e:
         return [("err", None, (r.dataset, r.file_path, f"{type(e).__name__}: {e}"[:1000]))]
-
-def align(df, table):
-    """Select + cast the target table's columns by name; fail loudly if one is missing."""
-    target = spark.table(table).schema
-    missing = [f.name for f in target if f.name not in df.columns]
-    if missing:
-        raise ValueError(f"{table}: source is missing columns {missing}")
-    return df.select([F.col(f.name).cast(f.dataType).alias(f.name) for f in target])
 
 prod = (spark.read.format("delta").load(f"{BRONZE_ABFS}/Tables/production_type")
              .select("psr_type_code", F.col("lifecycle_gco2e_per_kwh").cast("double").alias("gco2e_per_kwh")))
@@ -283,24 +211,7 @@ def shape(dataset, df):
                   .withColumn("energy_mwh", F.col("value") * hours))
     raise ValueError(dataset)
 
-def merge_into(table, keys, src):
-    v_before = DeltaTable.forName(spark, table).history(1).select("version").first()[0]
-    target_cols = [f.name for f in spark.table(table).schema]
-    value_cols = [c for c in target_cols if c not in keys and c not in LINEAGE]
-    on = " AND ".join(f"t.{k} = s.{k}" for k in keys)
-    changed = " OR ".join(f"NOT (t.{c} <=> s.{c})" for c in value_cols)
-    (DeltaTable.forName(spark, table).alias("t")
-        .merge(src.alias("s"), on)
-        .whenMatchedUpdate(condition=changed, set={c: f"s.{c}" for c in target_cols if c not in keys})
-        .whenNotMatchedInsertAll()
-        .execute())
-    # only trust metrics if this MERGE actually committed a new version
-    h = DeltaTable.forName(spark, table).history(1).select("version", "operationMetrics").first()
-    if h.version == v_before:
-        return {"numTargetRowsInserted": "0", "numTargetRowsUpdated": "0",
-                "numSourceRows": "no commit (nothing changed)"}
-    m = h.operationMetrics
-    return {k: m.get(k) for k in ("numTargetRowsInserted", "numTargetRowsUpdated", "numSourceRows")}
+
 
 # METADATA ********************
 
@@ -333,7 +244,7 @@ for dataset in [d.strip() for d in datasets.split(",") if d.strip()]:
                    .load([f"{BRONZE_ABFS}/{r.file_path}" for r in file_rows])
                    .withColumn("file_name", F.element_at(F.split("path", "/"), -1))
                    .select("file_name", "content"))
-    results = bin_df.join(files, "file_name").repartition(32).rdd.flatMap(parse_or_error) \
+    results = bin_df.join(F.broadcast(files), "file_name").repartition(32).rdd.flatMap(parse_or_error) \
                  .persist(StorageLevel.MEMORY_AND_DISK)
 
     errors = results.filter(lambda x: x[0] == "err").map(lambda x: x[2]).collect()
@@ -387,66 +298,6 @@ for t in ["silver_load", "silver_generation", "silver_price", "silver_flow"]:
     summary[t] = spark.table(t).count()
 print(json.dumps(summary, indent=2, default=str))
 notebookutils.notebook.exit(json.dumps(summary, default=str))
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-# 1) no duplicate business keys
-for t, (_, keys) in [(v[0], v) for v in TARGETS.values()]:
-    d = spark.table(t).groupBy(*keys).count().filter("count > 1").count()
-    print(f"{t}: duplicate keys = {d}")
-
-# 2) generation rows without CO2e -> should only be codes with NULL factor (oil, waste, other, storage...)
-spark.sql("""
-  SELECT g.psr_type_code, COUNT(*) AS rows_without_co2e
-  FROM silver_generation g
-  WHERE g.direction = 'generation' AND g.co2e_kg IS NULL
-  GROUP BY g.psr_type_code ORDER BY rows_without_co2e DESC
-""").show()
-
-# 3) sanity: NL, one day, generation mix and carbon intensity
-spark.sql("""
-  SELECT SUM(energy_mwh) AS gen_mwh,
-         SUM(co2e_kg) / SUM(CASE WHEN co2e_kg IS NOT NULL THEN energy_mwh END) AS g_per_kwh
-  FROM silver_generation
-  WHERE area_code = 'NL' AND direction = 'generation'
-    AND ts_utc >= '2025-06-15' AND ts_utc < '2025-06-16'
-""").show()
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-spark.sql("""
-  SELECT area_code, resolution_minutes, COUNT(*) AS rows_, MIN(ts_utc) AS first_ts, MAX(ts_utc) AS last_ts
-  FROM silver_load GROUP BY area_code, resolution_minutes ORDER BY area_code, resolution_minutes
-""").show(truncate=False)
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-spark.sql("DESCRIBE HISTORY silver_load LIMIT 3") \
-     .select("version", "timestamp", "operation", "operationMetrics.numTargetRowsInserted",
-             "operationMetrics.numTargetRowsUpdated") \
-     .show(truncate=False)
-print("silver_load rows:", spark.table("silver_load").count())
 
 # METADATA ********************
 

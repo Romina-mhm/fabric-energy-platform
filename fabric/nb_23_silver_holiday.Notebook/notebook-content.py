@@ -71,12 +71,17 @@ print("holiday rows read:", raw.count())
 
 # CELL ********************
 
-def align(df, table):
-    target = spark.table(table).schema
-    missing = [f.name for f in target if f.name not in df.columns]
-    if missing:
-        raise ValueError(f"{table}: source is missing columns {missing}")
-    return df.select([F.col(f.name).cast(f.dataType).alias(f.name) for f in target])
+%run nb_lib_silver
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
 
 typed = raw.withColumn("holiday_date", F.to_date("date_str", "yyyy-MM-dd"))
 
@@ -123,42 +128,6 @@ summary = {"files": len(paths), "quarantined": n_bad,
            "silver_holiday_rows": spark.table("silver_holiday").count()}
 print(json.dumps(summary, indent=2, default=str))
 notebookutils.notebook.exit(json.dumps(summary, default=str))
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-spark.sql("""
-  SELECT country_code, year(holiday_date) AS yr,
-         COUNT(*) AS holidays, SUM(CASE WHEN is_nationwide THEN 1 ELSE 0 END) AS nationwide
-  FROM silver_holiday GROUP BY country_code, year(holiday_date) ORDER BY country_code, yr
-""").show(50)
-
-spark.sql("""
-  SELECT holiday_date, local_name, name, is_nationwide
-  FROM silver_holiday WHERE country_code = 'NL' AND year(holiday_date) = 2025 ORDER BY holiday_date
-""").show(truncate=False)
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-spark.sql("DESCRIBE HISTORY silver_holiday LIMIT 3") \
-     .select("version", "timestamp", "operation",
-             "operationMetrics.numTargetRowsInserted",
-             "operationMetrics.numTargetRowsUpdated",
-             "operationMetrics.numTargetRowsDeleted") \
-     .show(truncate=False)
 
 # METADATA ********************
 
