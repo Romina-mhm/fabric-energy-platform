@@ -81,23 +81,7 @@ print(len(locations), "locations:", [r.location_code for r in locations])
 
 # CELL ********************
 
-locations = spark.sql("""
-    SELECT w.location_code, w.country_code, w.latitude, w.longitude
-    FROM weather_location w
-    JOIN country c ON c.country_code = w.country_code
-    WHERE c.is_active
-    ORDER BY w.location_code
-""").collect()
-print(len(locations), "locations:", [r.location_code for r in locations])
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
+from collections import defaultdict
 
 archive_end = today_utc - pd.Timedelta(days=archive_delay_days)
 
@@ -122,14 +106,15 @@ def year_chunks(start, end):
         cur = nxt
     return chunks
 
-jobs = []
+# group locations that need the same time window -> ONE API call per window
+groups = defaultdict(list)
 for loc in locations:
     for s, e in year_chunks(archive_start(loc.location_code), archive_end):
-        jobs.append(("weather_hourly_archive", loc, s, e))
-    jobs.append(("weather_hourly_forecast", loc,
-                 today_utc - pd.Timedelta(days=forecast_past_days),
-                 today_utc + pd.Timedelta(days=forecast_days)))
-print(len(jobs), "API calls planned")
+        groups[("weather_hourly_archive", s, e)].append(loc)
+f_start = today_utc - pd.Timedelta(days=forecast_past_days)
+f_end = today_utc + pd.Timedelta(days=forecast_days)
+groups[("weather_hourly_forecast", f_start, f_end)] = list(locations)
+print(len(groups), "API calls instead of", sum(len(v) for v in groups.values()))
 
 # METADATA ********************
 
@@ -144,10 +129,10 @@ def get_json(url, params, attempts=4):
     """GET with generous timeout and retries on timeouts, connection errors and 429/5xx."""
     for i in range(attempts):
         try:
-            r = requests.get(url, params=params, timeout=(10, 240))   # 10 s to connect, 240 s to read
+            r = requests.get(url, params=params, timeout=(10, 240))
         except (requests.exceptions.Timeout, requests.exceptions.ConnectionError):
             if i < attempts - 1:
-                time.sleep(20 * (i + 1))        # 20 s, 40 s, 60 s back-off
+                time.sleep(20 * (i + 1))
                 continue
             raise
         if r.status_code in (429, 500, 502, 503, 504) and i < attempts - 1:
@@ -156,35 +141,39 @@ def get_json(url, params, attempts=4):
         r.raise_for_status()
         return r.json()
 
-def fetch_weather(job):
-    dataset, loc, start, end = job
-    base = dict(latitude=float(loc.latitude), longitude=float(loc.longitude),
+def fetch_group(dataset, start, end, locs):
+    base = dict(latitude=",".join(str(float(l.latitude)) for l in locs),
+                longitude=",".join(str(float(l.longitude)) for l in locs),
                 hourly=HOURLY_VARS, timezone="UTC")
     if dataset == "weather_hourly_archive":
-        url = ARCHIVE_URL
-        # end_date is inclusive in Open-Meteo, our windows are end-exclusive
-        params = {**base, "start_date": f"{start:%Y-%m-%d}",
-                  "end_date": f"{(end - pd.Timedelta(days=1)):%Y-%m-%d}"}
+        url, params = ARCHIVE_URL, {**base, "start_date": f"{start:%Y-%m-%d}",
+                                     "end_date": f"{(end - pd.Timedelta(days=1)):%Y-%m-%d}"}
     else:
-        url = FORECAST_URL
-        params = {**base, "past_days": forecast_past_days, "forecast_days": forecast_days}
-
+        url, params = FORECAST_URL, {**base, "past_days": forecast_past_days, "forecast_days": forecast_days}
     kind = dataset.replace("weather_hourly_", "")
-    path = (f"Files/raw/weather/{kind}/{loc.location_code}/{start:%Y}/"
-            f"weather_{kind}__{loc.location_code}__{start:%Y%m%d}_{end:%Y%m%d}__{RUN_ID}.json")
-    rec = dict(run_id=RUN_ID, source="open_meteo", dataset=dataset, area_key=loc.location_code,
-               request_start_utc=start.to_pydatetime(), request_end_utc=end.to_pydatetime(),
-               status=None, file_path=None, bytes=None, points=None, error_message=None)
     try:
         payload = get_json(url, params)
-        text = json.dumps(payload)
-        notebookutils.fs.put(path, text, True)
-        rec.update(status="ok", file_path=path, bytes=len(text.encode("utf-8")),
-                   points=len(payload.get("hourly", {}).get("time", [])))
+        payloads = payload if isinstance(payload, list) else [payload]   # same order as the coordinates
+        if len(payloads) != len(locs):
+            raise ValueError(f"expected {len(locs)} locations, got {len(payloads)}")
+        error = None
     except Exception as e:
-        rec.update(status="error", error_message=f"{type(e).__name__}: {str(e)[:500]}")
-    rec["ingested_at_utc"] = datetime.now(timezone.utc)
-    return rec
+        payloads, error = [None] * len(locs), f"{type(e).__name__}: {str(e)[:500]}"
+    recs = []
+    for loc, p in zip(locs, payloads):
+        rec = dict(run_id=RUN_ID, source="open_meteo", dataset=dataset, area_key=loc.location_code,
+                   request_start_utc=start.to_pydatetime(), request_end_utc=end.to_pydatetime(),
+                   status="error", file_path=None, bytes=None, points=None, error_message=error)
+        if p is not None:   # one file per location -> Silver stays unchanged
+            path = (f"Files/raw/weather/{kind}/{loc.location_code}/{start:%Y}/"
+                    f"weather_{kind}__{loc.location_code}__{start:%Y%m%d}_{end:%Y%m%d}__{RUN_ID}.json")
+            text = json.dumps(p)
+            notebookutils.fs.put(path, text, True)
+            rec.update(status="ok", file_path=path, bytes=len(text.encode("utf-8")),
+                       points=len(p.get("hourly", {}).get("time", [])))
+        rec["ingested_at_utc"] = datetime.now(timezone.utc)
+        recs.append(rec)
+    return recs
 
 LOG_SCHEMA = spark.table("ctl_ingest_log").schema
 LOG_COLS = [f.name for f in LOG_SCHEMA]
@@ -204,13 +193,11 @@ def write_log(records):
 # CELL ********************
 
 results = []
-for i, job in enumerate(jobs, 1):
-    results.append(fetch_weather(job))
-    time.sleep(5)                       # be polite to the free API
-    if i % 10 == 0:
-        print(f"{i}/{len(jobs)} calls done")
+for (dataset, s, e), locs in groups.items():
+    results += fetch_group(dataset, s, e, locs)
+    time.sleep(2)
 write_log(results)
-print("Finished:", len(results), "calls")
+print("Finished:", len(results), "location-files")
 
 # METADATA ********************
 
@@ -257,19 +244,10 @@ else:
 # CELL ********************
 
 res = pd.DataFrame(results)
-display(res.groupby(["dataset", "status"]).size().unstack(fill_value=0))
-display(res[res.status == "error"][["dataset", "area_key", "error_message"]])
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-notebookutils.session.stop()
+print(res.groupby(["dataset", "status"]).size().unstack(fill_value=0).to_string())
+summary = {"api_calls": len(groups), "files_ok": int((res.status == "ok").sum()),
+           "errors": int((res.status == "error").sum())}
+notebookutils.notebook.exit(json.dumps(summary))
 
 # METADATA ********************
 
