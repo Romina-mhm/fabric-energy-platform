@@ -183,6 +183,22 @@
             ]
           }
         ]
+      },
+      {
+        "type": "Fail",
+        "typeProperties": {
+          "message": "@concat('pl_master failed. Run ID: ', pipeline().RunId)",
+          "errorCode": "500"
+        },
+        "name": "Fail pipeline",
+        "dependsOn": [
+          {
+            "activity": "Alert on failure",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
       }
     ]
   }
