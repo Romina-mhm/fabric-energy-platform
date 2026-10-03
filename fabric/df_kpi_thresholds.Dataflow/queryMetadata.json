@@ -1,0 +1,29 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "df_kpi_thresholds",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "kpi_threshold": {
+      "queryId": "1695d79e-74ca-4545-ac33-43643382bb6a",
+      "queryName": "kpi_threshold",
+      "loadEnabled": false
+    },
+    "kpi_threshold_DataDestination": {
+      "queryId": "3594bd48-da4c-49b1-8b6f-9e08a97e9afe",
+      "queryName": "kpi_threshold_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"a4455076-9efd-4e19-8162-12c9661796fd\",\"DatasourceId\":\"fdbccf90-8e3a-4423-b9ec-b3e05ff1ece8\"}"
+    }
+  ]
+}
