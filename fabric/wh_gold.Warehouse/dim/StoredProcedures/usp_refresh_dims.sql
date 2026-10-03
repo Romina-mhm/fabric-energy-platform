@@ -1,4 +1,4 @@
-CREATE   PROCEDURE dim.usp_refresh_dims
+CREATE     PROCEDURE dim.usp_refresh_dims
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -31,6 +31,19 @@ BEGIN
     SELECT CAST(country_code AS char(2)), CAST(CONVERT(varchar(8), holiday_date, 112) AS int), holiday_date,
            CAST(name AS varchar(100)), CAST(local_name AS varchar(100)), CAST(is_nationwide AS bit)
     FROM lh_silver.dbo.silver_holiday;
+
+        TRUNCATE TABLE dim.dim_kpi_threshold;
+    INSERT INTO dim.dim_kpi_threshold
+        (country_code, carbon_intensity_alert_gco2e_per_kwh, price_spike_alert_eur_per_mwh,
+         renewable_share_target_pct, valid_from, owner, note)
+    SELECT CAST(country_code AS char(2)),
+           CAST(carbon_intensity_alert_gco2e_per_kwh AS decimal(8,2)),
+           CAST(price_spike_alert_eur_per_mwh AS decimal(10,2)),
+           CAST(renewable_share_target_pct AS decimal(6,2)),
+           CAST(valid_from AS date),
+           CAST(owner AS varchar(100)),
+           CAST(note AS varchar(400))
+    FROM lh_silver.dbo.silver_kpi_threshold;
 
     COMMIT TRANSACTION;
 END;
