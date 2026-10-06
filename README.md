@@ -112,12 +112,72 @@ CHANGELOG.md
 
 ## Roadmap
 
-- [x] Bronze, Silver, Gold, orchestration, security, CI/CD
-- [x] Direct Lake semantic model, relationships and core DAX measures
+**1. Foundation** ✅
+- [x] Azure SQL reference database: countries, market areas, interconnectors, generation types with emission factors, weather points
+- [x] Least-privilege SQL login for Fabric Mirroring
+- [x] Fabric workspaces `energy-dev` and `energy-test`, grouped in the `Energy` domain
+- [x] Git integration (`energy-dev` ↔ `main`)
+- [x] Lakehouses `lh_bronze` and `lh_silver`, Spark environment with pinned libraries
+- [x] Mirrored Azure SQL database exposed in Bronze through OneLake shortcuts
+- [x] ENTSO-E API key stored in Azure Key Vault
+
+**2. Bronze: raw ingestion** ✅
+- [x] Audit log (`ctl_ingest_log`) and watermarks (`ctl_watermark`)
+- [x] ENTSO-E notebook: load, generation, prices (10 bidding zones), cross-border flows (30 directions)
+- [x] Backfill from 2024-01-01: 1,584 chunks, 0 errors, resumable
+- [x] Open-Meteo weather: reanalysis archive + recent forecast
+- [x] Holidays pipeline: Lookup → Filter → ForEach → REST Copy
+- [x] Retries with back-off, pipeline-safe notebooks
+
+**3. Silver: clean Delta tables** ✅
+- [x] Distributed ENTSO-E XML parser on Spark (A03 forward-fill, generation vs consumption)
+- [x] Dedupe + conditional `MERGE`, state table for incremental processing
+- [x] Weather guard: observed values never overwritten by forecasts
+- [x] Data-quality checks (uniqueness, integrity, ranges, completeness, freshness) and quarantine
+- [x] `OPTIMIZE` with V-Order
+- [x] KPI targets from ADLS via Dataflow Gen2
+
+**4. Gold: star schema** ✅
+- [x] `wh_gold` warehouse: 8 dimensions, 6 hourly facts (load, generation, carbon, price, flow, weather)
+- [x] Transactional delete-insert procedures per fact
+- [x] `ops.usp_load_gold` with a reconciliation gate and run log
+- [x] SCD Type 2 emission factors, CO2e computed with the factor valid at each hour
+
+**5. Orchestration** ✅
+- [x] `pl_master`: Bronze → monthly branch → Silver → Gold, daily at 06:00 Europe/Rome
+- [x] Failure path with alert and Fail activity
+- [x] Activator on pipeline job events
+
+**6. Security & governance** ✅
+- [x] Workspace roles and least-privilege sharing
+- [x] Row-level security, column-level security, dynamic data masking
+- [x] OneLake data access roles configured
+
+**7. CI/CD** ✅
+- [x] Deployment pipeline dev → test
+- [x] Conventional commits and CHANGELOG
+
+**8. Performance** ✅
+- [x] Batched weather API calls (22 → 2)
+- [x] Incremental DQ checks, conditional `OPTIMIZE`
+- [x] Shared helper notebook, broadcast join, shared Spark session
+- [x] Daily run ~27 → ~17 minutes
+
+**9. Real-Time Intelligence demo** ✅
+- [x] Eventstream → Eventhouse with KQL window queries
+
+**10. Reporting** 🔄 in progress
+- [x] Direct Lake semantic model, star relationships, core DAX measures
+- [x] Model validated against Gold (NL 2025-06-15 = 315.7)
 - [ ] Power BI report: Overview, Country deep-dive, Greenest-hours heatmap, Market & flows
-- [ ] Fabric Data Agent over the semantic model, with an accuracy evaluation set
+
+**11. AI layer** ⏳ next
+- [ ] Fabric Data Agent over the semantic model
+- [ ] Accuracy evaluation set of test questions
+
+**12. Improvements & release** ⏳ planned
 - [ ] Holiday flag and emission-factor surrogate key folded into Gold facts
-- [ ] Screenshots and release v1.0.0
+- [ ] Release v1.0.0
 
 ## Tech stack
 
