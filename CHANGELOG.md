@@ -2,6 +2,31 @@
 
 All notable changes to this project are documented here.
 
+## [0.6.0] - 2026-10-03 — Performance, Dataflow Gen2 & SCD Type 2
+### Added
+- Dataflow Gen2 `df_kpi_thresholds`: KPI targets CSV (ADLS) → `lh_silver.silver_kpi_threshold` → `dim.dim_kpi_threshold`; runs in the monthly branch of `pl_master`
+- SCD Type 2 dimension `dim.dim_emission_factor` (`valid_from`, `valid_to`, `is_current`) with `dim.usp_scd2_emission_factor`; generation CO2e now computed in Gold with the factor valid at each hour
+- Shared Silver helper notebook `nb_lib_silver` (`align`, `merge_into` with Delta version check) used via `%run`
+### Changed
+- Open-Meteo requests batched for all locations per time window (22 → 2 API calls), one raw file per location kept
+- Data-quality notebook: incremental daily checks (last 7 days) with a weekly full scan; `OPTIMIZE` only above a file-count threshold
+- Broadcast join for small lookups in the Silver ENTSO-E notebook; test clutter removed from notebooks
+- Dimension refresh switched to `TRUNCATE` + `INSERT`
+- Capacity back to F2 after the Azure credit ended (paused when idle)
+### Fixed
+- `pl_master` reported success even when a step failed (a deactivated alert counts as handled) → **Fail activity** at the end of the failure path
+### Performance
+- Daily end-to-end run reduced from ~27 to ~17 minutes
+
+## [0.5.0] - 2026-09-28 — Security, CI/CD & real-time
+### Added
+- Row-level security on `wh_gold` by country (`sec.user_country`, `sec.fn_country_filter`, `sec.country_policy`)
+- Column-level `DENY` on `fact_price_hourly.max_price_eur_mwh`; dynamic data masking on `ops.gold_run_log.message`
+- OneLake data access roles on the lakehouse; least-privilege item sharing
+- Deployment pipeline dev → test
+- Eventstream sample → Eventhouse with KQL window queries
+- Activator alert on pipeline job failure
+
 ## [0.4.0] - 2026-09-28 — Gold layer & orchestration
 ### Added
 - `wh_gold` Fabric Warehouse with star schema (schemas `dim`, `fact`, `ops`)
