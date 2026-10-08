@@ -1,0 +1,188 @@
+table fact_flow_hourly
+	lineageTag: 56214175-29d5-4c64-802b-36a1258d0605
+	sourceLineageTag: [fact].[fact_flow_hourly]
+
+	measure 'Exports MWh' = SUM ( fact_flow_hourly[flow_mwh] )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Market
+		lineageTag: ca9d2f83-c595-4cdc-b095-eab22e9a7f2a
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Imports MWh' =
+			
+			CALCULATE (
+			    SUM ( fact_flow_hourly[flow_mwh] ),
+			    USERELATIONSHIP ( fact_flow_hourly[to_country_code], dim_country[country_code] )
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Market
+		lineageTag: 691247d0-1e29-4204-b535-d7544c5e9ae8
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Imports minus exports across all borders. Positive means the country imports more than it exports.
+	measure 'Net Imports MWh' = [Imports MWh] - [Exports MWh]
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Market
+		lineageTag: 6fcd557a-a3fa-467f-a66b-af6fc5a92097
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Description
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6967e9e0-866c-4537-afa9-9aeacee48087
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: smallint
+		lineageTag: 65820740-53e0-4b72-a534-848234084e05
+		sourceLineageTag: hour_key
+		summarizeBy: none
+		sourceColumn: hour_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ts_hour_utc
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: a8841624-9e80-40fe-94a7-dd91a9fcddd9
+		sourceLineageTag: ts_hour_utc
+		summarizeBy: none
+		sourceColumn: ts_hour_utc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column from_area_code
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 085d5fe3-33b3-4a8e-81dd-d243dbce0f80
+		sourceLineageTag: from_area_code
+		summarizeBy: none
+		sourceColumn: from_area_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column to_area_code
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: a676cdfa-2d05-4a7b-b0ab-b26688176c27
+		sourceLineageTag: to_area_code
+		summarizeBy: none
+		sourceColumn: to_area_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column from_country_code
+		dataType: string
+		isHidden
+		sourceProviderType: char
+		lineageTag: 85dc5f12-810d-4b1a-95e0-fecf19fd0945
+		sourceLineageTag: from_country_code
+		summarizeBy: none
+		sourceColumn: from_country_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column to_country_code
+		dataType: string
+		sourceProviderType: char
+		lineageTag: e6d6b569-2068-4fc8-8054-2841f703426f
+		sourceLineageTag: to_country_code
+		summarizeBy: none
+		sourceColumn: to_country_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column flow_mwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(14, 3)
+		lineageTag: d14f9fcd-eee8-4162-8df7-6a7f14eb0a34
+		sourceLineageTag: flow_mwh
+		summarizeBy: sum
+		sourceColumn: flow_mwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column source_resolution_minutes
+		dataType: int64
+		formatString: 0
+		sourceProviderType: smallint
+		lineageTag: 43b34222-65e3-4504-be45-5126460789f4
+		sourceLineageTag: source_resolution_minutes
+		summarizeBy: sum
+		sourceColumn: source_resolution_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column coverage_minutes
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: fadd3069-e0c6-4491-82d7-7eefa91492d0
+		sourceLineageTag: coverage_minutes
+		summarizeBy: sum
+		sourceColumn: coverage_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column loaded_at_utc
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: fb6e4a0c-eb1b-49a9-96e6-d1b85f3f46b9
+		sourceLineageTag: loaded_at_utc
+		summarizeBy: none
+		sourceColumn: loaded_at_utc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_flow_hourly = entity
+		mode: directLake
+		source
+			entityName: fact_flow_hourly
+			schemaName: fact
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

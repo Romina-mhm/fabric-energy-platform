@@ -1,0 +1,99 @@
+table dim_production_type
+	lineageTag: 744ce089-6b8f-453b-adf2-211917d9798a
+	sourceLineageTag: [dim].[dim_production_type]
+
+	column psr_type_code
+		dataType: string
+		sourceProviderType: char
+		lineageTag: cd15c83f-79f4-4eb8-96ae-c75badf13d66
+		sourceLineageTag: psr_type_code
+		summarizeBy: none
+		sourceColumn: psr_type_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_type_name
+		dataType: string
+		sourceProviderType: varchar(60)
+		lineageTag: 80761a56-cb6a-42e8-a8f1-c2a560647803
+		sourceLineageTag: production_type_name
+		summarizeBy: none
+		sourceColumn: production_type_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column fuel_category
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: 33524ccd-0f05-4384-8eb9-aadccb84935a
+		sourceLineageTag: fuel_category
+		summarizeBy: none
+		sourceColumn: fuel_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_renewable
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 673641c9-c19f-48cb-bf5c-c6b3de92308c
+		sourceLineageTag: is_renewable
+		summarizeBy: none
+		sourceColumn: is_renewable
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_low_carbon
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: bf95ed64-59c8-43ef-b74b-cd2ac3006b24
+		sourceLineageTag: is_low_carbon
+		summarizeBy: none
+		sourceColumn: is_low_carbon
+
+		annotation SummarizationSetBy = Automatic
+
+	column lifecycle_gco2e_per_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(6, 1)
+		lineageTag: b851bfdb-47ba-4951-ac65-f97560a9711c
+		sourceLineageTag: lifecycle_gco2e_per_kwh
+		summarizeBy: none
+		sourceColumn: lifecycle_gco2e_per_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column has_emission_factor
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: d9b0943f-673c-498c-a678-07bd5d08344f
+		sourceLineageTag: has_emission_factor
+		summarizeBy: none
+		sourceColumn: has_emission_factor
+
+		annotation SummarizationSetBy = Automatic
+
+	column emission_factor_source
+		dataType: string
+		sourceProviderType: varchar(80)
+		lineageTag: a96b74b2-93f8-4745-bebc-0741da754f35
+		sourceLineageTag: emission_factor_source
+		summarizeBy: none
+		sourceColumn: emission_factor_source
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_production_type = entity
+		mode: directLake
+		source
+			entityName: dim_production_type
+			schemaName: dim
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

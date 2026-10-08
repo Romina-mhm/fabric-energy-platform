@@ -1,0 +1,47 @@
+table dim_hour
+	lineageTag: 7592f06b-dbb3-46cb-a295-45eb2f3215ed
+	sourceLineageTag: [dim].[dim_hour]
+
+	column hour_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: aa31d9a7-072e-40a7-993a-c2e376ceefc3
+		sourceLineageTag: hour_key
+		summarizeBy: none
+		sourceColumn: hour_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour_label
+		dataType: string
+		sourceProviderType: varchar(6)
+		lineageTag: 79b0e849-588f-48ab-a6ef-66efe96ee5f9
+		sourceLineageTag: hour_label
+		summarizeBy: none
+		sourceColumn: hour_label
+		sortByColumn: hour_key
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_part
+		dataType: string
+		sourceProviderType: varchar(9)
+		lineageTag: db9c166e-c0b4-47ec-92ba-069ca0b7033c
+		sourceLineageTag: day_part
+		summarizeBy: none
+		sourceColumn: day_part
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_hour = entity
+		mode: directLake
+		source
+			entityName: dim_hour
+			schemaName: dim
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

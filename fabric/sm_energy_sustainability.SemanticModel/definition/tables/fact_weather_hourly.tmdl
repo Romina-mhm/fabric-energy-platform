@@ -1,0 +1,193 @@
+table fact_weather_hourly
+	lineageTag: 10b98024-e3c4-41af-a622-7f79c73ebadd
+	sourceLineageTag: [fact].[fact_weather_hourly]
+
+	measure 'Avg Wind 100m km/h' = AVERAGE ( fact_weather_hourly[wind_speed_100m_kmh] )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Weather
+		lineageTag: 619225e5-da59-4292-9724-c60910be3902
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Avg Solar W/m2' = AVERAGE ( fact_weather_hourly[solar_radiation_wm2] )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Weather
+		lineageTag: 318be1c4-d5c2-415b-980a-fdffc46322f9
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7a9fc4d5-c1f8-4298-8b47-9eea1886f144
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: smallint
+		lineageTag: a5ac931f-c443-45f6-a02c-21088bf90524
+		sourceLineageTag: hour_key
+		summarizeBy: none
+		sourceColumn: hour_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ts_hour_utc
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 119e7f87-ec42-4dcc-95f0-f8304024c475
+		sourceLineageTag: ts_hour_utc
+		summarizeBy: none
+		sourceColumn: ts_hour_utc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column country_code
+		dataType: string
+		isHidden
+		sourceProviderType: char
+		lineageTag: 43c5085a-06ff-4694-aabd-2d4eb75bfd50
+		sourceLineageTag: country_code
+		summarizeBy: none
+		sourceColumn: country_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column temperature_c
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(6, 2)
+		lineageTag: 344fd592-6c58-4361-b225-c870f069b8e0
+		sourceLineageTag: temperature_c
+		summarizeBy: sum
+		sourceColumn: temperature_c
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column wind_speed_100m_kmh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(6, 2)
+		lineageTag: 5db94baf-73ec-4367-9e97-718fea641c7a
+		sourceLineageTag: wind_speed_100m_kmh
+		summarizeBy: sum
+		sourceColumn: wind_speed_100m_kmh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column solar_radiation_wm2
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(8, 2)
+		lineageTag: 5d1ad078-b263-4d01-acb1-3c6925cc48b9
+		sourceLineageTag: solar_radiation_wm2
+		summarizeBy: sum
+		sourceColumn: solar_radiation_wm2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column cloud_cover_pct
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(6, 2)
+		lineageTag: 1f8feb89-8630-4397-a5a7-8e4c24aa322b
+		sourceLineageTag: cloud_cover_pct
+		summarizeBy: sum
+		sourceColumn: cloud_cover_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column precipitation_mm
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(6, 2)
+		lineageTag: 90599630-33a5-455a-8dec-6da4bca96606
+		sourceLineageTag: precipitation_mm
+		summarizeBy: sum
+		sourceColumn: precipitation_mm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column archive_share
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(4, 3)
+		lineageTag: e64b25ec-2498-4fa9-8c61-1c40093e3afc
+		sourceLineageTag: archive_share
+		summarizeBy: sum
+		sourceColumn: archive_share
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column is_observed
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: e71bd10b-6ad0-4e57-9eab-57cd5463ec3e
+		sourceLineageTag: is_observed
+		summarizeBy: none
+		sourceColumn: is_observed
+
+		annotation SummarizationSetBy = Automatic
+
+	column loaded_at_utc
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 8d1ab258-00f1-4bfe-a3b7-8300b69880c2
+		sourceLineageTag: loaded_at_utc
+		summarizeBy: none
+		sourceColumn: loaded_at_utc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_weather_hourly = entity
+		mode: directLake
+		source
+			entityName: fact_weather_hourly
+			schemaName: fact
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

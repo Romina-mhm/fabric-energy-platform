@@ -1,0 +1,310 @@
+table fact_carbon_hourly
+	lineageTag: 2a22e47a-0c03-4287-b58b-7ecc1235171d
+	sourceLineageTag: [fact].[fact_carbon_hourly]
+
+	measure 'Total Generation MWh' = SUM ( fact_carbon_hourly[total_generation_mwh] )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Carbon
+		lineageTag: e1db860e-8182-4510-9b31-7c6bf097e669
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Share of total generation from renewable sources (wind, solar, hydro, biomass, geothermal).
+	measure 'Renewable %' =
+			
+			DIVIDE ( SUM ( fact_carbon_hourly[renewable_mwh] ), [Total Generation MWh] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Carbon
+		lineageTag: 273a8f33-595e-4f49-a3b6-63a6bc4b4d2d
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Description
+
+		changedProperty = FormatString
+
+	measure 'Low-carbon %' =
+			
+			DIVIDE ( SUM ( fact_carbon_hourly[low_carbon_mwh] ), [Total Generation MWh] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Carbon
+		lineageTag: 545f1ee6-5b21-4c96-9ad2-eeaaa3f054d9
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		changedProperty = FormatString
+
+	/// Lifecycle grams CO2e per kWh generated, calculated only over generation with a known emission factor. Read together with Factor Coverage %.
+	measure 'Carbon Intensity gCO2e/kWh' =
+			
+			DIVIDE ( SUM ( fact_carbon_hourly[co2e_kg] ), SUM ( fact_carbon_hourly[factor_covered_mwh] ) )
+		displayFolder: Carbon
+		lineageTag: 5f2dfde2-f9d9-4fb4-b857-705412ee05e5
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Description
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Share of generation that has a known emission factor. Below ~90% the carbon intensity is less reliable (e.g. NL 'Other').
+	measure 'Factor Coverage %' =
+			
+			DIVIDE ( SUM ( fact_carbon_hourly[factor_covered_mwh] ), [Total Generation MWh] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Carbon
+		lineageTag: 3a92d4f3-f68e-4b8c-8820-519189c9c531
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Description
+
+		changedProperty = FormatString
+
+	measure 'Total CO2e tonnes' = DIVIDE ( SUM ( fact_carbon_hourly[co2e_kg] ), 1000 )
+		displayFolder: Carbon
+		lineageTag: af09b043-c863-488e-9fda-fdf2de5fa007
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Hour of day (0–23, UTC) with the lowest carbon intensity in the current filter.
+	measure 'Greenest Hour' =
+			
+			VAR t =
+			    FILTER (
+			        ADDCOLUMNS ( VALUES ( dim_hour[hour_key] ), "@ci", [Carbon Intensity gCO2e/kWh] ),
+			        NOT ISBLANK ( [@ci] )
+			    )
+			RETURN MINX ( TOPN ( 1, t, [@ci], ASC ), dim_hour[hour_key] )
+		formatString: 0
+		displayFolder: Carbon
+		lineageTag: b8167242-de53-4201-b545-812cccb4be08
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Description
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3d282817-0262-4fb9-983c-12629d991d7c
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: smallint
+		lineageTag: 9f574582-09a7-41d8-98a3-d899e6e1e438
+		sourceLineageTag: hour_key
+		summarizeBy: none
+		sourceColumn: hour_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ts_hour_utc
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 09840856-255a-432f-8df1-3ae0e678784e
+		sourceLineageTag: ts_hour_utc
+		summarizeBy: none
+		sourceColumn: ts_hour_utc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column country_code
+		dataType: string
+		isHidden
+		sourceProviderType: char
+		lineageTag: ec2c50ff-ac40-4af1-b3f8-aef7f3b2d2dc
+		sourceLineageTag: country_code
+		summarizeBy: none
+		sourceColumn: country_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_generation_mwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(14, 3)
+		lineageTag: a71829b9-f796-4e9a-8137-c6c97bf006ec
+		sourceLineageTag: total_generation_mwh
+		summarizeBy: sum
+		sourceColumn: total_generation_mwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column renewable_mwh
+		dataType: decimal
+		isHidden
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(14, 3)
+		lineageTag: cf6e1257-b831-4b5a-a59a-f1a3596a5ee5
+		sourceLineageTag: renewable_mwh
+		summarizeBy: sum
+		sourceColumn: renewable_mwh
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column low_carbon_mwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(14, 3)
+		lineageTag: e6eee451-89a5-46a4-bff9-b2838ddc3ea2
+		sourceLineageTag: low_carbon_mwh
+		summarizeBy: sum
+		sourceColumn: low_carbon_mwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column factor_covered_mwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(14, 3)
+		lineageTag: 3d2d0f8b-58be-4ba0-a20d-f4114f82e40d
+		sourceLineageTag: factor_covered_mwh
+		summarizeBy: sum
+		sourceColumn: factor_covered_mwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column co2e_kg
+		dataType: double
+		isHidden
+		sourceProviderType: decimal(18, 3)
+		lineageTag: 614be105-9d46-41de-bb29-ac33738b4aac
+		sourceLineageTag: co2e_kg
+		summarizeBy: sum
+		sourceColumn: co2e_kg
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column renewable_share_pct
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(6, 2)
+		lineageTag: a463e336-7598-4f44-8d62-18b0283c6ab7
+		sourceLineageTag: renewable_share_pct
+		summarizeBy: sum
+		sourceColumn: renewable_share_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column low_carbon_share_pct
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(6, 2)
+		lineageTag: 804c9c97-212a-4856-b29d-45317cb79c01
+		sourceLineageTag: low_carbon_share_pct
+		summarizeBy: sum
+		sourceColumn: low_carbon_share_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column carbon_intensity_g_per_kwh
+		dataType: decimal
+		isHidden
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(8, 2)
+		lineageTag: 3165d02d-27f2-44ca-b161-7107625391f3
+		sourceLineageTag: carbon_intensity_g_per_kwh
+		summarizeBy: sum
+		sourceColumn: carbon_intensity_g_per_kwh
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column factor_coverage_pct
+		dataType: decimal
+		isHidden
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(6, 2)
+		lineageTag: e28ad2be-4173-440f-86d9-b174e477b356
+		sourceLineageTag: factor_coverage_pct
+		summarizeBy: sum
+		sourceColumn: factor_coverage_pct
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column loaded_at_utc
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: fb617899-b419-4544-b7b6-7030743d40ae
+		sourceLineageTag: loaded_at_utc
+		summarizeBy: none
+		sourceColumn: loaded_at_utc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_carbon_hourly = entity
+		mode: directLake
+		source
+			entityName: fact_carbon_hourly
+			schemaName: fact
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

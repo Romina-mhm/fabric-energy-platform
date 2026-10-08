@@ -1,0 +1,76 @@
+table dim_holiday
+	lineageTag: b4708def-f90f-4320-8014-af62526ef3f3
+	sourceLineageTag: [dim].[dim_holiday]
+
+	column country_code
+		dataType: string
+		sourceProviderType: char
+		lineageTag: 7875b609-6c98-41d6-b8b4-408978ae505b
+		sourceLineageTag: country_code
+		summarizeBy: none
+		sourceColumn: country_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b8990a0c-865c-4daf-9791-41782f9331c7
+		sourceLineageTag: date_key
+		summarizeBy: sum
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column holiday_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 6696b3b7-1f71-477f-a683-9f5a78cf3de1
+		sourceLineageTag: holiday_date
+		summarizeBy: none
+		sourceColumn: holiday_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column holiday_name
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 274d4ee4-5686-4d74-8277-4a5ee405e365
+		sourceLineageTag: holiday_name
+		summarizeBy: none
+		sourceColumn: holiday_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column local_name
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: fa84d021-8fad-47ed-ac78-0d8a0bb26acf
+		sourceLineageTag: local_name
+		summarizeBy: none
+		sourceColumn: local_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_nationwide
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 18e37cd0-6d31-482f-b671-b8ca91117cdd
+		sourceLineageTag: is_nationwide
+		summarizeBy: none
+		sourceColumn: is_nationwide
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_holiday = entity
+		mode: directLake
+		source
+			entityName: dim_holiday
+			schemaName: dim
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

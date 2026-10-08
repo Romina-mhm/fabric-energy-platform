@@ -1,0 +1,89 @@
+relationship b2238e94-82ab-e1e1-9100-aa753d3586e0
+	fromColumn: fact_carbon_hourly.country_code
+	toColumn: dim_country.country_code
+
+relationship 54a0d792-b7f0-a895-3803-8c12cde4d6c5
+	fromColumn: fact_carbon_hourly.date_key
+	toColumn: dim_date.date_key
+
+relationship fc2f1e7a-5805-6723-78b5-e4e927714821
+	fromColumn: fact_carbon_hourly.hour_key
+	toColumn: dim_hour.hour_key
+
+relationship aa913c39-b17d-bcaa-7a8e-f089ae82e46e
+	fromColumn: fact_flow_hourly.hour_key
+	toColumn: dim_hour.hour_key
+
+relationship 9ec97343-c725-4d2c-beb6-0859349b697e
+	fromColumn: fact_flow_hourly.date_key
+	toColumn: dim_date.date_key
+
+relationship 8c50752e-1b9d-2678-8110-09b4b814d310
+	fromColumn: fact_price_hourly.country_code
+	toColumn: dim_country.country_code
+
+relationship f6216b12-c51e-a024-9475-b127d967a46b
+	fromColumn: fact_price_hourly.date_key
+	toColumn: dim_date.date_key
+
+relationship 9c130163-2a7e-6984-5863-7e788c8f9b41
+	fromColumn: fact_weather_hourly.hour_key
+	toColumn: dim_hour.hour_key
+
+relationship 2e338185-8946-cbff-bcd2-e7353ee3b5cc
+	fromColumn: fact_flow_hourly.from_country_code
+	toColumn: dim_country.country_code
+
+relationship 2fc3043c-7c2f-1944-07c7-474920d9e805
+	isActive: false
+	fromColumn: fact_flow_hourly.to_country_code
+	toColumn: dim_country.country_code
+
+relationship e8b06e1d-fa57-2b45-f8c8-73a7001f36bf
+	fromColumn: fact_price_hourly.hour_key
+	toColumn: dim_hour.hour_key
+
+relationship 6a8e391c-c798-ae86-7ec0-4c5853c4395e
+	fromColumn: fact_weather_hourly.country_code
+	toColumn: dim_country.country_code
+
+relationship 303c7dd4-8443-0ca3-8bfe-a74e16d23e5c
+	fromColumn: fact_weather_hourly.date_key
+	toColumn: dim_date.date_key
+
+relationship 6e56ee22-8725-eb4c-20df-703fec37e6f8
+	fromColumn: fact_generation_hourly.country_code
+	toColumn: dim_country.country_code
+
+relationship edff7d70-845b-2a67-9a7a-ea89661f35b7
+	fromColumn: fact_generation_hourly.date_key
+	toColumn: dim_date.date_key
+
+relationship bd9f7a41-9ac8-65cb-dd85-0f8b812a1f4a
+	fromColumn: fact_generation_hourly.hour_key
+	toColumn: dim_hour.hour_key
+
+relationship a064385b-2673-76bd-bae0-bddda7ae1d35
+	fromColumn: fact_price_hourly.area_code
+	toColumn: dim_area.area_code
+
+relationship 870d87ab-3bd2-bd04-ac63-8e7a8ef0d383
+	fromColumn: fact_generation_hourly.psr_type_code
+	toColumn: dim_production_type.psr_type_code
+
+relationship e32e9501-e47b-643b-efd2-a39cea53c288
+	fromColumn: fact_load_hourly.country_code
+	toColumn: dim_country.country_code
+
+relationship f3260494-b191-59a7-6448-fe471d967aad
+	fromColumn: fact_load_hourly.date_key
+	toColumn: dim_date.date_key
+
+relationship 5f93cf40-9d6d-d9ab-4634-38aef1a04221
+	fromColumn: fact_load_hourly.hour_key
+	toColumn: dim_hour.hour_key
+
+relationship b1d6273e-0607-ab2d-b002-8c331f315f89
+	fromColumn: dim_kpi_threshold.country_code
+	toColumn: dim_country.country_code
+

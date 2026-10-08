@@ -1,0 +1,57 @@
+table dim_country
+	lineageTag: 6b1f73d0-84b6-4bcc-9fd1-8af8f5ae873a
+	sourceLineageTag: [dim].[dim_country]
+
+	column country_code
+		dataType: string
+		sourceProviderType: char
+		lineageTag: 6bd22b99-f09c-4126-a4c6-faa8cc21c060
+		sourceLineageTag: country_code
+		summarizeBy: none
+		sourceColumn: country_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column country_name
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: 58e2fe28-38e0-4301-a57b-ab7e2a3033fb
+		sourceLineageTag: country_name
+		summarizeBy: none
+		sourceColumn: country_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_zone
+		dataType: string
+		sourceProviderType: varchar(40)
+		lineageTag: 434c0e22-623a-4a02-aed6-84d3dda29cc1
+		sourceLineageTag: time_zone
+		summarizeBy: none
+		sourceColumn: time_zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: cdc0dec0-5413-4254-91ac-9c31d8c5174d
+		sourceLineageTag: is_active
+		summarizeBy: none
+		sourceColumn: is_active
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_country = entity
+		mode: directLake
+		source
+			entityName: dim_country
+			schemaName: dim
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

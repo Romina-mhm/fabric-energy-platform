@@ -1,0 +1,85 @@
+table dim_area
+	lineageTag: 41696597-ec52-4b53-be23-3ca6261698aa
+	sourceLineageTag: [dim].[dim_area]
+
+	column area_code
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: fb1db9b6-f361-41f1-90cf-d17746a085ec
+		sourceLineageTag: area_code
+		summarizeBy: none
+		sourceColumn: area_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column eic_code
+		dataType: string
+		sourceProviderType: varchar(16)
+		lineageTag: 40f18937-e9d7-48d3-a720-6ddc10ad39d3
+		sourceLineageTag: eic_code
+		summarizeBy: none
+		sourceColumn: eic_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column area_name
+		dataType: string
+		sourceProviderType: varchar(60)
+		lineageTag: 5fad167e-0be4-48e1-8a44-182cf6c6e35a
+		sourceLineageTag: area_name
+		summarizeBy: none
+		sourceColumn: area_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column country_code
+		dataType: string
+		sourceProviderType: char
+		lineageTag: 742afa21-2048-4d0c-9ce3-2308708405d0
+		sourceLineageTag: country_code
+		summarizeBy: none
+		sourceColumn: country_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column country_name
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: 28583a96-6cfd-4739-a568-a5874af09f33
+		sourceLineageTag: country_name
+		summarizeBy: none
+		sourceColumn: country_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_country_area
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: d3392c19-01b6-488c-bd60-7ee745792521
+		sourceLineageTag: is_country_area
+		summarizeBy: none
+		sourceColumn: is_country_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_bidding_zone
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: b35a83a1-3eb1-43e1-8347-53e683667dfb
+		sourceLineageTag: is_bidding_zone
+		summarizeBy: none
+		sourceColumn: is_bidding_zone
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_area = entity
+		mode: directLake
+		source
+			entityName: dim_area
+			schemaName: dim
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

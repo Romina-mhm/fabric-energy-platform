@@ -1,0 +1,134 @@
+table dim_kpi_threshold
+	lineageTag: c8832790-045a-439d-955e-428bd3acf00b
+	sourceLineageTag: [dim].[dim_kpi_threshold]
+
+	measure 'Renewable Target %' = DIVIDE ( MAX ( dim_kpi_threshold[renewable_share_target_pct] ), 100 )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Targets
+		lineageTag: d93dcfcb-6945-44c3-a779-b1a20965c855
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		changedProperty = FormatString
+
+	measure 'Renewable Gap vs Target' = [Renewable %] - [Renewable Target %]
+		displayFolder: Targets
+		lineageTag: 842c3c76-7509-4c76-b5a3-d4b6a283c13b
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Carbon Alert Level' = MAX ( dim_kpi_threshold[carbon_intensity_alert_gco2e_per_kwh] )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Targets
+		lineageTag: 42df4275-7f11-4ef1-b1cd-48a88fc86da1
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column country_code
+		dataType: string
+		sourceProviderType: char
+		lineageTag: 670d9733-b13b-4eda-9f8f-fa6d2b8b8e40
+		sourceLineageTag: country_code
+		summarizeBy: none
+		sourceColumn: country_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column carbon_intensity_alert_gco2e_per_kwh
+		dataType: decimal
+		isHidden
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(8, 2)
+		lineageTag: c32dfb9a-8590-40c0-b08e-b68dc6b31a2b
+		sourceLineageTag: carbon_intensity_alert_gco2e_per_kwh
+		summarizeBy: sum
+		sourceColumn: carbon_intensity_alert_gco2e_per_kwh
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column price_spike_alert_eur_per_mwh
+		dataType: decimal
+		isHidden
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: e5d0915f-5bbc-45d8-9cf1-b2ad33396624
+		sourceLineageTag: price_spike_alert_eur_per_mwh
+		summarizeBy: sum
+		sourceColumn: price_spike_alert_eur_per_mwh
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column renewable_share_target_pct
+		dataType: decimal
+		isHidden
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(6, 2)
+		lineageTag: 6b8706e0-abf5-4c01-8e9a-925acc1f2be4
+		sourceLineageTag: renewable_share_target_pct
+		summarizeBy: sum
+		sourceColumn: renewable_share_target_pct
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column valid_from
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: c0c67d03-6c3d-4638-97a1-67d24dcb3023
+		sourceLineageTag: valid_from
+		summarizeBy: none
+		sourceColumn: valid_from
+
+		annotation SummarizationSetBy = Automatic
+
+	column owner
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: e806a066-1129-449e-a44b-b05b39c64b64
+		sourceLineageTag: owner
+		summarizeBy: none
+		sourceColumn: owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column note
+		dataType: string
+		sourceProviderType: varchar(400)
+		lineageTag: f0243b86-dc6e-4080-ae94-19f0ce73d798
+		sourceLineageTag: note
+		summarizeBy: none
+		sourceColumn: note
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_kpi_threshold = entity
+		mode: directLake
+		source
+			entityName: dim_kpi_threshold
+			schemaName: dim
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

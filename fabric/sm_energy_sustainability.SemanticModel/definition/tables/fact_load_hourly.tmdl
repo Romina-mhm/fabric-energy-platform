@@ -1,0 +1,157 @@
+table fact_load_hourly
+	lineageTag: a61b15c3-38c4-4bc1-b616-4f1ffdd031aa
+	sourceLineageTag: [fact].[fact_load_hourly]
+
+	measure 'Load MWh' = SUM ( fact_load_hourly[load_mwh] )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Market
+		lineageTag: 411510c9-9f0a-4ad5-9d84-401b6a54d0a3
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Avg Load MW' = AVERAGE ( fact_load_hourly[avg_load_mw] )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Market
+		lineageTag: 32380d65-3b81-4038-ad30-56ae8e184297
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 93be0139-de16-4593-ac37-17ab2f14f816
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: smallint
+		lineageTag: d577ec5b-d173-4e19-8bae-cd04d9e0d12b
+		sourceLineageTag: hour_key
+		summarizeBy: none
+		sourceColumn: hour_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ts_hour_utc
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 0866592c-6958-45d6-b87e-fac6811c6763
+		sourceLineageTag: ts_hour_utc
+		summarizeBy: none
+		sourceColumn: ts_hour_utc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column area_code
+		dataType: string
+		isHidden
+		sourceProviderType: varchar(10)
+		lineageTag: db51b931-2eca-4cea-8f59-973e58835c0d
+		sourceLineageTag: area_code
+		summarizeBy: none
+		sourceColumn: area_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column country_code
+		dataType: string
+		isHidden
+		sourceProviderType: char
+		lineageTag: cd0734bb-4e4e-41b4-8907-e88aeb3cacbe
+		sourceLineageTag: country_code
+		summarizeBy: none
+		sourceColumn: country_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column load_mwh
+		dataType: decimal
+		isHidden
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(14, 3)
+		lineageTag: 73f05124-7bba-431d-bd3f-6014908ebb69
+		sourceLineageTag: load_mwh
+		summarizeBy: sum
+		sourceColumn: load_mwh
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column avg_load_mw
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(14, 3)
+		lineageTag: 1e227d13-5f98-400a-9b48-534ed30f129d
+		sourceLineageTag: avg_load_mw
+		summarizeBy: sum
+		sourceColumn: avg_load_mw
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column coverage_minutes
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ab7c9bb8-1ae6-430e-a1d6-388384b4a03e
+		sourceLineageTag: coverage_minutes
+		summarizeBy: sum
+		sourceColumn: coverage_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column loaded_at_utc
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 24d46b57-74ef-4613-be03-0d84af342c4f
+		sourceLineageTag: loaded_at_utc
+		summarizeBy: none
+		sourceColumn: loaded_at_utc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_load_hourly = entity
+		mode: directLake
+		source
+			entityName: fact_load_hourly
+			schemaName: fact
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

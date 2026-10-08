@@ -1,0 +1,181 @@
+table fact_price_hourly
+	lineageTag: 0b1f83da-fd68-41d0-9597-f3a41b10f2ba
+	sourceLineageTag: [fact].[fact_price_hourly]
+
+	measure 'Avg Price EUR/MWh' = AVERAGE ( fact_price_hourly[price_eur_mwh] )
+		formatString: "€"\ #,0.0;-"€"\ #,0.0;"€"\ #,0.0
+		displayFolder: Market
+		lineageTag: 13a7ae89-2ad1-43f8-bad3-d4361b329f30
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		changedProperty = FormatString
+
+	measure 'Negative Price Hours' =
+			
+			CALCULATE ( COUNTROWS ( fact_price_hourly ), fact_price_hourly[price_eur_mwh] < 0 )
+		formatString: 0
+		displayFolder: Market
+		lineageTag: 37ead2fc-1101-4de5-b056-8e596e680b5f
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 29b83323-f8f1-4788-86b4-ef4da04191a4
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: smallint
+		lineageTag: 9ecb32e4-b6f3-4863-895f-cd9bbe69848d
+		sourceLineageTag: hour_key
+		summarizeBy: none
+		sourceColumn: hour_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ts_hour_utc
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: ff083112-eafc-4600-a2bb-2d6e61a1a404
+		sourceLineageTag: ts_hour_utc
+		summarizeBy: none
+		sourceColumn: ts_hour_utc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column area_code
+		dataType: string
+		isHidden
+		sourceProviderType: varchar(10)
+		lineageTag: d997ccc8-1341-4d00-9a67-0938967d609b
+		sourceLineageTag: area_code
+		summarizeBy: none
+		sourceColumn: area_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column country_code
+		dataType: string
+		isHidden
+		sourceProviderType: char
+		lineageTag: 6e1455d3-21d9-483f-bd02-dc48b609cddd
+		sourceLineageTag: country_code
+		summarizeBy: none
+		sourceColumn: country_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column price_eur_mwh
+		dataType: decimal
+		isHidden
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: 678084c7-1faa-4b6a-9e5f-90eaf5a0fe7c
+		sourceLineageTag: price_eur_mwh
+		summarizeBy: sum
+		sourceColumn: price_eur_mwh
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column min_price_eur_mwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: 2e662fa0-3a38-4087-a05d-e9fa1997ae59
+		sourceLineageTag: min_price_eur_mwh
+		summarizeBy: sum
+		sourceColumn: min_price_eur_mwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column max_price_eur_mwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: 74626a37-dbef-464b-8e9b-cb350646f448
+		sourceLineageTag: max_price_eur_mwh
+		summarizeBy: sum
+		sourceColumn: max_price_eur_mwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column source_resolution_minutes
+		dataType: int64
+		formatString: 0
+		sourceProviderType: smallint
+		lineageTag: c9787bc9-bf6b-4253-b135-6941d664eeb1
+		sourceLineageTag: source_resolution_minutes
+		summarizeBy: sum
+		sourceColumn: source_resolution_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_slots
+		dataType: int64
+		formatString: 0
+		sourceProviderType: smallint
+		lineageTag: 01cf035f-499c-4f8b-83db-3b41a1e16528
+		sourceLineageTag: source_slots
+		summarizeBy: sum
+		sourceColumn: source_slots
+
+		annotation SummarizationSetBy = Automatic
+
+	column loaded_at_utc
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 202bcc11-5462-4e48-a090-2817a425a53c
+		sourceLineageTag: loaded_at_utc
+		summarizeBy: none
+		sourceColumn: loaded_at_utc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_price_hourly = entity
+		mode: directLake
+		source
+			entityName: fact_price_hourly
+			schemaName: fact
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

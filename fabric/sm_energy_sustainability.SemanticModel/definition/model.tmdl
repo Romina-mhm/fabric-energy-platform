@@ -1,0 +1,30 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+annotation PBI_ProTooling = ["WebModelingEdit"]
+
+ref table dim_kpi_threshold
+ref table dim_emission_factor
+ref table dim_country
+ref table dim_area
+ref table dim_production_type
+ref table dim_holiday
+ref table dim_hour
+ref table dim_date
+ref table fact_load_hourly
+ref table fact_generation_hourly
+ref table fact_carbon_hourly
+ref table fact_price_hourly
+ref table fact_flow_hourly
+ref table fact_weather_hourly
+

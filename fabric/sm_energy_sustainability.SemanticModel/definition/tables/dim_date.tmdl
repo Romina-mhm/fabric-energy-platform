@@ -1,0 +1,154 @@
+table dim_date
+	lineageTag: e400483f-955b-4600-a7dc-1166099c31c7
+	sourceLineageTag: [dim].[dim_date]
+	dataCategory: Time
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 46b98ea8-e9d2-41e1-a3d1-626861215645
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		isKey
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 0a73d264-55dd-49f0-a4a1-144cbf760829
+		sourceLineageTag: date
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 61d8c629-9911-4792-a2b8-9cb8f6800d67
+		sourceLineageTag: year
+		summarizeBy: none
+		sourceColumn: year
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column quarter
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: c612871e-7dd8-4d50-8e72-deae7e4494e1
+		sourceLineageTag: quarter
+		summarizeBy: none
+		sourceColumn: quarter
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: bc9d5690-763e-4c49-b845-a90bd34ff727
+		sourceLineageTag: month
+		summarizeBy: none
+		sourceColumn: month
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column month_name
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: c69c457e-fc88-45ca-9fec-03eb6e3dead8
+		sourceLineageTag: month_name
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: month
+
+		changedProperty = IsHidden
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 680b534e-4251-4042-bb6c-b30f23f3f9a6
+		sourceLineageTag: day_of_month
+		summarizeBy: none
+		sourceColumn: day_of_month
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column day_of_week
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b9c88164-e792-4939-a44e-6217b6687b83
+		sourceLineageTag: day_of_week
+		summarizeBy: none
+		sourceColumn: day_of_week
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column day_name
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 0a4f09dc-a7b9-49bb-b511-1cc8df2819b5
+		sourceLineageTag: day_name
+		summarizeBy: none
+		sourceColumn: day_name
+		sortByColumn: day_of_week
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_weekend
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: f860a996-eee5-4ce0-ad5e-2b691869a3a2
+		sourceLineageTag: is_weekend
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+		annotation SummarizationSetBy = Automatic
+
+	column season
+		dataType: string
+		sourceProviderType: varchar(6)
+		lineageTag: 63de87ed-16c3-4799-83ba-e8bfbab208cc
+		sourceLineageTag: season
+		summarizeBy: none
+		sourceColumn: season
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = entity
+		mode: directLake
+		source
+			entityName: dim_date
+			schemaName: dim
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

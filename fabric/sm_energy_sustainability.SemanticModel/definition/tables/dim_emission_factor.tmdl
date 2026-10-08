@@ -1,0 +1,79 @@
+table dim_emission_factor
+	lineageTag: 57d0c35c-2a10-450a-b332-dab22a1b7d95
+	sourceLineageTag: [dim].[dim_emission_factor]
+
+	column psr_type_code
+		dataType: string
+		sourceProviderType: char
+		lineageTag: 803942d1-93c1-4b54-aa78-eca340b22c73
+		sourceLineageTag: psr_type_code
+		summarizeBy: none
+		sourceColumn: psr_type_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column lifecycle_gco2e_per_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(6, 1)
+		lineageTag: 24e47de8-d56e-4f15-805d-561a90a4e0e3
+		sourceLineageTag: lifecycle_gco2e_per_kwh
+		summarizeBy: sum
+		sourceColumn: lifecycle_gco2e_per_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column emission_factor_source
+		dataType: string
+		sourceProviderType: varchar(80)
+		lineageTag: dfad75e6-f530-458e-9baf-f73aad4cea11
+		sourceLineageTag: emission_factor_source
+		summarizeBy: none
+		sourceColumn: emission_factor_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_from
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 082bd1ef-19a3-4ddf-a62f-de85d1a42c3f
+		sourceLineageTag: valid_from
+		summarizeBy: none
+		sourceColumn: valid_from
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_to
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 8fc37225-b19d-4cce-879b-59ed1110c2ec
+		sourceLineageTag: valid_to
+		summarizeBy: none
+		sourceColumn: valid_to
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_current
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: aa85a684-82e4-4713-bab0-cb9c21ee6d57
+		sourceLineageTag: is_current
+		summarizeBy: none
+		sourceColumn: is_current
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_emission_factor = entity
+		mode: directLake
+		source
+			entityName: dim_emission_factor
+			schemaName: dim
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+
