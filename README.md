@@ -12,6 +12,12 @@ It combines grid data from ENTSO-E, weather from Open-Meteo, public holidays, a 
 
 The project started while volunteering on a sustainable farm, where I met someone running a carbon-offset project. Offsetting only makes sense when you know how much carbon your electricity actually carries, and that depends on the country, the hour and the energy mix. This platform is the data foundation for that kind of carbon insight: reliable, hourly and explainable, including where the source data is incomplete.
 
+## Report
+
+![Overview page of the Power BI report](docs/img/overview.png)
+
+*Overview page (Power BI, Direct Lake): carbon intensity, renewable share vs official 2030 targets, hourly profile and generation mix for IT, FR, DE and NL.*
+
 ## Architecture
 
 ```mermaid
@@ -169,7 +175,8 @@ CHANGELOG.md
 **10. Reporting** 🔄 in progress
 - [x] Direct Lake semantic model, star relationships, core DAX measures
 - [x] Model validated against Gold (NL 2025-06-15 = 315.7)
-- [ ] Power BI report: Overview, Country deep-dive, Greenest-hours heatmap, Market & flows
+- [x] Power BI report: Overview page (KPIs, carbon trend, renewables vs 2030 targets, hourly profile, generation mix)
+- [ ] Power BI report: Market & flows and Country deep-dive pages
 
 **11. AI layer** ⏳ next
 - [ ] Fabric Data Agent over the semantic model
