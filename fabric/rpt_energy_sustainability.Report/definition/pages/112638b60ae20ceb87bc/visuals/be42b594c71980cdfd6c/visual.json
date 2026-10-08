@@ -1,0 +1,82 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "be42b594c71980cdfd6c",
+  "position": {
+    "x": 1612.5183374083131,
+    "y": 82,
+    "z": 11001,
+    "height": 110,
+    "width": 269,
+    "tabOrder": 11001
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_carbon_hourly"
+                    }
+                  },
+                  "Property": "Total CO2e tonnes"
+                }
+              },
+              "queryRef": "fact_carbon_hourly.Total CO2e tonnes",
+              "nativeQueryRef": "Total CO2e (Mt)",
+              "displayName": "Total CO2e (Mt)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_carbon_hourly"
+                  }
+                },
+                "Property": "Total CO2e tonnes"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000000D"
+                }
+              }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "1L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_carbon_hourly.Total CO2e tonnes"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "d62ac2214018bbdd871f",
+  "position": {
+    "x": 354.42542787286067,
+    "y": 82.151589242053788,
+    "z": 6000,
+    "height": 110,
+    "width": 280,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_carbon_hourly"
+                    }
+                  },
+                  "Property": "Factor Coverage %"
+                }
+              },
+              "queryRef": "fact_carbon_hourly.Factor Coverage %",
+              "nativeQueryRef": "Factor Coverage %"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_carbon_hourly"
+                  }
+                },
+                "Property": "Factor Coverage %"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
