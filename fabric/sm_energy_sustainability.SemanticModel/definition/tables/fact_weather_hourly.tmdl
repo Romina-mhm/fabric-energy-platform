@@ -1,3 +1,4 @@
+/// Hourly weather (wind, solar radiation, temperature) per country.
 table fact_weather_hourly
 	lineageTag: 10b98024-e3c4-41af-a622-7f79c73ebadd
 	sourceLineageTag: [fact].[fact_weather_hourly]
@@ -188,6 +189,8 @@ table fact_weather_hourly
 			entityName: fact_weather_hourly
 			schemaName: fact
 			expressionSource: DatabaseQuery
+
+	changedProperty = Description
 
 	annotation PBI_ResultType = Table
 

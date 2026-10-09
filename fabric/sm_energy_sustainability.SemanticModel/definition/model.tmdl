@@ -11,7 +11,7 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_QueryOrder = ["DatabaseQuery"]
 
-annotation PBI_ProTooling = ["WebModelingEdit"]
+annotation PBI_ProTooling = ["WebModelingEdit","CopilotTooling","DaxQueryView_Desktop"]
 
 ref table dim_kpi_threshold
 ref table dim_emission_factor
@@ -27,4 +27,8 @@ ref table fact_carbon_hourly
 ref table fact_price_hourly
 ref table fact_flow_hourly
 ref table fact_weather_hourly
+
+ref role Country_NL
+
+ref cultureInfo en-US
 

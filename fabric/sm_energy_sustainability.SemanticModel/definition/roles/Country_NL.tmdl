@@ -1,0 +1,7 @@
+role Country_NL
+	modelPermission: read
+
+	tablePermission dim_country = [country_code] == "NL"
+
+	annotation PBI_Id = 8b1ccc09dbf14ce5a6b917f42558f558
+

@@ -1,3 +1,4 @@
+/// Hour of day in UTC (0–23).
 table dim_hour
 	lineageTag: 7592f06b-dbb3-46cb-a295-45eb2f3215ed
 	sourceLineageTag: [dim].[dim_hour]
@@ -42,6 +43,8 @@ table dim_hour
 			entityName: dim_hour
 			schemaName: dim
 			expressionSource: DatabaseQuery
+
+	changedProperty = Description
 
 	annotation PBI_ResultType = Table
 

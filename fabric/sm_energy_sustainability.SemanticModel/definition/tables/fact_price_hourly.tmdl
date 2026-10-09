@@ -1,7 +1,9 @@
+/// Hourly day-ahead wholesale prices per bidding zone.
 table fact_price_hourly
 	lineageTag: 0b1f83da-fd68-41d0-9597-f3a41b10f2ba
 	sourceLineageTag: [fact].[fact_price_hourly]
 
+	/// Average hourly day-ahead wholesale electricity price in EUR per MWh.
 	measure 'Avg Price EUR/MWh' = AVERAGE ( fact_price_hourly[price_eur_mwh] )
 		formatString: "€"\ #,0.0;-"€"\ #,0.0;"€"\ #,0.0
 		displayFolder: Market
@@ -13,6 +15,9 @@ table fact_price_hourly
 
 		changedProperty = FormatString
 
+		changedProperty = Description
+
+	/// Number of hours with a day-ahead price below zero.
 	measure 'Negative Price Hours' =
 			
 			CALCULATE ( COUNTROWS ( fact_price_hourly ), fact_price_hourly[price_eur_mwh] < 0 )
@@ -23,6 +28,8 @@ table fact_price_hourly
 		changedProperty = Name
 
 		changedProperty = DisplayFolder
+
+		changedProperty = Description
 
 	column date_key
 		dataType: int64
@@ -176,6 +183,8 @@ table fact_price_hourly
 			entityName: fact_price_hourly
 			schemaName: fact
 			expressionSource: DatabaseQuery
+
+	changedProperty = Description
 
 	annotation PBI_ResultType = Table
 

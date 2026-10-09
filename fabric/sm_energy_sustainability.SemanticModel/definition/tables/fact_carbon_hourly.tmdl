@@ -1,7 +1,9 @@
+/// Hourly carbon metrics per country: generation, renewable and low-carbon energy, CO2e.
 table fact_carbon_hourly
 	lineageTag: 2a22e47a-0c03-4287-b58b-7ecc1235171d
 	sourceLineageTag: [fact].[fact_carbon_hourly]
 
+	/// Electricity generated, in MWh, all fuel types.
 	measure 'Total Generation MWh' = SUM ( fact_carbon_hourly[total_generation_mwh] )
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		displayFolder: Carbon
@@ -10,6 +12,8 @@ table fact_carbon_hourly
 		changedProperty = Name
 
 		changedProperty = DisplayFolder
+
+		changedProperty = Description
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
@@ -29,6 +33,7 @@ table fact_carbon_hourly
 
 		changedProperty = FormatString
 
+	/// Share of generation from renewables plus nuclear.
 	measure 'Low-carbon %' =
 			
 			DIVIDE ( SUM ( fact_carbon_hourly[low_carbon_mwh] ), [Total Generation MWh] )
@@ -41,6 +46,8 @@ table fact_carbon_hourly
 		changedProperty = DisplayFolder
 
 		changedProperty = FormatString
+
+		changedProperty = Description
 
 	/// Lifecycle grams CO2e per kWh generated, calculated only over generation with a known emission factor. Read together with Factor Coverage %.
 	measure 'Carbon Intensity gCO2e/kWh' =
@@ -73,6 +80,7 @@ table fact_carbon_hourly
 
 		changedProperty = FormatString
 
+	/// Lifecycle greenhouse-gas emissions of generation in tonnes CO2-equivalent; only generation with a known emission factor.
 	measure 'Total CO2e tonnes' = DIVIDE ( SUM ( fact_carbon_hourly[co2e_kg] ), 1000 )
 		displayFolder: Carbon
 		lineageTag: af09b043-c863-488e-9fda-fdf2de5fa007
@@ -80,6 +88,8 @@ table fact_carbon_hourly
 		changedProperty = Name
 
 		changedProperty = DisplayFolder
+
+		changedProperty = Description
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -305,6 +315,8 @@ table fact_carbon_hourly
 			entityName: fact_carbon_hourly
 			schemaName: fact
 			expressionSource: DatabaseQuery
+
+	changedProperty = Description
 
 	annotation PBI_ResultType = Table
 

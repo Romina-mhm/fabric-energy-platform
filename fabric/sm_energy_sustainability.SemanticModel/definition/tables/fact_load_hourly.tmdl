@@ -2,6 +2,7 @@ table fact_load_hourly
 	lineageTag: a61b15c3-38c4-4bc1-b616-4f1ffdd031aa
 	sourceLineageTag: [fact].[fact_load_hourly]
 
+	/// Electricity consumed (demand), in MWh.
 	measure 'Load MWh' = SUM ( fact_load_hourly[load_mwh] )
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		displayFolder: Market
@@ -10,6 +11,8 @@ table fact_load_hourly
 		changedProperty = Name
 
 		changedProperty = DisplayFolder
+
+		changedProperty = Description
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 

@@ -1,7 +1,9 @@
+/// Official 2030 renewable targets and alert levels per country.
 table dim_kpi_threshold
 	lineageTag: c8832790-045a-439d-955e-428bd3acf00b
 	sourceLineageTag: [dim].[dim_kpi_threshold]
 
+	/// Official national 2030 renewable electricity target (DE 80%, IT 63.4%, NL 70%, FR 40%).
 	measure 'Renewable Target %' = DIVIDE ( MAX ( dim_kpi_threshold[renewable_share_target_pct] ), 100 )
 		formatString: #,0.0%;-#,0.0%;#,0.0%
 		displayFolder: Targets
@@ -12,6 +14,8 @@ table dim_kpi_threshold
 		changedProperty = DisplayFolder
 
 		changedProperty = FormatString
+
+		changedProperty = Description
 
 	measure 'Renewable Gap vs Target' = [Renewable %] - [Renewable Target %]
 		displayFolder: Targets
@@ -129,6 +133,8 @@ table dim_kpi_threshold
 			entityName: dim_kpi_threshold
 			schemaName: dim
 			expressionSource: DatabaseQuery
+
+	changedProperty = Description
 
 	annotation PBI_ResultType = Table
 

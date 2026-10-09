@@ -1,7 +1,9 @@
+/// Hourly electricity demand per country.
 table fact_flow_hourly
 	lineageTag: 56214175-29d5-4c64-802b-36a1258d0605
 	sourceLineageTag: [fact].[fact_flow_hourly]
 
+	/// Cross-border physical electricity flow into / out of the country, in MWh.
 	measure 'Exports MWh' = SUM ( fact_flow_hourly[flow_mwh] )
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		displayFolder: Market
@@ -11,8 +13,11 @@ table fact_flow_hourly
 
 		changedProperty = DisplayFolder
 
+		changedProperty = Description
+
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
+	/// Cross-border physical electricity flow into / out of the country, in MWh.
 	measure 'Imports MWh' =
 			
 			CALCULATE (
@@ -26,6 +31,8 @@ table fact_flow_hourly
 		changedProperty = Name
 
 		changedProperty = DisplayFolder
+
+		changedProperty = Description
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
@@ -183,6 +190,8 @@ table fact_flow_hourly
 			entityName: fact_flow_hourly
 			schemaName: fact
 			expressionSource: DatabaseQuery
+
+	changedProperty = Description
 
 	annotation PBI_ResultType = Table
 
