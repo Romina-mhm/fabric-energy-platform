@@ -1,0 +1,975 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/dataSource/1.0.0/schema.json",
+  "artifactId": "ba3041e0-9d16-9313-4623-ae5d90d140b2",
+  "workspaceId": "00000000-0000-0000-0000-000000000000",
+  "dataSourceInstructions": null,
+  "displayName": "sm_energy_sustainability",
+  "type": "semantic_model",
+  "userDescription": null,
+  "metadata": null,
+  "elements": [
+    {
+      "id": "c8832790-045a-439d-955e-428bd3acf00b",
+      "is_selected": true,
+      "display_name": "dim_kpi_threshold",
+      "type": "semantic_model.table",
+      "description": "Official 2030 renewable targets and alert levels per country.",
+      "children": [
+        {
+          "id": "670d9733-b13b-4eda-9f8f-fa6d2b8b8e40",
+          "is_selected": true,
+          "display_name": "country_code",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "c0c67d03-6c3d-4638-97a1-67d24dcb3023",
+          "is_selected": true,
+          "display_name": "valid_from",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "e806a066-1129-449e-a44b-b05b39c64b64",
+          "is_selected": true,
+          "display_name": "owner",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "f0243b86-dc6e-4080-ae94-19f0ce73d798",
+          "is_selected": true,
+          "display_name": "note",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "d93dcfcb-6945-44c3-a779-b1a20965c855",
+          "is_selected": true,
+          "display_name": "Renewable Target %",
+          "type": "semantic_model.measure",
+          "data_type": "Decimal",
+          "description": "Official national 2030 renewable electricity target (DE 80%, IT 63.4%, NL 70%, FR 40%).",
+          "children": []
+        },
+        {
+          "id": "842c3c76-7509-4c76-b5a3-d4b6a283c13b",
+          "is_selected": true,
+          "display_name": "Renewable Gap vs Target",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "42df4275-7f11-4ef1-b1cd-48a88fc86da1",
+          "is_selected": true,
+          "display_name": "Carbon Alert Level",
+          "type": "semantic_model.measure",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "57d0c35c-2a10-450a-b332-dab22a1b7d95",
+      "is_selected": false,
+      "display_name": "dim_emission_factor",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "803942d1-93c1-4b54-aa78-eca340b22c73",
+          "is_selected": true,
+          "display_name": "psr_type_code",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "24e47de8-d56e-4f15-805d-561a90a4e0e3",
+          "is_selected": true,
+          "display_name": "lifecycle_gco2e_per_kwh",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "dfad75e6-f530-458e-9baf-f73aad4cea11",
+          "is_selected": true,
+          "display_name": "emission_factor_source",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "082bd1ef-19a3-4ddf-a62f-de85d1a42c3f",
+          "is_selected": true,
+          "display_name": "valid_from",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "8fc37225-b19d-4cce-879b-59ed1110c2ec",
+          "is_selected": true,
+          "display_name": "valid_to",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "aa85a684-82e4-4713-bab0-cb9c21ee6d57",
+          "is_selected": true,
+          "display_name": "is_current",
+          "type": "semantic_model.column",
+          "data_type": "Boolean",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "6b1f73d0-84b6-4bcc-9fd1-8af8f5ae873a",
+      "is_selected": true,
+      "display_name": "dim_country",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "6bd22b99-f09c-4126-a4c6-faa8cc21c060",
+          "is_selected": true,
+          "display_name": "country_code",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "58e2fe28-38e0-4301-a57b-ab7e2a3033fb",
+          "is_selected": true,
+          "display_name": "country_name",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "434c0e22-623a-4a02-aed6-84d3dda29cc1",
+          "is_selected": true,
+          "display_name": "time_zone",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "41696597-ec52-4b53-be23-3ca6261698aa",
+      "is_selected": true,
+      "display_name": "dim_area",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "fb1db9b6-f361-41f1-90cf-d17746a085ec",
+          "is_selected": true,
+          "display_name": "area_code",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "40f18937-e9d7-48d3-a720-6ddc10ad39d3",
+          "is_selected": true,
+          "display_name": "eic_code",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "5fad167e-0be4-48e1-8a44-182cf6c6e35a",
+          "is_selected": true,
+          "display_name": "area_name",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "742afa21-2048-4d0c-9ce3-2308708405d0",
+          "is_selected": true,
+          "display_name": "country_code",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "28583a96-6cfd-4739-a568-a5874af09f33",
+          "is_selected": true,
+          "display_name": "country_name",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "d3392c19-01b6-488c-bd60-7ee745792521",
+          "is_selected": true,
+          "display_name": "is_country_area",
+          "type": "semantic_model.column",
+          "data_type": "Boolean",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "b35a83a1-3eb1-43e1-8347-53e683667dfb",
+          "is_selected": true,
+          "display_name": "is_bidding_zone",
+          "type": "semantic_model.column",
+          "data_type": "Boolean",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "744ce089-6b8f-453b-adf2-211917d9798a",
+      "is_selected": true,
+      "display_name": "dim_production_type",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "cd15c83f-79f4-4eb8-96ae-c75badf13d66",
+          "is_selected": true,
+          "display_name": "psr_type_code",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "80761a56-cb6a-42e8-a8f1-c2a560647803",
+          "is_selected": true,
+          "display_name": "production_type_name",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "33524ccd-0f05-4384-8eb9-aadccb84935a",
+          "is_selected": true,
+          "display_name": "fuel_category",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "673641c9-c19f-48cb-bf5c-c6b3de92308c",
+          "is_selected": true,
+          "display_name": "is_renewable",
+          "type": "semantic_model.column",
+          "data_type": "Boolean",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "bf95ed64-59c8-43ef-b74b-cd2ac3006b24",
+          "is_selected": true,
+          "display_name": "is_low_carbon",
+          "type": "semantic_model.column",
+          "data_type": "Boolean",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "b851bfdb-47ba-4951-ac65-f97560a9711c",
+          "is_selected": true,
+          "display_name": "lifecycle_gco2e_per_kwh",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "d9b0943f-673c-498c-a678-07bd5d08344f",
+          "is_selected": true,
+          "display_name": "has_emission_factor",
+          "type": "semantic_model.column",
+          "data_type": "Boolean",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "a96b74b2-93f8-4745-bebc-0741da754f35",
+          "is_selected": true,
+          "display_name": "emission_factor_source",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "b4708def-f90f-4320-8014-af62526ef3f3",
+      "is_selected": false,
+      "display_name": "dim_holiday",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "7875b609-6c98-41d6-b8b4-408978ae505b",
+          "is_selected": true,
+          "display_name": "country_code",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "b8990a0c-865c-4daf-9791-41782f9331c7",
+          "is_selected": true,
+          "display_name": "date_key",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "6696b3b7-1f71-477f-a683-9f5a78cf3de1",
+          "is_selected": true,
+          "display_name": "holiday_date",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "274d4ee4-5686-4d74-8277-4a5ee405e365",
+          "is_selected": true,
+          "display_name": "holiday_name",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "fa84d021-8fad-47ed-ac78-0d8a0bb26acf",
+          "is_selected": true,
+          "display_name": "local_name",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "18e37cd0-6d31-482f-b671-b8ca91117cdd",
+          "is_selected": true,
+          "display_name": "is_nationwide",
+          "type": "semantic_model.column",
+          "data_type": "Boolean",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "7592f06b-dbb3-46cb-a295-45eb2f3215ed",
+      "is_selected": true,
+      "display_name": "dim_hour",
+      "type": "semantic_model.table",
+      "description": "Hour of day in UTC (0–23).",
+      "children": [
+        {
+          "id": "aa31d9a7-072e-40a7-993a-c2e376ceefc3",
+          "is_selected": true,
+          "display_name": "hour_key",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "79b0e849-588f-48ab-a6ef-66efe96ee5f9",
+          "is_selected": true,
+          "display_name": "hour_label",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "db9c166e-c0b4-47ec-92ba-069ca0b7033c",
+          "is_selected": true,
+          "display_name": "day_part",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "e400483f-955b-4600-a7dc-1166099c31c7",
+      "is_selected": true,
+      "display_name": "dim_date",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "0a73d264-55dd-49f0-a4a1-144cbf760829",
+          "is_selected": true,
+          "display_name": "date",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "61d8c629-9911-4792-a2b8-9cb8f6800d67",
+          "is_selected": true,
+          "display_name": "year",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "c612871e-7dd8-4d50-8e72-deae7e4494e1",
+          "is_selected": true,
+          "display_name": "quarter",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "bc9d5690-763e-4c49-b845-a90bd34ff727",
+          "is_selected": true,
+          "display_name": "month",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "c69c457e-fc88-45ca-9fec-03eb6e3dead8",
+          "is_selected": true,
+          "display_name": "month_name",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "680b534e-4251-4042-bb6c-b30f23f3f9a6",
+          "is_selected": true,
+          "display_name": "day_of_month",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "b9c88164-e792-4939-a44e-6217b6687b83",
+          "is_selected": true,
+          "display_name": "day_of_week",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "0a4f09dc-a7b9-49bb-b511-1cc8df2819b5",
+          "is_selected": true,
+          "display_name": "day_name",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "f860a996-eee5-4ce0-ad5e-2b691869a3a2",
+          "is_selected": true,
+          "display_name": "is_weekend",
+          "type": "semantic_model.column",
+          "data_type": "Boolean",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "63de87ed-16c3-4799-83ba-e8bfbab208cc",
+          "is_selected": true,
+          "display_name": "season",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "a61b15c3-38c4-4bc1-b616-4f1ffdd031aa",
+      "is_selected": true,
+      "display_name": "fact_load_hourly",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "1e227d13-5f98-400a-9b48-534ed30f129d",
+          "is_selected": true,
+          "display_name": "avg_load_mw",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ab7c9bb8-1ae6-430e-a1d6-388384b4a03e",
+          "is_selected": true,
+          "display_name": "coverage_minutes",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "411510c9-9f0a-4ad5-9d84-401b6a54d0a3",
+          "is_selected": true,
+          "display_name": "Load MWh",
+          "type": "semantic_model.measure",
+          "data_type": "Decimal",
+          "description": "Electricity consumed (demand), in MWh.",
+          "children": []
+        },
+        {
+          "id": "32380d65-3b81-4038-ad30-56ae8e184297",
+          "is_selected": true,
+          "display_name": "Avg Load MW",
+          "type": "semantic_model.measure",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "97ce24ef-4e4d-4d27-aca9-3467641aa6e8",
+      "is_selected": true,
+      "display_name": "fact_generation_hourly",
+      "type": "semantic_model.table",
+      "description": "Hourly generation per country and production type (fuel).",
+      "children": [
+        {
+          "id": "d180dfca-0507-4479-b94a-231bea251894",
+          "is_selected": true,
+          "display_name": "generation_mwh",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "d59c643d-c0a2-4327-8370-fa31078c91d2",
+          "is_selected": true,
+          "display_name": "coverage_minutes",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "0b574ee1-7d94-49da-8429-afba399b2342",
+          "is_selected": true,
+          "display_name": "Generation MWh",
+          "type": "semantic_model.measure",
+          "data_type": "Decimal",
+          "description": "Electricity generated by fuel type, in MWh; use with production type for the generation mix.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "2a22e47a-0c03-4287-b58b-7ecc1235171d",
+      "is_selected": true,
+      "display_name": "fact_carbon_hourly",
+      "type": "semantic_model.table",
+      "description": "Hourly carbon metrics per country: generation, renewable and low-carbon energy, CO2e.",
+      "children": [
+        {
+          "id": "a71829b9-f796-4e9a-8137-c6c97bf006ec",
+          "is_selected": true,
+          "display_name": "total_generation_mwh",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "e6eee451-89a5-46a4-bff9-b2838ddc3ea2",
+          "is_selected": true,
+          "display_name": "low_carbon_mwh",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "3d2d0f8b-58be-4ba0-a20d-f4114f82e40d",
+          "is_selected": true,
+          "display_name": "factor_covered_mwh",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "a463e336-7598-4f44-8d62-18b0283c6ab7",
+          "is_selected": true,
+          "display_name": "renewable_share_pct",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "804c9c97-212a-4856-b29d-45317cb79c01",
+          "is_selected": true,
+          "display_name": "low_carbon_share_pct",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "e1db860e-8182-4510-9b31-7c6bf097e669",
+          "is_selected": true,
+          "display_name": "Total Generation MWh",
+          "type": "semantic_model.measure",
+          "data_type": "Decimal",
+          "description": "Electricity generated, in MWh, all fuel types.",
+          "children": []
+        },
+        {
+          "id": "273a8f33-595e-4f49-a3b6-63a6bc4b4d2d",
+          "is_selected": true,
+          "display_name": "Renewable %",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Share of total generation from renewable sources (wind, solar, hydro, biomass, geothermal).",
+          "children": []
+        },
+        {
+          "id": "545f1ee6-5b21-4c96-9ad2-eeaaa3f054d9",
+          "is_selected": true,
+          "display_name": "Low-carbon %",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Share of generation from renewables plus nuclear.",
+          "children": []
+        },
+        {
+          "id": "5f2dfde2-f9d9-4fb4-b857-705412ee05e5",
+          "is_selected": true,
+          "display_name": "Carbon Intensity gCO2e/kWh",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Lifecycle grams CO2e per kWh generated, calculated only over generation with a known emission factor. Read together with Factor Coverage %.",
+          "children": []
+        },
+        {
+          "id": "3a92d4f3-f68e-4b8c-8820-519189c9c531",
+          "is_selected": true,
+          "display_name": "Factor Coverage %",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Share of generation that has a known emission factor. Below ~90% the carbon intensity is less reliable (e.g. NL 'Other').",
+          "children": []
+        },
+        {
+          "id": "af09b043-c863-488e-9fda-fdf2de5fa007",
+          "is_selected": true,
+          "display_name": "Total CO2e tonnes",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Lifecycle greenhouse-gas emissions of generation in tonnes CO2-equivalent; only generation with a known emission factor.",
+          "children": []
+        },
+        {
+          "id": "b8167242-de53-4201-b545-812cccb4be08",
+          "is_selected": true,
+          "display_name": "Greenest Hour",
+          "type": "semantic_model.measure",
+          "data_type": "Int64",
+          "description": "Hour of day (0–23, UTC) with the lowest carbon intensity in the current filter.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "0b1f83da-fd68-41d0-9597-f3a41b10f2ba",
+      "is_selected": true,
+      "display_name": "fact_price_hourly",
+      "type": "semantic_model.table",
+      "description": "Hourly day-ahead wholesale prices per bidding zone.",
+      "children": [
+        {
+          "id": "2e662fa0-3a38-4087-a05d-e9fa1997ae59",
+          "is_selected": true,
+          "display_name": "min_price_eur_mwh",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "74626a37-dbef-464b-8e9b-cb350646f448",
+          "is_selected": true,
+          "display_name": "max_price_eur_mwh",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "c9787bc9-bf6b-4253-b135-6941d664eeb1",
+          "is_selected": true,
+          "display_name": "source_resolution_minutes",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "01cf035f-499c-4f8b-83db-3b41a1e16528",
+          "is_selected": true,
+          "display_name": "source_slots",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "13a7ae89-2ad1-43f8-bad3-d4361b329f30",
+          "is_selected": true,
+          "display_name": "Avg Price EUR/MWh",
+          "type": "semantic_model.measure",
+          "data_type": "Decimal",
+          "description": "Average hourly day-ahead wholesale electricity price in EUR per MWh.",
+          "children": []
+        },
+        {
+          "id": "37ead2fc-1101-4de5-b056-8e596e680b5f",
+          "is_selected": true,
+          "display_name": "Negative Price Hours",
+          "type": "semantic_model.measure",
+          "data_type": "Int64",
+          "description": "Number of hours with a day-ahead price below zero.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "56214175-29d5-4c64-802b-36a1258d0605",
+      "is_selected": true,
+      "display_name": "fact_flow_hourly",
+      "type": "semantic_model.table",
+      "description": "Hourly electricity demand per country.",
+      "children": [
+        {
+          "id": "085d5fe3-33b3-4a8e-81dd-d243dbce0f80",
+          "is_selected": true,
+          "display_name": "from_area_code",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "a676cdfa-2d05-4a7b-b0ab-b26688176c27",
+          "is_selected": true,
+          "display_name": "to_area_code",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "e6d6b569-2068-4fc8-8054-2841f703426f",
+          "is_selected": true,
+          "display_name": "to_country_code",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "d14f9fcd-eee8-4162-8df7-6a7f14eb0a34",
+          "is_selected": true,
+          "display_name": "flow_mwh",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "43b34222-65e3-4504-be45-5126460789f4",
+          "is_selected": true,
+          "display_name": "source_resolution_minutes",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "fadd3069-e0c6-4491-82d7-7eefa91492d0",
+          "is_selected": true,
+          "display_name": "coverage_minutes",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ca9d2f83-c595-4cdc-b095-eab22e9a7f2a",
+          "is_selected": true,
+          "display_name": "Exports MWh",
+          "type": "semantic_model.measure",
+          "data_type": "Decimal",
+          "description": "Cross-border physical electricity flow into / out of the country, in MWh.",
+          "children": []
+        },
+        {
+          "id": "691247d0-1e29-4204-b535-d7544c5e9ae8",
+          "is_selected": true,
+          "display_name": "Imports MWh",
+          "type": "semantic_model.measure",
+          "data_type": "Decimal",
+          "description": "Cross-border physical electricity flow into / out of the country, in MWh.",
+          "children": []
+        },
+        {
+          "id": "6fcd557a-a3fa-467f-a66b-af6fc5a92097",
+          "is_selected": true,
+          "display_name": "Net Imports MWh",
+          "type": "semantic_model.measure",
+          "data_type": "Decimal",
+          "description": "Imports minus exports across all borders. Positive means the country imports more than it exports.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "10b98024-e3c4-41af-a622-7f79c73ebadd",
+      "is_selected": true,
+      "display_name": "fact_weather_hourly",
+      "type": "semantic_model.table",
+      "description": "Hourly weather (wind, solar radiation, temperature) per country.",
+      "children": [
+        {
+          "id": "344fd592-6c58-4361-b225-c870f069b8e0",
+          "is_selected": true,
+          "display_name": "temperature_c",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "5db94baf-73ec-4367-9e97-718fea641c7a",
+          "is_selected": true,
+          "display_name": "wind_speed_100m_kmh",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "5d1ad078-b263-4d01-acb1-3c6925cc48b9",
+          "is_selected": true,
+          "display_name": "solar_radiation_wm2",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "1f8feb89-8630-4397-a5a7-8e4c24aa322b",
+          "is_selected": true,
+          "display_name": "cloud_cover_pct",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "90599630-33a5-455a-8dec-6da4bca96606",
+          "is_selected": true,
+          "display_name": "precipitation_mm",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "e64b25ec-2498-4fa9-8c61-1c40093e3afc",
+          "is_selected": true,
+          "display_name": "archive_share",
+          "type": "semantic_model.column",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "e71bd10b-6ad0-4e57-9eab-57cd5463ec3e",
+          "is_selected": true,
+          "display_name": "is_observed",
+          "type": "semantic_model.column",
+          "data_type": "Boolean",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "619225e5-da59-4292-9724-c60910be3902",
+          "is_selected": true,
+          "display_name": "Avg Wind 100m km/h",
+          "type": "semantic_model.measure",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "318be1c4-d5c2-415b-980a-fdffc46322f9",
+          "is_selected": true,
+          "display_name": "Avg Solar W/m2",
+          "type": "semantic_model.measure",
+          "data_type": "Decimal",
+          "description": null,
+          "children": []
+        }
+      ]
+    }
+  ]
+}
