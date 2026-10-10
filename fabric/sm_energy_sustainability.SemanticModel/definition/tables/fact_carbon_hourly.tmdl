@@ -112,6 +112,18 @@ table fact_carbon_hourly
 
 		changedProperty = Description
 
+	/// Latest hour (UTC) loaded in the data; use it to state the end of ‘all available data’.
+	measure 'Data Through Date' = MAX ( fact_carbon_hourly[ts_hour_utc] )
+		formatString: General Date
+		displayFolder: Carbon
+		lineageTag: 56b63e44-5f53-469e-91a7-2d99255b92c5
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+		changedProperty = Description
+
 	column date_key
 		dataType: int64
 		isHidden
