@@ -1,0 +1,4 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/publishInfo/1.0.0/schema.json",
+  "description": "Answers questions about electricity carbon intensity, renewable share, generation mix, prices and cross-border flows for Italy, France, Germany and the Netherlands (hourly, since Jan 2024), using the governed Fabric semantic model."
+}

@@ -3,6 +3,7 @@ table fact_weather_hourly
 	lineageTag: 10b98024-e3c4-41af-a622-7f79c73ebadd
 	sourceLineageTag: [fact].[fact_weather_hourly]
 
+	/// Average wind speed at 100 m height in km/h (weather data, not wind power generation). Use for questions about wind conditions or weather.
 	measure 'Avg Wind 100m km/h' = AVERAGE ( fact_weather_hourly[wind_speed_100m_kmh] )
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		displayFolder: Weather
@@ -11,6 +12,8 @@ table fact_weather_hourly
 		changedProperty = Name
 
 		changedProperty = DisplayFolder
+
+		changedProperty = Description
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 

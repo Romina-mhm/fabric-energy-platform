@@ -23,6 +23,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "dim kpi threshold": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "dim_kpi_threshold": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -149,6 +155,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "country code": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "country_code": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -215,6 +227,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "carbon intensity alert gco 2e per kwh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "carbon_intensity_alert_gco2e_per_kwh": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -241,6 +259,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "price spike alert eur per mwh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "price_spike_alert_eur_per_mwh": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -263,6 +287,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "renewable share target pct": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "renewable share target pct": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -324,6 +354,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "valid from": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "valid_from": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -332,6 +368,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "date": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
@@ -354,6 +397,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "owner": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "owner": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -440,6 +489,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "note": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "note": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -560,6 +615,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "renewable target %": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "renewable target percentage": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -626,6 +687,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "renewable gap vs target": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "renewable gap vs focus": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -672,13 +739,33 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "carbon alert level": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "level": {
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
 			        },
 			        {
+			          "level": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "alert level": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "alert level": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -803,6 +890,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "dim emission factor": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "dim_emission_factor": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -816,7 +909,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "factor": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "emission factor": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "emission factor": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -938,6 +1045,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "psr type code": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "psr type code": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -1069,6 +1182,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "lifecycle gco 2e per kwh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "lifecycle_gco2e_per_kwh": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -1096,6 +1215,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "emission factor source": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "emission_factor_source": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -1109,7 +1234,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "source": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "factor source": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "factor source": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -1235,6 +1374,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "valid from": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "valid_from": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -1263,6 +1408,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "valid to": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "valid_to": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -1287,6 +1438,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "is current": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "is current": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -1363,6 +1520,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "dim country": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "dim_country": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -1371,6 +1534,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "country": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "country": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -1419,6 +1589,12 @@ cultureInfo en-US
 			          "country code": {
 			            "State": "Generated"
 			          }
+			        },
+			        {
+			          "country code": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
 			        }
 			      ]
 			    },
@@ -1437,7 +1613,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "country code": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "code": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "code": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -1507,7 +1696,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "country name": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "name": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "name": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -1521,6 +1723,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "country": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "country": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -1623,6 +1832,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "time zone": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "time_zone": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -1631,6 +1846,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "zone": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "zone": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -1755,6 +1977,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "is active": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "is_active": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -1763,6 +1991,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "active": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "active": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -1833,6 +2068,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "dim area": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "dim_area": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -1841,6 +2082,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "area": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "area": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -1962,7 +2210,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "area code": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "code": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "code": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -2092,6 +2353,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "eic code": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "eic_code": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -2135,7 +2402,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "area name": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "name": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "name": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -2149,6 +2429,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "area": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "area": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -2271,6 +2558,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "country code": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "country_code": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -2334,6 +2627,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "country name": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "country_name": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -2342,6 +2641,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "country": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "country": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -2443,6 +2749,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "is country area": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "is_country_area": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -2456,7 +2768,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "area": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "country area": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "country area": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -2578,6 +2904,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "is bidding zone": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "is_bidding_zone": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -2591,7 +2923,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "zone": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "bidding zone": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "bidding zone": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -2716,6 +3062,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "dim production type": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "dim_production_type": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -2729,7 +3081,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "type": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "production type": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "production type": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -2851,6 +3217,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "psr type code": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "psr type code": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -2978,7 +3350,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "production type name": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "name": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "name": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -2997,13 +3382,34 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "type": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "production type": {
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
 			        },
 			        {
+			          "production type": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "type name": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "type name": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -3126,6 +3532,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "fuel category": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "fuel_category": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -3134,6 +3546,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "category": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "category": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -3259,6 +3678,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "is renewable": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "is_renewable": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -3267,6 +3692,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "renewable": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "renewable": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -3292,6 +3724,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "is low carbon": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "is_low_carbon": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -3305,7 +3743,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "carbon": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "low carbon": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "low carbon": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -3327,6 +3779,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "lifecycle gco 2e per kwh": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "lifecycle gco 2e per kwh": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -3354,6 +3812,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "has emission factor": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "has emission factor": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -3485,6 +3949,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "emission factor source": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "emission_factor_source": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -3498,7 +3968,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "source": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "factor source": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "factor source": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -3623,6 +4107,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "dim holiday": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "dim_holiday": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -3631,6 +4121,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "holiday": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "holiday": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -3756,6 +4253,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "country code": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "country_code": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -3823,6 +4326,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "date key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "date_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -3831,6 +4340,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -3956,6 +4472,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "holiday date": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "holiday_date": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -4004,6 +4526,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "holiday name": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "holiday_name": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -4012,6 +4540,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "holiday": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "holiday": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -4137,6 +4672,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "local name": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "local_name": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -4145,6 +4686,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "local": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "local": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -4250,6 +4798,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "is nationwide": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "is_nationwide": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -4268,6 +4822,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "dim hour": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "dim hour": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -4335,6 +4895,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hour key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "hour_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -4343,6 +4909,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -4464,6 +5037,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hour label": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "hour_label": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -4472,6 +5051,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "label": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "label": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -4573,6 +5159,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "day part": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "day_part": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -4581,6 +5173,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "part": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "part": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -4705,6 +5304,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "dim date": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "dim_date": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -4751,6 +5356,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "date key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "date_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -4759,6 +5370,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -4880,6 +5498,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "date": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "moment": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -4917,6 +5541,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "year": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "yr": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -4944,6 +5574,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "quarter": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -4978,6 +5614,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "month": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "mth": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -5000,6 +5642,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "month name": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "month name": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -5081,6 +5729,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "day of month": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "day_of_month": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -5118,6 +5772,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "day of week": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "day_of_week": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -5141,6 +5801,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "day name": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "day name": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -5212,6 +5878,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "is weekend": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "is_weekend": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -5220,6 +5892,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "weekend": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "weekend": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -5241,6 +5920,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "season": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "season": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -5294,6 +5979,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "fact load hourly": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "fact_load_hourly": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -5307,7 +5998,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hourly": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "load hourly": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "load hourly": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -5332,6 +6037,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "date key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "date_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -5340,6 +6051,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -5464,6 +6182,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hour key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "hour_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -5472,6 +6196,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -5596,6 +6327,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "ts hour utc": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "ts_hour_utc": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -5604,6 +6341,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "date": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
@@ -5625,6 +6369,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "area code": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "area code": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -5755,6 +6505,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "country code": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "country_code": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -5821,6 +6577,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "load mwh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "load_mwh": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -5829,6 +6591,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "mwh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "mwh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -5850,6 +6619,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "avg load mw": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "avg load mw": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -5891,6 +6666,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "coverage minute": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "coverage_minutes": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -5899,6 +6680,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "minute": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "minute": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -6023,6 +6811,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "loaded at utc": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "loaded_at_utc": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -6031,6 +6825,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "date": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
@@ -6053,7 +6854,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "load MWh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "MWh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "MWh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -6071,6 +6885,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "avg load MW": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "avg load MW": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -6104,6 +6924,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "fact generation hourly": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "fact_generation_hourly": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -6117,7 +6943,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hourly": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "generation hourly": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "generation hourly": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -6142,6 +6982,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "date key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "date_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -6150,6 +6996,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -6274,6 +7127,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hour key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "hour_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -6282,6 +7141,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -6406,6 +7272,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "ts hour utc": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "ts_hour_utc": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -6414,6 +7286,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "date": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
@@ -6435,6 +7314,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "area code": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "area code": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -6565,6 +7450,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "country code": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "country_code": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -6627,6 +7518,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "psr type code": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "psr type code": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -6758,6 +7655,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "generation mwh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "generation_mwh": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -6766,6 +7669,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "mwh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "mwh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -6786,6 +7696,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "co 2e kg": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "co 2e kg": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -6817,6 +7733,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "coverage minute": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "coverage_minutes": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -6825,6 +7747,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "minute": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "minute": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -6949,6 +7878,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "loaded at utc": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "loaded_at_utc": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -6957,6 +7892,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "date": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
@@ -6979,7 +7921,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "generation MWh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "MWh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "MWh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -7004,6 +7959,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "fact carbon hourly": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "fact_carbon_hourly": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -7017,7 +7978,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hourly": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "carbon hourly": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "carbon hourly": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -7042,6 +8017,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "date key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "date_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -7050,6 +8031,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -7174,6 +8162,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hour key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "hour_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -7182,6 +8176,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -7306,6 +8307,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "ts hour utc": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "ts_hour_utc": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -7314,6 +8321,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "date": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
@@ -7335,6 +8349,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "country code": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "country code": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -7406,6 +8426,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "total generation mwh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "total_generation_mwh": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -7414,6 +8440,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "mwh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "mwh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -7458,6 +8491,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "renewable mwh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "renewable_mwh": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -7466,6 +8505,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "mwh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "mwh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -7491,6 +8537,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "low carbon mwh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "low_carbon_mwh": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -7504,7 +8556,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "mwh": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "carbon mwh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "carbon mwh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -7526,6 +8592,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "factor covered mwh": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "factor covered mwh": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -7552,6 +8624,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "co 2e kg": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "co 2e kg": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -7583,6 +8661,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "renewable share pct": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "renewable_share_pct": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -7606,6 +8690,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "low carbon share pct": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "low carbon share pct": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -7636,6 +8726,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "carbon intensity g per kwh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "carbon_intensity_g_per_kwh": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -7649,13 +8745,34 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "g": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "intensity g": {
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
 			        },
 			        {
+			          "intensity g": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "carbon intensity g": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "carbon intensity g": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -7676,6 +8793,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "factor coverage pct": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "factor coverage pct": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -7706,6 +8829,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "loaded at utc": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "loaded_at_utc": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -7714,6 +8843,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "date": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
@@ -7736,7 +8872,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "total generation MWh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "MWh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "MWh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -7778,6 +8927,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "renewable %": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "renewable percentage": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -7814,7 +8969,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "low-carbon %": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "low carbon %": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "low carbon %": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -7876,7 +9044,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "carbon intensity gCO2e/kWh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "carbon intensity gCO2e": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "carbon intensity gCO2e": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -7888,7 +9069,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "carbon intensity gCO2e kWh": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "kWh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "kWh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -7906,6 +9101,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "factor coverage %": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "factor coverage %": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -7932,6 +9133,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "total CO2e tonnes": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "total CO2e tonnes": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -7968,6 +9175,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "greenest hour": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "greenest hour": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -8031,6 +9244,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "fact price hourly": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "fact_price_hourly": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -8044,7 +9263,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hourly": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "price hourly": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "price hourly": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -8069,6 +9302,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "date key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "date_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -8077,6 +9316,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -8201,6 +9447,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hour key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "hour_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -8209,6 +9461,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -8333,6 +9592,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "ts hour utc": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "ts_hour_utc": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -8341,6 +9606,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "date": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
@@ -8362,6 +9634,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "area code": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "area code": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -8492,6 +9770,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "country code": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "country_code": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -8558,6 +9842,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "price eur mwh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "price_eur_mwh": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -8581,6 +9871,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "min price eur mwh": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "min price eur mwh": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -8622,6 +9918,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "max price eur mwh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "max_price_eur_mwh": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -8659,6 +9961,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "source resolution minute": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "source_resolution_minutes": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -8672,7 +9980,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "minute": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "resolution minute": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "resolution minute": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -8798,6 +10120,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "source slot": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "source_slots": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -8806,6 +10134,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "slot": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "slot": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -8830,6 +10165,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "loaded at utc": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "loaded_at_utc": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -8838,6 +10179,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "date": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
@@ -8860,7 +10208,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "avg price EUR/MWh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "avg price EUR": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "avg price EUR": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -8872,7 +10233,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "avg price EUR MWh": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "MWh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "MWh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -8924,7 +10299,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "negative price hours": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "price hours": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "price hours": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -9029,6 +10417,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "fact flow hourly": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "fact_flow_hourly": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -9042,7 +10436,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hourly": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "flow hourly": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "flow hourly": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -9067,6 +10475,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "date key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "date_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -9075,6 +10489,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -9199,6 +10620,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hour key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "hour_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -9207,6 +10634,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -9331,6 +10765,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "ts hour utc": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "ts_hour_utc": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -9339,6 +10779,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "date": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
@@ -9361,6 +10808,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "from area code": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "from area code": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -9492,6 +10945,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "to area code": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "to_area_code": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -9618,6 +11077,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "from country code": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "from_country_code": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -9681,6 +11146,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "to country code": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "to country code": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -9752,6 +11223,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "flow mwh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "flow_mwh": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -9760,6 +11237,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "mwh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "mwh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -9785,6 +11269,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "source resolution minute": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "source_resolution_minutes": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -9798,7 +11288,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "minute": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "resolution minute": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "resolution minute": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -9924,6 +11428,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "coverage minute": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "coverage_minutes": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -9932,6 +11442,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "minute": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "minute": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -10056,6 +11573,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "loaded at utc": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "loaded_at_utc": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -10064,6 +11587,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "date": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
@@ -10086,7 +11616,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "exports MWh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "MWh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "MWh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -10108,7 +11651,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "imports MWh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "MWh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "MWh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -10130,7 +11686,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "net imports MWh": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "MWh": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "MWh": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -10155,6 +11724,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "fact weather hourly": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "fact_weather_hourly": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -10168,7 +11743,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hourly": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "weather hourly": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "weather hourly": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -10193,6 +11782,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "date key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "date_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -10201,6 +11796,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -10325,6 +11927,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "hour key": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "hour_key": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -10333,6 +11941,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "key": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -10457,6 +12072,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "ts hour utc": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "ts_hour_utc": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -10465,6 +12086,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "date": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
@@ -10486,6 +12114,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "country code": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "country code": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -10557,6 +12191,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "temperature c": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "temperature_c": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -10565,6 +12205,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "c": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "c": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -10586,6 +12233,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "wind speed 10 0m kmh": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "wind speed 10 0m kmh": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -10617,6 +12270,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "solar radiation wm 2": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "solar_radiation_wm2": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -10640,6 +12299,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "cloud cover pct": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "cloud cover pct": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -10671,6 +12336,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "precipitation mm": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "precipitation_mm": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -10679,6 +12350,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "mm": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "mm": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -10704,6 +12382,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "archive share": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "archive_share": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -10712,6 +12396,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "share": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "share": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -10837,6 +12528,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "is observed": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "is_observed": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -10863,6 +12560,12 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "loaded at utc": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "loaded_at_utc": {
 			            "Type": "Noun",
 			            "State": "Generated",
@@ -10871,6 +12574,13 @@ cultureInfo en-US
 			        },
 			        {
 			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "date": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
@@ -10889,6 +12599,12 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "avg wind 100m km/h": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "avg wind 100m km/h": {
+			            "Type": "Noun",
 			            "State": "Generated"
 			          }
 			        },
@@ -10919,7 +12635,20 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "avg solar w/m2": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "avg solar w": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "avg solar w": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -10931,7 +12660,21 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "avg solar w m2": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
 			          "m2": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "m2": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -10983,13 +12726,33 @@ cultureInfo en-US
 			          }
 			        },
 			        {
+			          "data through date": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
 			          "date": {
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
 			        },
 			        {
+			          "date": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
 			          "data": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "data": {
+			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -11099,6 +12862,201 @@ cultureInfo en-US
 			    }
 			  },
 			  "Relationships": {
+			    "fact_flow_hourly_has_dim_country": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_flow_hourly"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_flow_hourly": {
+			          "Target": {
+			            "Entity": "fact_flow_hourly"
+			          }
+			        },
+			        "dim_country": {
+			          "Target": {
+			            "Entity": "dim_country"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_flow_hourly"
+			            },
+			            "Object": {
+			              "Role": "dim_country"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_country"
+			            },
+			            "Object": {
+			              "Role": "fact_flow_hourly"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "fact_flow_hourly"
+			            },
+			            "Prepositions": [
+			              {
+			                "from": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "dim_country"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "fact_flow_hourly_has_dim_date": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_flow_hourly"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_flow_hourly": {
+			          "Target": {
+			            "Entity": "fact_flow_hourly"
+			          }
+			        },
+			        "dim_date": {
+			          "Target": {
+			            "Entity": "dim_date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_flow_hourly"
+			            },
+			            "Object": {
+			              "Role": "dim_date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_date"
+			            },
+			            "Object": {
+			              "Role": "fact_flow_hourly"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "fact_flow_hourly_has_dim_hour": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_flow_hourly"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_flow_hourly": {
+			          "Target": {
+			            "Entity": "fact_flow_hourly"
+			          }
+			        },
+			        "dim_hour": {
+			          "Target": {
+			            "Entity": "dim_hour"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_flow_hourly"
+			            },
+			            "Object": {
+			              "Role": "dim_hour"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_hour"
+			            },
+			            "Object": {
+			              "Role": "fact_flow_hourly"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "fact_price_hourly_has_dim_area": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_price_hourly"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_price_hourly": {
+			          "Target": {
+			            "Entity": "fact_price_hourly"
+			          }
+			        },
+			        "dim_area": {
+			          "Target": {
+			            "Entity": "dim_area"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_price_hourly"
+			            },
+			            "Object": {
+			              "Role": "dim_area"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_area"
+			            },
+			            "Object": {
+			              "Role": "fact_price_hourly"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
 			    "fact_price_hourly_has_dim_hour": {
 			      "Binding": {
 			        "ConceptualEntity": "fact_price_hourly"
@@ -13087,101 +15045,6 @@ cultureInfo en-US
 			        }
 			      ]
 			    },
-			    "dim_kpi_threshold_has_owner": {
-			      "Binding": {
-			        "ConceptualEntity": "dim_kpi_threshold"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_kpi_threshold": {
-			          "Target": {
-			            "Entity": "dim_kpi_threshold"
-			          }
-			        },
-			        "dim_kpi_threshold.owner": {
-			          "Target": {
-			            "Entity": "dim_kpi_threshold.owner"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_kpi_threshold"
-			            },
-			            "Object": {
-			              "Role": "dim_kpi_threshold.owner"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        },
-			        {
-			          "Verb": {
-			            "Subject": {
-			              "Role": "dim_kpi_threshold.owner"
-			            },
-			            "Verbs": [
-			              {
-			                "own": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "dim_kpi_threshold"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.75
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_kpi_threshold.owner"
-			            },
-			            "Object": {
-			              "Role": "dim_kpi_threshold"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        }
-			      ]
-			    },
-			    "dim_kpi_threshold_has_valid_from": {
-			      "Binding": {
-			        "ConceptualEntity": "dim_kpi_threshold"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_kpi_threshold": {
-			          "Target": {
-			            "Entity": "dim_kpi_threshold"
-			          }
-			        },
-			        "dim_kpi_threshold.valid_from": {
-			          "Target": {
-			            "Entity": "dim_kpi_threshold.valid_from"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_kpi_threshold"
-			            },
-			            "Object": {
-			              "Role": "dim_kpi_threshold.valid_from"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        }
-			      ]
-			    },
 			    "fact_weather_hourly_in_dim_country": {
 			      "Binding": {
 			        "ConceptualEntity": "fact_weather_hourly"
@@ -13676,201 +15539,6 @@ cultureInfo en-US
 			        }
 			      ]
 			    },
-			    "fact_price_hourly_has_dim_area": {
-			      "Binding": {
-			        "ConceptualEntity": "fact_price_hourly"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_price_hourly": {
-			          "Target": {
-			            "Entity": "fact_price_hourly"
-			          }
-			        },
-			        "dim_area": {
-			          "Target": {
-			            "Entity": "dim_area"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_price_hourly"
-			            },
-			            "Object": {
-			              "Role": "dim_area"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_area"
-			            },
-			            "Object": {
-			              "Role": "fact_price_hourly"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        }
-			      ]
-			    },
-			    "fact_flow_hourly_has_dim_hour": {
-			      "Binding": {
-			        "ConceptualEntity": "fact_flow_hourly"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_flow_hourly": {
-			          "Target": {
-			            "Entity": "fact_flow_hourly"
-			          }
-			        },
-			        "dim_hour": {
-			          "Target": {
-			            "Entity": "dim_hour"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_flow_hourly"
-			            },
-			            "Object": {
-			              "Role": "dim_hour"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_hour"
-			            },
-			            "Object": {
-			              "Role": "fact_flow_hourly"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        }
-			      ]
-			    },
-			    "fact_flow_hourly_has_dim_date": {
-			      "Binding": {
-			        "ConceptualEntity": "fact_flow_hourly"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_flow_hourly": {
-			          "Target": {
-			            "Entity": "fact_flow_hourly"
-			          }
-			        },
-			        "dim_date": {
-			          "Target": {
-			            "Entity": "dim_date"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_flow_hourly"
-			            },
-			            "Object": {
-			              "Role": "dim_date"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_date"
-			            },
-			            "Object": {
-			              "Role": "fact_flow_hourly"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        }
-			      ]
-			    },
-			    "fact_flow_hourly_has_dim_country": {
-			      "Binding": {
-			        "ConceptualEntity": "fact_flow_hourly"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_flow_hourly": {
-			          "Target": {
-			            "Entity": "fact_flow_hourly"
-			          }
-			        },
-			        "dim_country": {
-			          "Target": {
-			            "Entity": "dim_country"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_flow_hourly"
-			            },
-			            "Object": {
-			              "Role": "dim_country"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_country"
-			            },
-			            "Object": {
-			              "Role": "fact_flow_hourly"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "fact_flow_hourly"
-			            },
-			            "Prepositions": [
-			              {
-			                "from": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "dim_country"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        }
-			      ]
-			    },
 			    "fact_weather_hourly_has_dim_hour": {
 			      "Binding": {
 			        "ConceptualEntity": "fact_weather_hourly"
@@ -14009,7 +15677,7 @@ cultureInfo en-US
 			      "Version": "1.1.0"
 			    }
 			  },
-			  "CustomInstructions": "This model covers hourly electricity data for Italy, France, Germany and the Netherlands from January 2024, sourced from ENTSO-E.\n- All times are UTC.\n- \"Clean\", \"green\" or \"low emissions\" means low Carbon Intensity gCO2e/kWh. \"Greenest hour\" means the hour with the lowest carbon intensity.\n- Always use the measures for ratios (Renewable %, Low-carbon %, Carbon Intensity); never average stored percentage columns.\n- When reporting carbon intensity, also mention Factor Coverage %. If coverage is below 90%, say the figure is less reliable.\n- Netherlands renewables are under-reported by ENTSO-E (rooftop solar is missing, a large share is classified as \"Other\"); mention this when answering about the Netherlands.\n- Renewable targets are official 2030 national targets, not current-year targets.\n- Prices are day-ahead wholesale prices in EUR/MWh, not consumer prices.\n- If a question is outside this data (other countries, consumer bills, forecasts), say so instead of guessing."
+			  "CustomInstructions": "This model covers hourly electricity data for Italy, France, Germany and the Netherlands from January 2024, sourced from ENTSO-E.\n- All times are UTC.\n- \"Clean\", \"green\" or \"low emissions\" means low Carbon Intensity gCO2e/kWh. \"Greenest hour\" means the hour with the lowest carbon intensity.\n- Always use the measures for ratios (Renewable %, Low-carbon %, Carbon Intensity); never average stored percentage columns.\n- When reporting carbon intensity, also mention Factor Coverage %. If coverage is below 90%, say the figure is less reliable.\n- Netherlands renewables are under-reported by ENTSO-E (rooftop solar is missing, a large share is classified as \"Other\"); mention this when answering about the Netherlands.\n- Renewable targets are official 2030 national targets, not current-year targets.\n- Prices are day-ahead wholesale prices in EUR/MWh, not consumer prices.\n- If a question is outside this data (other countries, consumer bills, forecasts), say so instead of guessing.\n- Never derive a share by subtracting other shares from 100%. Storage and Other (unclassified) exist, so the remaining share is not fossil, clean or any single group. Always compute a share directly with a filter or an existing measure."
 			}
 		contentType: json
 

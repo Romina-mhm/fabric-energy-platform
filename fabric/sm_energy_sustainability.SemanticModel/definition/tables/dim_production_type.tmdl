@@ -22,6 +22,7 @@ table dim_production_type
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Fuel group of each production type. Values: Fossil, Nuclear, Renewable, Storage, Other (unclassified). The five groups add up to total generation. To get the share of any group, filter fuel_category to that group and divide by total generation. Applies only to generation measures; load, prices, flows and weather are not split by fuel.
 	column fuel_category
 		dataType: string
 		sourceProviderType: varchar(20)
@@ -29,6 +30,8 @@ table dim_production_type
 		sourceLineageTag: fuel_category
 		summarizeBy: none
 		sourceColumn: fuel_category
+
+		changedProperty = Description
 
 		annotation SummarizationSetBy = Automatic
 
