@@ -17,6 +17,7 @@ table dim_kpi_threshold
 
 		changedProperty = Description
 
+	/// Renewable % minus the 2030 renewable target, returned as a fraction (e.g. -0.49 = 49 percentage points below target). Negative = below target; positive = above target.
 	measure 'Renewable Gap vs Target' = [Renewable %] - [Renewable Target %]
 		displayFolder: Targets
 		lineageTag: 842c3c76-7509-4c76-b5a3-d4b6a283c13b
@@ -24,6 +25,8 @@ table dim_kpi_threshold
 		changedProperty = Name
 
 		changedProperty = DisplayFolder
+
+		changedProperty = Description
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 

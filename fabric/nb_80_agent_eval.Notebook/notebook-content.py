@@ -171,10 +171,10 @@ Expected answer:
 
 Rules:
 - Numbers must match the expected value within +/-1% (rounding differences are fine).
+- The same value in an equivalent unit (e.g. m/s vs km/h, MWh vs TWh, fraction vs percentage) counts as a match after conversion.
 - The answer must cover the same scope (same country, period and metric) as the expected answer.
-- If the expected answer starts with "Declines", the agent's answer is correct only if it says the data is not available and gives NO invented number.
+- If the expected answer starts with "Declines", the answer is correct if it clearly says the requested quantity is not in the data and does not present any number as that quantity. Offering clearly labelled related data (e.g. wholesale instead of retail prices) is fine.
 - Extra context or caveats are fine, as long as they do not contradict the expected answer.
-- The same value in an equivalent unit (e.g. m/s vs km/h, MWh vs TWh) counts as a match after conversion.
 
 Is the agent's answer equivalent to the expected answer? Respond with 'yes' or 'no' only.
 """
@@ -223,5 +223,41 @@ get_evaluation_details(run_held, "agent_eval_heldout", get_all_rows=True, verbos
 
 # META {
 # META   "language": "python",
-# META   "language_group": "synapse_pyspark"
+# META   "language_group": "synapse_pyspark",
+# META   "frozen": true,
+# META   "editable": false
+# META }
+
+# CELL ********************
+
+summary_tune = get_evaluation_summary("agent_eval_tuning")
+run_tune = summary_tune[summary_tune["evaluation_id"].str.startswith("40b4c5f2")]["evaluation_id"].iloc[0]
+print("Tuning run:", run_tune)
+
+get_evaluation_details(run_tune, "agent_eval_tuning", get_all_rows=True, verbose=True)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark",
+# META   "frozen": true,
+# META   "editable": false
+# META }
+
+# CELL ********************
+
+for table, prefix in [("agent_eval_tuning", "bb8340b5"), ("agent_eval_heldout", "cc735e2e")]:
+    rid = [i for i in get_evaluation_summary(table)["evaluation_id"] if i.startswith(prefix)][0]
+    d = get_evaluation_details(rid, table, get_all_rows=True, verbose=False)
+    print(table, rid)
+    display(d[d.astype(str).apply(lambda r: r.str.lower().eq("false").any(), axis=1)])
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark",
+# META   "frozen": false,
+# META   "editable": true
 # META }

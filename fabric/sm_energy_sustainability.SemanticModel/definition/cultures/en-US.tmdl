@@ -12862,113 +12862,6 @@ cultureInfo en-US
 			    }
 			  },
 			  "Relationships": {
-			    "fact_flow_hourly_has_dim_country": {
-			      "Binding": {
-			        "ConceptualEntity": "fact_flow_hourly"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_flow_hourly": {
-			          "Target": {
-			            "Entity": "fact_flow_hourly"
-			          }
-			        },
-			        "dim_country": {
-			          "Target": {
-			            "Entity": "dim_country"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_flow_hourly"
-			            },
-			            "Object": {
-			              "Role": "dim_country"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_country"
-			            },
-			            "Object": {
-			              "Role": "fact_flow_hourly"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "fact_flow_hourly"
-			            },
-			            "Prepositions": [
-			              {
-			                "from": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "dim_country"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        }
-			      ]
-			    },
-			    "fact_flow_hourly_has_dim_date": {
-			      "Binding": {
-			        "ConceptualEntity": "fact_flow_hourly"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_flow_hourly": {
-			          "Target": {
-			            "Entity": "fact_flow_hourly"
-			          }
-			        },
-			        "dim_date": {
-			          "Target": {
-			            "Entity": "dim_date"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_flow_hourly"
-			            },
-			            "Object": {
-			              "Role": "dim_date"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_date"
-			            },
-			            "Object": {
-			              "Role": "fact_flow_hourly"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99
-			        }
-			      ]
-			    },
 			    "fact_flow_hourly_has_dim_hour": {
 			      "Binding": {
 			        "ConceptualEntity": "fact_flow_hourly"
@@ -15539,6 +15432,113 @@ cultureInfo en-US
 			        }
 			      ]
 			    },
+			    "fact_flow_hourly_has_dim_date": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_flow_hourly"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_flow_hourly": {
+			          "Target": {
+			            "Entity": "fact_flow_hourly"
+			          }
+			        },
+			        "dim_date": {
+			          "Target": {
+			            "Entity": "dim_date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_flow_hourly"
+			            },
+			            "Object": {
+			              "Role": "dim_date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_date"
+			            },
+			            "Object": {
+			              "Role": "fact_flow_hourly"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "fact_flow_hourly_has_dim_country": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_flow_hourly"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_flow_hourly": {
+			          "Target": {
+			            "Entity": "fact_flow_hourly"
+			          }
+			        },
+			        "dim_country": {
+			          "Target": {
+			            "Entity": "dim_country"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_flow_hourly"
+			            },
+			            "Object": {
+			              "Role": "dim_country"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_country"
+			            },
+			            "Object": {
+			              "Role": "fact_flow_hourly"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "fact_flow_hourly"
+			            },
+			            "Prepositions": [
+			              {
+			                "from": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "dim_country"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
 			    "fact_weather_hourly_has_dim_hour": {
 			      "Binding": {
 			        "ConceptualEntity": "fact_weather_hourly"
@@ -15677,7 +15677,7 @@ cultureInfo en-US
 			      "Version": "1.1.0"
 			    }
 			  },
-			  "CustomInstructions": "This model covers hourly electricity data for Italy, France, Germany and the Netherlands from January 2024, sourced from ENTSO-E.\n- All times are UTC.\n- \"Clean\", \"green\" or \"low emissions\" means low Carbon Intensity gCO2e/kWh. \"Greenest hour\" means the hour with the lowest carbon intensity.\n- Always use the measures for ratios (Renewable %, Low-carbon %, Carbon Intensity); never average stored percentage columns.\n- When reporting carbon intensity, also mention Factor Coverage %. If coverage is below 90%, say the figure is less reliable.\n- Netherlands renewables are under-reported by ENTSO-E (rooftop solar is missing, a large share is classified as \"Other\"); mention this when answering about the Netherlands.\n- Renewable targets are official 2030 national targets, not current-year targets.\n- Prices are day-ahead wholesale prices in EUR/MWh, not consumer prices.\n- If a question is outside this data (other countries, consumer bills, forecasts), say so instead of guessing.\n- Never derive a share by subtracting other shares from 100%. Storage and Other (unclassified) exist, so the remaining share is not fossil, clean or any single group. Always compute a share directly with a filter or an existing measure."
+			  "CustomInstructions": "This model covers hourly electricity data for Italy, France, Germany and the Netherlands from January 2024, sourced from ENTSO-E.\n- All times are UTC.\n- \"Clean\", \"green\" or \"low emissions\" means low Carbon Intensity gCO2e/kWh. \"Greenest hour\" means the hour with the lowest carbon intensity.\n- Always use the measures for ratios (Renewable %, Low-carbon %, Carbon Intensity); never average stored percentage columns.\n- When reporting carbon intensity, also mention Factor Coverage %. If coverage is below 90%, say the figure is less reliable.\n- Netherlands renewables are under-reported by ENTSO-E (rooftop solar is missing, a large share is classified as \"Other\"); mention this when answering about the Netherlands.\n- Renewable targets are official 2030 national targets, not current-year targets.\n- Prices are day-ahead wholesale prices in EUR/MWh, not consumer prices.\n- If a question is outside this data (other countries, consumer bills, forecasts), say so instead of guessing.\n-    Use existing measures as they are: they are correct at any grain (hour, day, month, year, one or all countries). Never rebuild a measure from its parts (e.g. CO2e divided by generation). Only when no measure exists, compute a share as filtered generation divided by total generation, never as 100% minus other shares."
 			}
 		contentType: json
 
