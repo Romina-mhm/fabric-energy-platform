@@ -4,7 +4,7 @@ An end-to-end data platform that answers one question: **how clean is the electr
 
 It combines grid data from ENTSO-E, weather from Open-Meteo, public holidays, a reference database in Azure SQL and business KPI targets into a governed medallion architecture on Microsoft Fabric. Every result is traceable from the report back to the raw API file it came from.
 
-> **Status:** data platform complete (Bronze → Silver → Gold, orchestration, security, CI/CD). Reporting and AI layer in progress. See [Roadmap](#roadmap).
+> **Status:** data platform complete (Bronze → Silver → Gold, orchestration, security, CI/CD), Power BI Overview page, and an AI layer (Fabric Data Agent) with measured accuracy. See [Roadmap](#roadmap).
 
 ---
 
@@ -88,10 +88,38 @@ Result: daily pipeline **~27 → ~17 minutes**.
 
 `pl_master` runs daily at 06:00 Europe/Rome: Bronze ENTSO-E → Bronze weather → monthly branch (holidays, KPI Dataflow) → Silver → Gold. A failure path alerts and ends in a **Fail activity**, so a handled error still marks the run as failed. Activator watches pipeline job events.
 
+## AI layer: Fabric Data Agent with measured accuracy
+
+The Direct Lake semantic model is **prepared for AI**: business descriptions on every measure and table, a curated AI data schema (measures and descriptive attributes; keys and raw columns hidden), model-level AI instructions and verified answers. A **Fabric Data Agent** (`da_energy_sustainability`) answers natural-language questions on carbon intensity, renewable share, prices, flows and weather, states the data period, and declines out-of-scope questions (forecasts, retail prices) instead of guessing.
+
+**Evaluation** (`nb_80_agent_eval`, Fabric Data Agent SDK):
+- Expected answers computed **live in DAX**, so they always match the current data
+- An **LLM-as-judge** with a custom rubric: ±1% tolerance, equivalent units, refusal checks
+- A **tuning set** (6 questions, used to improve instructions) and a **held-out set** (14 questions, never used for tuning) to avoid overfitting
+- After the final change, instructions and model were **frozen** and evaluated 3 times
+
+| | Baseline | Final (3 frozen runs) |
+|---|---|---|
+| Tuning | 6/6 | 18/18 (100%) |
+| Held-out | 11/14 (78.6%) | **41/42 (97.6%)** |
+
+**What the failures taught:**
+- 2 of the 3 baseline failures were **semantic-model gaps**, not LLM errors: a measure without a description, and fuel groups that were never defined (the agent computed fossil share as 100% − low-carbon, counting unclassified generation as fossil).
+- **Prompt wording leaks into the agent's plan:** the word "hourly" in the instructions made the agent answer daily questions with hourly breakdowns; two rules (full range vs a named period) combined into a wrong date filter.
+- **A description must match what the measure returns:** a gap returned as a fraction was described as percentage points.
+- Every fix was general (definitions in the model, method rules in AI instructions, scope in the agent prompt); test questions were never copied into the prompt. Each change was followed by a regression run, which caught three regressions.
+
+**Known limitations**
+- Seasonal questions without a year ("in winter") are ambiguous: the agent sometimes uses one season instead of all, and may label the period incorrectly (1 failure in 60 answers).
+- LLM answers are non-deterministic; accuracy is reported as a range over repeated runs, not a single score.
+- The evaluation covers 20 questions. In production it would be extended with real user questions and monitored over time.
+
+Row-level security in the semantic model also applies to agent users. AI usage consumes Fabric capacity (CU), so AI and ETL workloads share capacity planning.
+
 ## Security & governance
 
 - Workspace roles and least-privilege item sharing
-- Warehouse **row-level security** by country, **column-level** `DENY` on a sensitive column, **dynamic data masking** on run-log messages
+- **Row-level security in the semantic model** (country roles, fixed workspace identity). Warehouse RLS was removed because, even when disabled, it forced Direct Lake to fall back to DirectQuery. Column-level `DENY` and dynamic data masking remain in the Warehouse
 - OneLake data access roles configured on the lakehouse
 - Secrets (ENTSO-E API key) only in **Azure Key Vault**, read at runtime with `notebookutils.credentials.getSecret`, never stored in code
 - Least-privilege SQL login for Fabric Mirroring
@@ -178,9 +206,12 @@ CHANGELOG.md
 - [x] Power BI report: Overview page (KPIs, carbon trend, renewables vs 2030 targets, hourly profile, generation mix)
 - [ ] Power BI report: Market & flows and Country deep-dive pages
 
-**11. AI layer** ⏳ next
-- [ ] Fabric Data Agent over the semantic model
-- [ ] Accuracy evaluation set of test questions
+**11. AI layer** 🔄 in progress
+- [x] Semantic model prepared for AI (descriptions, AI data schema, AI instructions, verified answers)
+- [x] Fabric Data Agent over the semantic model
+- [x] Automated accuracy evaluation: held-out 78.6% → 97.6% over 3 frozen runs
+- [ ] Publish the agent to Copilot Studio / Microsoft Teams
+- [ ] Capacity monitoring of AI workloads
 
 **12. Improvements & release** ⏳ planned
 - [ ] Holiday flag and emission-factor surrogate key folded into Gold facts
