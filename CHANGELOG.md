@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented here.
 
+## [0.7.0] - 2026-10-12: AI layer
+### Added
+- Semantic model prepared for AI: descriptions, AI data schema, AI instructions, verified answers
+- Fabric Data Agent `da_energy_sustainability`
+- `nb_80_agent_eval`: SDK evaluation with live DAX ground truth, LLM judge, tuning and held-out sets
+- Measures `Data Through Date`, `Generation MWh`, `Fossil Share %`
+### Changed
+- RLS moved from the Warehouse to the semantic model (Direct Lake fallback); model uses the workspace identity
+- KPI targets replaced with official 2030 targets
+### Results
+- Held-out accuracy 78.6% → 97.6% (41/42 over 3 frozen runs); tuning 18/18
+
 ## [0.6.0] - 2026-10-03 — Performance, Dataflow Gen2 & SCD Type 2
 ### Added
 - Dataflow Gen2 `df_kpi_thresholds`: KPI targets CSV (ADLS) → `lh_silver.silver_kpi_threshold` → `dim.dim_kpi_threshold`; runs in the monthly branch of `pl_master`
