@@ -247,11 +247,9 @@ get_evaluation_details(run_tune, "agent_eval_tuning", get_all_rows=True, verbose
 
 # CELL ********************
 
-for table, prefix in [("agent_eval_tuning", "bb8340b5"), ("agent_eval_heldout", "cc735e2e")]:
-    rid = [i for i in get_evaluation_summary(table)["evaluation_id"] if i.startswith(prefix)][0]
-    d = get_evaluation_details(rid, table, get_all_rows=True, verbose=False)
-    print(table, rid)
-    display(d[d.astype(str).apply(lambda r: r.str.lower().eq("false").any(), axis=1)])
+rid = [i for i in get_evaluation_summary("agent_eval_heldout")["evaluation_id"] if i.startswith("bb1a0d0c")][0]
+d = get_evaluation_details(rid, "agent_eval_heldout", get_all_rows=True, verbose=False)
+display(d[d.astype(str).apply(lambda r: r.str.lower().eq("false").any(), axis=1)])
 
 # METADATA ********************
 
