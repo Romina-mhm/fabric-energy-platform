@@ -41,6 +41,23 @@ table dim_kpi_threshold
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
+	///    Difference between the renewable share and the 2030 renewable target, in percentage points (e.g. -49.2 = 49.2 percentage points below target). Negative = below target.
+	measure 'Renewable Gap vs Target pp' = ```
+			
+			   ( [Renewable %] - [Renewable Target %] ) * 100
+			```
+		formatString: 0.0
+		displayFolder: Targets
+		lineageTag: a1514db4-183b-44f1-9049-1b260417852f
+
+		changedProperty = DisplayFolder
+
+		changedProperty = Name
+
+		changedProperty = Description
+
+		changedProperty = FormatString
+
 	column country_code
 		dataType: string
 		sourceProviderType: char
