@@ -1,0 +1,142 @@
+[
+  {
+    "id": "T1",
+    "set": "tuning",
+    "question": "When is electricity greenest in Germany?",
+    "truth_dax": "EVALUATE TOPN(1, CALCULATETABLE(ADDCOLUMNS(SUMMARIZE(dim_hour, dim_hour[hour_key]), \"CI\", [Carbon Intensity gCO2e/kWh]), dim_country[country_code]=\"DE\"), [CI], ASC)",
+    "expected_answer": "Typically {hour_key:02.0f}:00 UTC, about {CI:.0f} gCO2e/kWh"
+  },
+  {
+    "id": "T2",
+    "set": "tuning",
+    "question": "What was the carbon intensity in the Netherlands on 15 June 2025?",
+    "truth_dax": "EVALUATE ROW(\"v\", CALCULATE([Carbon Intensity gCO2e/kWh], dim_country[country_code]=\"NL\", dim_date[date] = DATE(2025,6,15)))",
+    "expected_answer": "{v:.1f} gCO2e/kWh (daily value)"
+  },
+  {
+    "id": "T3",
+    "set": "tuning",
+    "question": "What is the overall carbon intensity across all countries?",
+    "truth_dax": "EVALUATE ROW(\"ci\", [Carbon Intensity gCO2e/kWh], \"cov\", [Factor Coverage %])",
+    "expected_answer": "{ci:.1f} gCO2e/kWh, coverage {cov:.1%}, period 1 Jan 2024 to latest data"
+  },
+  {
+    "id": "T4",
+    "set": "tuning",
+    "question": "Which country has the lowest carbon intensity?",
+    "truth_dax": "EVALUATE TOPN(1, FILTER(ADDCOLUMNS(VALUES(dim_country[country_name]), \"CI\", [Carbon Intensity gCO2e/kWh]), NOT ISBLANK([CI])), [CI], ASC)",
+    "expected_answer": "{country_name} ({CI:.1f} gCO2e/kWh)"
+  },
+  {
+    "id": "T5",
+    "set": "tuning",
+    "question": "How far is the Netherlands from its renewable target?",
+    "truth_dax": "EVALUATE ROW(\"r\", CALCULATE([Renewable %], dim_country[country_code]=\"NL\"), \"gap\", 70 - 100 * CALCULATE([Renewable %], dim_country[country_code]=\"NL\"))",
+    "expected_answer": "Renewable share {r:.1%} vs 70% 2030 target, about {gap:.0f} percentage points below"
+  },
+  {
+    "id": "T6",
+    "set": "tuning",
+    "question": "What's the carbon intensity in Spain?",
+    "truth_dax": "",
+    "expected_answer": "Declines: Spain is not in the data"
+  },
+  {
+    "id": "H1",
+    "set": "heldout",
+    "question": "What's the best time of day to charge an EV in France to minimise emissions?",
+    "truth_dax": "EVALUATE ROW(\"h\", CALCULATE([Greenest Hour], dim_country[country_code]=\"FR\"))",
+    "expected_answer": "Around {h:02.0f}:00 UTC"
+  },
+  {
+    "id": "H2",
+    "set": "heldout",
+    "question": "Which month had the highest carbon intensity in Germany in 2025?",
+    "truth_dax": "EVALUATE TOPN(1, CALCULATETABLE(ADDCOLUMNS(SUMMARIZE(dim_date, dim_date[month], dim_date[month_name]), \"CI\", [Carbon Intensity gCO2e/kWh]), dim_country[country_code]=\"DE\", dim_date[year] = 2025), [CI], DESC)",
+    "expected_answer": "{month_name} ({CI:.1f} gCO2e/kWh)"
+  },
+  {
+    "id": "H3",
+    "set": "heldout",
+    "question": "What was Italy's renewable share in 2025?",
+    "truth_dax": "EVALUATE ROW(\"v\", CALCULATE([Renewable %], dim_country[country_code]=\"IT\", dim_date[year] = 2025))",
+    "expected_answer": "{v:.1%}"
+  },
+  {
+    "id": "H4",
+    "set": "heldout",
+    "question": "How did Germany's carbon intensity change from 2024 to 2025?",
+    "truth_dax": "EVALUATE VAR a = CALCULATE([Carbon Intensity gCO2e/kWh], dim_country[country_code]=\"DE\", dim_date[year] = 2024) VAR b = CALCULATE([Carbon Intensity gCO2e/kWh], dim_country[country_code]=\"DE\", dim_date[year] = 2025) RETURN ROW(\"dir\", IF(b < a, \"Decreased\", \"Increased\"), \"a\", a, \"b\", b, \"chg\", DIVIDE(b - a, a))",
+    "expected_answer": "{dir} from {a:.1f} to {b:.1f} gCO2e/kWh ({chg:+.1%})"
+  },
+  {
+    "id": "H5",
+    "set": "heldout",
+    "question": "What was the average day-ahead price in Germany in 2025?",
+    "truth_dax": "EVALUATE ROW(\"v\", CALCULATE([Avg Price EUR/MWh], dim_country[country_code]=\"DE\", dim_date[year] = 2025))",
+    "expected_answer": "EUR {v:.1f}/MWh"
+  },
+  {
+    "id": "H6",
+    "set": "heldout",
+    "question": "How many negative-price hours did the Netherlands have in 2025?",
+    "truth_dax": "EVALUATE ROW(\"v\", CALCULATE([Negative Price Hours], dim_country[country_code]=\"NL\", dim_date[year] = 2025))",
+    "expected_answer": "{v:.0f} hours"
+  },
+  {
+    "id": "H7",
+    "set": "heldout",
+    "question": "Is France a net importer or exporter of electricity?",
+    "truth_dax": "EVALUATE VAR v = CALCULATE([Net Imports MWh], dim_country[country_code]=\"FR\") RETURN ROW(\"label\", IF(v > 0, \"Net importer\", \"Net exporter\"), \"twh\", ABS(v) / 1000000)",
+    "expected_answer": "{label} ({twh:.1f} TWh net over the period)"
+  },
+  {
+    "id": "H8",
+    "set": "heldout",
+    "question": "What share of Dutch electricity generation comes from fossil fuels?",
+    "truth_dax": "EVALUATE ROW(\"v\", DIVIDE(CALCULATE([Generation MWh], dim_country[country_code]=\"NL\", dim_production_type[fuel_category] = \"Fossil\"), CALCULATE([Generation MWh], dim_country[country_code]=\"NL\")))",
+    "expected_answer": "{v:.1%}"
+  },
+  {
+    "id": "H9",
+    "set": "heldout",
+    "question": "Which country has the highest renewable share?",
+    "truth_dax": "EVALUATE TOPN(1, FILTER(ADDCOLUMNS(VALUES(dim_country[country_name]), \"R\", [Renewable %]), NOT ISBLANK([R])), [R], DESC)",
+    "expected_answer": "{country_name} ({R:.1%})"
+  },
+  {
+    "id": "H10",
+    "set": "heldout",
+    "question": "What is the cheapest hour of the day for electricity in Italy?",
+    "truth_dax": "EVALUATE TOPN(1, CALCULATETABLE(ADDCOLUMNS(SUMMARIZE(dim_hour, dim_hour[hour_key]), \"P\", [Avg Price EUR/MWh]), dim_country[country_code]=\"IT\"), [P], ASC)",
+    "expected_answer": "Around {hour_key:02.0f}:00 UTC (average across Italian bidding zones, EUR {P:.1f}/MWh)"
+  },
+  {
+    "id": "H11",
+    "set": "heldout",
+    "question": "How clean is the electricity?",
+    "truth_dax": "EVALUATE ROW(\"ci\", [Carbon Intensity gCO2e/kWh], \"cov\", [Factor Coverage %])",
+    "expected_answer": "{ci:.1f} gCO2e/kWh for IT, FR, DE, NL over the full period (coverage {cov:.1%}); assumption stated"
+  },
+  {
+    "id": "H12",
+    "set": "heldout",
+    "question": "What will the carbon intensity be in Germany tomorrow?",
+    "truth_dax": "",
+    "expected_answer": "Declines: no forecasts in the data"
+  },
+  {
+    "id": "H13",
+    "set": "heldout",
+    "question": "How much does a household in Italy pay per kWh?",
+    "truth_dax": "",
+    "expected_answer": "Declines: only wholesale day-ahead prices are available"
+  },
+  {
+    "id": "H14",
+    "set": "heldout",
+    "question": "What was the average wind speed in Germany in winter?",
+    "truth_dax": "EVALUATE ROW(\"v\", CALCULATE([Avg Wind 100m km/h], dim_country[country_code]=\"DE\", dim_date[season] = \"Winter\"))",
+    "expected_answer": "{v:.1f} km/h at 100 m"
+  }
+]
