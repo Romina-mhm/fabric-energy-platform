@@ -109,7 +109,22 @@ The Direct Lake semantic model is **prepared for AI**: business descriptions on 
 - **A description must match what the measure returns:** a gap returned as a fraction was described as percentage points.
 - Every fix was general (definitions in the model, method rules in AI instructions, scope in the agent prompt); test questions were never copied into the prompt. Each change was followed by a regression run, which caught three regressions.
 
+**Re-evaluation after later changes** (reusable `nb_eval_template`, 3 runs, 16 Oct 2026, under capacity pressure)
+
+| | Correct | Agent errors | Service failures (no answer) | Agent accuracy (answered) |
+|---|---|---|---|---|
+| Tuning | 16/18 | 1 | 1 | 16/17 (94.1%) |
+| Held-out | 38/42 | 2 | 2 | 38/40 (95.0%) |
+| **Total** | **54/60 (90.0%)** | **3** | **3** | **54/57 (94.7%)** |
+
+- **Service failures** are answers the platform never produced: a generic system message after ~4–5 s, or `server_error`. They happened while the F2 capacity was throttled (`CapacityLimitExceeded`), so they are reported separately from agent errors.
+- **Out-of-scope questions are the weak spot:** 5 of the 6 failures were questions the agent should decline. The most serious one presented a past value as "tomorrow's" carbon intensity.
+- The judge returned "yes" for one `server_error` answer; the SDK recorded the result as unclear because the run itself failed. End-to-end results always need a check of the run status, not only the judge's verdict.
+
 **Known limitations**
+- **Future-period questions** ("tomorrow", forecasts) are not always declined: in 1 of 3 runs the agent presented the latest historical day as a forecast. A rule in the agent instructions will fix this; the forecast question then moves to the tuning set and a new held-out question replaces it.
+- **Intermittent platform message** ("There's content here I can't work with…") on some out-of-scope questions, reproducible for the household-price question even with earlier instructions (platform-side; to be reported to Microsoft).
+- **Capacity:** each evaluated question costs ~1,000 CU(s); three back-to-back runs on F2 caused throttling, which shows up as failed answers. Evaluate on a larger or paused-and-resumed capacity.
 - Seasonal questions without a year ("in winter") are ambiguous: the agent sometimes uses one season instead of all, and may label the period incorrectly (1 failure in 60 answers).
 - LLM answers are non-deterministic; accuracy is reported as a range over repeated runs, not a single score.
 - The evaluation covers 20 questions. In production it would be extended with real user questions and monitored over time.
