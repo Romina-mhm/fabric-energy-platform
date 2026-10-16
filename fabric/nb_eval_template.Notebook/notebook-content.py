@@ -37,7 +37,7 @@ AGENT_NAME      = "da_energy_sustainability"   # published Fabric data agent
 SEMANTIC_MODEL  = "sm_energy_sustainability"   # model used for live ground truth
 QUESTIONS_FILE  = "Files/agent_eval/questions.json"
 SETS            = ["tuning", "heldout"]         # which question sets to run
-N_RUNS          = 1                             # repeat for stability (e.g. 3 for a frozen release)
+N_RUNS          = 3                             # repeat for stability (e.g. 3 for a frozen release)
 MAX_QUESTIONS   = None                          # e.g. 3 for a cheap smoke test; None = all
 TABLE_PREFIX    = "agent_eval"                  # results tables: agent_eval_tuning, agent_eval_heldout
 CRITIC_PROMPT   = """
@@ -172,10 +172,10 @@ display(overall.reset_index())
 fails = []
 for r in runs_df.itertuples():
     d = get_evaluation_details(r.evaluation_id, r.table, get_all_rows=True, verbose=False)
-    is_false = d.astype(str).apply(lambda c: c.str.lower().eq("false")).any(axis=1)
-    fails.append(d[is_false].assign(run=r.run, set=r.set))
-fails_df = pd.concat(fails) if fails else pd.DataFrame()
-print(f"{len(fails_df)} failed answers")
+    is_true = d.astype(str).apply(lambda c: c.str.lower().eq("true")).any(axis=1)
+    fails.append(d[~is_true].assign(run=r.run, set=r.set))
+fails_df = pd.concat(fails, ignore_index=True) if fails else pd.DataFrame()
+print(f"{len(fails_df)} failed or unclear answers")
 display(fails_df)
 
 # METADATA ********************
