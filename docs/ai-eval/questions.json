@@ -120,7 +120,7 @@
   },
   {
     "id": "H12",
-    "set": "heldout",
+    "set": "tuning",
     "question": "What will the carbon intensity be in Germany tomorrow?",
     "truth_dax": "",
     "expected_answer": "Declines: no forecasts in the data"
@@ -138,5 +138,12 @@
     "question": "What was the average wind speed in Germany in winter?",
     "truth_dax": "EVALUATE ROW(\"v\", CALCULATE([Avg Wind 100m km/h], dim_country[country_code]=\"DE\", dim_date[season] = \"Winter\"))",
     "expected_answer": "{v:.1f} km/h at 100 m"
+  },
+  {
+    "id": "H15",
+    "set": "heldout",
+    "question": "What will the day-ahead price in France be next week?",
+    "truth_dax": "",
+    "expected_answer": "Declines: no forecasts in the data"
   }
 ]
