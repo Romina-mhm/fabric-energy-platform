@@ -37,7 +37,7 @@ AGENT_NAME      = "da_energy_sustainability"   # published Fabric data agent
 SEMANTIC_MODEL  = "sm_energy_sustainability"   # model used for live ground truth
 QUESTIONS_FILE  = "Files/agent_eval/questions.json"
 SETS            = ["tuning", "heldout"]         # which question sets to run
-N_RUNS          = 3                             # repeat for stability (e.g. 3 for a frozen release)
+N_RUNS          = 1                             # repeat for stability (e.g. 3 for a frozen release)
 MAX_QUESTIONS   = None                          # e.g. 3 for a cheap smoke test; None = all
 TABLE_PREFIX    = "agent_eval"                  # results tables: agent_eval_tuning, agent_eval_heldout
 CRITIC_PROMPT   = """
