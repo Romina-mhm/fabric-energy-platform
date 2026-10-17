@@ -121,13 +121,25 @@ The Direct Lake semantic model is **prepared for AI**: business descriptions on 
 - **Out-of-scope questions are the weak spot:** 5 of the 6 failures were questions the agent should decline. The most serious one presented a past value as "tomorrow's" carbon intensity.
 - The judge returned "yes" for one `server_error` answer; the SDK recorded the result as unclear because the run itself failed. End-to-end results always need a check of the run status, not only the judge's verdict.
 
+**Fix round, 17 Oct 2026** (1 run on the new version)
+- **Placeholder bug, found by tracing the Foundry → data agent MCP call:** the agent copied the text "Data Through Date" from its instructions instead of querying the measure, and fell back to "2024" when unsure where the data ends.
+- **Fixes:** the agent states the real end date and applies no date filter when the user gives no period; future dates ("tomorrow", forecasts) are declined explicitly.
+- **Held-out caught a regression:** the first wording made the agent filter "no period" questions to 2024 (H7). Changing the method (no date filter) instead of the wording fixed it.
+- The forecast question that drove the fix (H12) moved to the tuning set; a new held-out forecast question (H15) replaced it.
+
+| | Correct | Agent errors | Service failures |
+|---|---|---|---|
+| Tuning (7) | 7/7 | 0 | 0 |
+| Held-out (14) | 13/14 | 0 | 1 (platform message on the household-price question) |
+
 **Known limitations**
-- **Future-period questions** ("tomorrow", forecasts) are not always declined: in 1 of 3 runs the agent presented the latest historical day as a forecast. A rule in the agent instructions will fix this; the forecast question then moves to the tuning set and a new held-out question replaces it.
+- **Period label:** the agent does not always print the real end date; it sometimes writes "to the latest available date". The value and the period used are correct. A text measure with the period label would make this deterministic.
+- **Future-period questions** ("tomorrow", forecasts): before the 17 Oct fix, 1 of 3 runs presented the latest historical day as a forecast. Fixed; both forecast questions passed in the following run, but one run is not proof, so this stays monitored.
 - **Intermittent platform message** ("There's content here I can't work with…") on some out-of-scope questions, reproducible for the household-price question even with earlier instructions (platform-side; to be reported to Microsoft).
 - **Capacity:** each evaluated question costs ~1,000 CU(s); three back-to-back runs on F2 caused throttling, which shows up as failed answers. Evaluate on a larger or paused-and-resumed capacity.
 - Seasonal questions without a year ("in winter") are ambiguous: the agent sometimes uses one season instead of all, and may label the period incorrectly (1 failure in 60 answers).
 - LLM answers are non-deterministic; accuracy is reported as a range over repeated runs, not a single score.
-- The evaluation covers 20 questions. In production it would be extended with real user questions and monitored over time.
+- The evaluation covers 21 questions. In production it would be extended with real user questions and monitored over time.
 
 Row-level security in the semantic model also applies to agent users. AI usage consumes Fabric capacity (CU), so AI and ETL workloads share capacity planning.
 
@@ -221,12 +233,16 @@ CHANGELOG.md
 - [x] Power BI report: Overview page (KPIs, carbon trend, renewables vs 2030 targets, hourly profile, generation mix)
 - [ ] Power BI report: Market & flows and Country deep-dive pages
 
-**11. AI layer** 🔄 in progress
+**11. AI layer** 🔄 in progress (Foundry ✅, ontology and Purview next)
 - [x] Semantic model prepared for AI (descriptions, AI data schema, AI instructions, verified answers)
 - [x] Fabric Data Agent over the semantic model
 - [x] Automated accuracy evaluation: held-out 78.6% → 97.6% over 3 frozen runs
-- [ ] Publish the agent to Copilot Studio / Microsoft Teams
-- [ ] Capacity monitoring of AI workloads
+- [x] Reusable evaluation template (`nb_eval_template`, question file with live truth DAX), agent vs service failures reported separately
+- [x] Capacity monitoring of AI workloads (~1,000 CU(s) per evaluated question, throttling under repeated runs)
+- [x] Microsoft Foundry agent calling the data agent through the **Fabric IQ (OneLake Catalog)** tool over MCP, traced end to end ([docs/foundry](docs/foundry/README.md))
+- [ ] Fabric IQ ontology (business entities over the Gold model)
+- [ ] Microsoft Purview: catalog, lineage and sensitivity labels for the Fabric estate
+- Copilot Studio / Teams channel: evaluated, not built; it needs a Copilot Studio licence and a Dataverse environment. Foundry was used as the agent channel instead.
 
 **12. Improvements & release** ⏳ planned
 - [ ] Holiday flag and emission-factor surrogate key folded into Gold facts
