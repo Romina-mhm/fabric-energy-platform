@@ -29,12 +29,24 @@ flowchart LR
         S[(Azure SQL<br/>reference data)]
         K[ADLS Gen2<br/>KPI targets CSV]
     end
-    subgraph Fabric["Microsoft Fabric"]
+    subgraph Fabric["Microsoft Fabric (F2, Italy North)"]
         B[Bronze<br/>lh_bronze<br/>raw files + audit log]
-        SV[Silver<br/>lh_silver<br/>Delta tables]
+        SV[Silver<br/>lh_silver<br/>Delta + DQ + quarantine]
         G[Gold<br/>wh_gold<br/>star schema]
-        SM[Semantic model<br/>Direct Lake]
+        SM[Semantic model<br/>Direct Lake + RLS]
+        DA[Fabric data agent<br/>evaluated: tuning + held-out]
+        ONT[Ontology]
     end
+    subgraph Foundry["Microsoft Foundry"]
+        FA[Foundry agent<br/>gpt-5-mini]
+        FIQ[Foundry IQ<br/>documents]
+    end
+    subgraph Gov["Governance & operations"]
+        PV[Purview<br/>Live view, owners]
+        PVE[Purview scans,<br/>glossary, labels]
+        OPS[Capacity Metrics,<br/>alerts, budget]
+    end
+    CS[Copilot Studio / Teams]
     E -->|PySpark notebook| B
     W -->|PySpark notebook| B
     H -->|Pipeline REST Copy| B
@@ -43,7 +55,18 @@ flowchart LR
     B -->|PySpark MERGE| SV
     SV -->|T-SQL procedures| G
     G --> SM --> PBI[Power BI]
+    SM --> DA
+    DA -->|Fabric IQ tool, MCP,<br/>user identity| FA
+    FIQ -.-> FA
+    ONT -.-> DA
+    FA -.-> CS
+    PV --- Fabric
+    PVE -.- Fabric
+    classDef target stroke-dasharray: 5 5,color:#666
+    class ONT,FIQ,PVE,CS target
 ```
+
+*Solid = built and tested. Dashed = recommended for production, not enabled in this lab (enterprise tier, extra licences or preview).*
 
 | Layer | Item | What it holds |
 |---|---|---|
@@ -233,7 +256,7 @@ CHANGELOG.md
 - [x] Power BI report: Overview page (KPIs, carbon trend, renewables vs 2030 targets, hourly profile, generation mix)
 - [ ] Power BI report: Market & flows and Country deep-dive pages
 
-**11. AI layer** 🔄 in progress (Foundry ✅, ontology and Purview next)
+**11. AI layer** 🔄 in progress (Foundry ✅, Purview ✅ free tier, ontology next)
 - [x] Semantic model prepared for AI (descriptions, AI data schema, AI instructions, verified answers)
 - [x] Fabric Data Agent over the semantic model
 - [x] Automated accuracy evaluation: held-out 78.6% → 97.6% over 3 frozen runs
@@ -241,10 +264,10 @@ CHANGELOG.md
 - [x] Capacity monitoring of AI workloads (~1,000 CU(s) per evaluated question, throttling under repeated runs)
 - [x] Microsoft Foundry agent calling the data agent through the **Fabric IQ (OneLake Catalog)** tool over MCP, traced end to end ([docs/foundry](docs/foundry/README.md))
 - [ ] Fabric IQ ontology (business entities over the Gold model)
-- [ ] Microsoft Purview: catalog, lineage and sensitivity labels for the Fabric estate
+- [x] Microsoft Purview (free version): Fabric estate discovered via Live view, descriptions and owners on Gold and the semantic model. Finding: data agents are not catalogued yet; schema, lineage and glossary need the enterprise tier (scans, domains), and sensitivity labels need Microsoft 365 / Information Protection licensing (neither enabled in this lab)
 - Copilot Studio / Teams channel: evaluated, not built; it needs a Copilot Studio licence and a Dataverse environment. Foundry was used as the agent channel instead.
 
-**12. Improvements & release** ⏳ planned
+**12. Improvements & release** planned
 - [ ] Holiday flag and emission-factor surrogate key folded into Gold facts
 - [ ] Release v1.0.0
 
