@@ -39,7 +39,7 @@ flowchart LR
     end
     subgraph Foundry["Microsoft Foundry"]
         FA[Foundry agent<br/>gpt-5-mini]
-        FIQ[Foundry IQ<br/>documents]
+        FIQ[Foundry IQ<br/>knowledge base:<br/>methodology + SDAC]
     end
     subgraph Gov["Governance & operations"]
         PV[Purview<br/>Live view, owners]
@@ -57,13 +57,14 @@ flowchart LR
     G --> SM --> PBI[Power BI]
     SM --> DA
     DA -->|Fabric IQ tool, MCP,<br/>user identity| FA
-    FIQ -.-> FA
+    BLOB[(Blob container<br/>knowledge)] --> FIQ
+    FIQ -->|MCP, API key| FA
     ONT -.-> DA
     FA -.-> CS
     PV --- Fabric
     PVE -.- Fabric
     classDef target stroke-dasharray: 5 5,color:#666
-    class ONT,FIQ,PVE,CS target
+    class ONT,PVE,CS target
 ```
 
 *Solid = built and tested. Dashed = recommended for production, not enabled in this lab (enterprise tier, extra licences or preview).*
@@ -263,6 +264,7 @@ CHANGELOG.md
 - [x] Reusable evaluation template (`nb_eval_template`, question file with live truth DAX), agent vs service failures reported separately
 - [x] Capacity monitoring of AI workloads (~1,000 CU(s) per evaluated question, throttling under repeated runs)
 - [x] Microsoft Foundry agent calling the data agent through the **Fabric IQ (OneLake Catalog)** tool over MCP, traced end to end ([docs/foundry](docs/foundry/README.md))
+- [x] Foundry IQ knowledge base (Azure AI Search, Free tier) over the methodology and the SDAC 15-minute MTU notice: the same agent answers numbers from Fabric and definitions with citations ([docs/foundry](docs/foundry/README.md))
 - [ ] Fabric IQ ontology (business entities over the Gold model)
 - [x] Microsoft Purview (free version): Fabric estate discovered via Live view, descriptions and owners on Gold and the semantic model. Finding: data agents are not catalogued yet; schema, lineage and glossary need the enterprise tier (scans, domains), and sensitivity labels need Microsoft 365 / Information Protection licensing (neither enabled in this lab)
 - Copilot Studio / Teams channel: evaluated, not built; it needs a Copilot Studio licence and a Dataverse environment. Foundry was used as the agent channel instead.
