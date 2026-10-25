@@ -36,3 +36,24 @@ For questions outside electricity data, answer briefly and say they are not cove
 - The OneLake Catalog tool warns that data may leave the Azure compliance boundary once it reaches Foundry.
 - Agent 365 traces may be stored across regions.
 - For production: Application Insights for distributed traces; standard agent setup (own Cosmos DB for threads) where compliance requires it.
+
+## Foundry IQ knowledge base (added 25 Oct 2026)
+The agent answers *how much* from Fabric (Fabric IQ) and *why / how is it defined* from documents (Foundry IQ), with citations.
+
+| Item | Value |
+|---|---|
+| Search service | Azure AI Search **Free**, Italy North, API access "Both" (key auth: Free tier has no managed identity) |
+| Documents | `docs/Methodology.md` and the SDAC 15-minute MTU notice, in a private Blob container `knowledge` |
+| Knowledge base | extraction minimal, embedding `text-embedding-3-small`, chat model `gpt-5-mini` |
+
+Orchestrator attribution rule (added after a wrong-citation finding):
+```
+Cite a document only for statements that document contains. Statements from the Fabric data agent are attributed to the data, not to a document. Do not add claims that are not in any tool result.
+```
+
+**Findings**
+- Foundry's "Create new resource" created a search service on a **paid tier with RBAC-only auth**; a key from a different (Free) service caused **401**. Check tier and auth of wizard-created resources.
+- The knowledge base gets its **own MCP connection** (RemoteTool, custom key). It must carry the search key; it didn't inherit it when the search connection's auth changed later.
+- A paused Fabric capacity makes the whole chain slow: check dependencies before changing prompts.
+- A claim from the data agent was cited to the methodology document. Tracing both MCP calls found the source; the attribution rule fixed it.
+- For production: managed identity + RBAC instead of keys, a paid tier with semantic ranking, and an orchestrator regression set (numbers, knowledge, combined, decline cases).
