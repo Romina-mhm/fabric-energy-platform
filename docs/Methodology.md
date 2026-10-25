@@ -1,7 +1,7 @@
 ---
 title: "European Energy Platform — Methodology and Data Definitions"
 subtitle: "How the KPIs are calculated, where the data comes from, and what the numbers can and cannot tell you"
-date: "Version 1.0 — October 2026"
+date: "Version 1.1 — October 2026"
 ---
 
 # 1. Purpose and scope
@@ -73,7 +73,7 @@ Factors are stored as a **slowly changing dimension (SCD Type 2)**. If a factor 
 - **90% or more:** the carbon intensity is reliable.
 - **Below 90%:** the carbon intensity describes the known part of the mix only and should be read with care. The true value for the whole country lies between a lower bound (carbon intensity × coverage, if all unknown generation were zero-carbon) and a value above the reported one (if the unknown generation were mostly fossil).
 
-**Example.** Over the full period the Netherlands has a factor coverage of about 64%, because a large share of Dutch generation is reported under production types without an emission factor. Its carbon intensity (about 371 gCO2e/kWh over the full period) therefore describes roughly two thirds of Dutch generation, and the true national value may be lower or higher.
+**Example.** The Netherlands has a much lower factor coverage than the other countries, because a large share of Dutch generation is reported under production types without an emission factor. Its carbon intensity therefore describes only part of Dutch generation, and the true national value may be lower or higher. For the current coverage and carbon intensity, use the live data (Factor Coverage % and Carbon Intensity measures), not this document.
 
 # 5. Other generation KPIs
 
