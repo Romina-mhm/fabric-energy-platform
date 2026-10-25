@@ -2,6 +2,25 @@
 
 All notable changes to this project are documented here.
 
+## [0.8.0] - 2026-10-25: Agents, knowledge and governance
+### Added
+- Microsoft Foundry agent `energy-orchestrator` (gpt-5-mini) calling the Fabric data agent through the **Fabric IQ** tool over MCP with the user's identity ([docs/foundry](docs/foundry/README.md))
+- **Foundry IQ** knowledge base (Azure AI Search, Free tier) over `docs/Methodology.md` and the SDAC 15-minute MTU notice: numbers from Fabric, definitions with citations
+- `docs/Methodology.md`: KPI definitions, IPCC AR5 lifecycle emission factors, factor coverage, data-handling rules, what the data cannot answer
+- `nb_eval_template`: reusable evaluation (question file with live DAX truth, N runs, agent errors vs service failures)
+- Microsoft Purview (free version): Fabric estate via Live view, descriptions and owners on Gold and the semantic model
+- Capacity notifications and an Azure budget; architecture diagram in the README
+### Changed
+- Data agent: real end date from `Data Through Date`, no date filter when no period is given, future dates declined
+- Forecast question H12 moved to the tuning set; new held-out H15
+- Orchestrator rule: cite a document only for statements it contains; data-agent statements are attributed to the data
+### Results
+- 3-run re-evaluation: 94.7% of answered questions correct; service failures (capacity throttling, platform message) reported separately
+- Fix round: tuning 7/7, held-out 13/14 (one platform message)
+### Findings
+- Data agents are not yet catalogued in Purview; schema, lineage and glossary need the enterprise tier
+- Agent and evaluation used ~93% of F2 capacity over 14 days; throttling rejected pipeline alerts on the heaviest day
+
 ## [0.7.0] - 2026-10-12: AI layer
 ### Added
 - Semantic model prepared for AI: descriptions, AI data schema, AI instructions, verified answers
