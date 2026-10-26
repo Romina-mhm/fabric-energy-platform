@@ -1,6 +1,6 @@
 # European Energy & Carbon-Intensity Platform on Microsoft Fabric
 
-An end-to-end data platform that answers one question: **how clean is the electricity in Europe, hour by hour, and when is the greenest time to use it?**
+An end-to-end data platform that answers one question: **how clean is the electricity in Europe, hour by hour, and when is the greenest time to use it?** It currently covers four markets (Italy, France, Germany, Netherlands) and is built to scale: countries, bidding zones and borders come from reference data, so adding a country is mainly a configuration change.
 
 It combines grid data from ENTSO-E, weather from Open-Meteo, public holidays, a reference database in Azure SQL and business KPI targets into a governed medallion architecture on Microsoft Fabric. Every result is traceable from the report back to the raw API file it came from.
 
@@ -117,8 +117,8 @@ Result: daily pipeline **~27 → ~17 minutes**.
 The Direct Lake semantic model is **prepared for AI**: business descriptions on every measure and table, a curated AI data schema (measures and descriptive attributes; keys and raw columns hidden), model-level AI instructions and verified answers ([model definition](fabric/sm_energy_sustainability.SemanticModel), [evaluation set](docs/ai-eval/questions.json)). A **Fabric Data Agent** (`da_energy_sustainability`) answers natural-language questions on carbon intensity, renewable share, prices, flows and weather, states the data period, and declines out-of-scope questions (forecasts, retail prices) instead of guessing.
 
 **Evaluation** (`nb_80_agent_eval`, Fabric Data Agent SDK):
-- Expected answers computed **live in DAX**, so they always match the current data
-- An **LLM-as-judge** with a custom rubric: ±1% tolerance, equivalent units, refusal checks
+- Expected answers computed **live in DAX** from the same measures, so they follow each data refresh instead of going stale
+- An **LLM-as-judge** with a custom rubric (±1% tolerance, equivalent units, refusal checks), published in `nb_eval_template`
 - A **tuning set** (6 questions, used to improve instructions) and a **held-out set** (14 questions, never used for tuning) to avoid overfitting
 - After the final change, instructions and model were **frozen** and evaluated 3 times
 
@@ -288,6 +288,6 @@ Microsoft Fabric (Lakehouse, Warehouse, Data Factory pipelines, Dataflow Gen2, M
 
 ## About
 
-Built by Romina Gharemohammadi, Microsoft Certified: Fabric Data Engineer Associate (DP-700). Developed with AI assistance (Claude); every change was reviewed, tested and validated against the data.
+Built by Romina Gharemohammadi, Microsoft Certified: Fabric Data Engineer Associate (DP-700). Developed with AI assistance (Claude); every change was reviewed by me and checked against the data (for example Silver-vs-Gold reconciliation and the agent evaluation).
 
 Licence: [MIT](LICENSE)
