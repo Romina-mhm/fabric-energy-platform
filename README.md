@@ -21,6 +21,7 @@ The project started while volunteering on a sustainable farm, where I met someon
 ## Architecture
 
 ```mermaid
+%%{init: {"themeVariables": {"fontSize": "18px"}}}%%
 flowchart LR
     subgraph Sources
         E[ENTSO-E API<br/>load, generation,<br/>prices, flows]
@@ -29,42 +30,70 @@ flowchart LR
         S[(Azure SQL<br/>reference data)]
         K[ADLS Gen2<br/>KPI targets CSV]
     end
-    subgraph Fabric["Microsoft Fabric (F2, Italy North)"]
-        B[Bronze<br/>lh_bronze<br/>raw files + audit log]
-        SV[Silver<br/>lh_silver<br/>Delta + DQ + quarantine]
-        G[Gold<br/>wh_gold<br/>star schema]
-        SM[Semantic model<br/>Direct Lake + RLS]
-        DA[Fabric data agent<br/>evaluated: tuning + held-out]
-        ONT[Ontology]
+
+    subgraph Fabric["Microsoft Fabric · data platform (F2, Italy North)"]
+        M[(Mirrored DB<br/>mirror_energy_ref)]
+        B[Bronze · lh_bronze<br/>raw files + audit log<br/>+ shortcuts]
+        SV[Silver · lh_silver<br/>Delta + DQ + quarantine]
+        G[Gold · wh_gold<br/>star schema, SCD2]
+        RTI[RTI demo<br/>Eventstream → Eventhouse]
+        subgraph OPS["Operations"]
+            P1[pl_master daily] ~~~ P2[Key Vault] ~~~ P3[Git · deploy dev → test] ~~~ P4[Activator + Teams alerts]
+        end
     end
-    subgraph Foundry["Microsoft Foundry"]
-        FA[Foundry agent<br/>gpt-5-mini]
-        FIQ[Foundry IQ<br/>knowledge base:<br/>methodology + SDAC]
+
+    subgraph AIF["AI-ready foundation"]
+        subgraph FabAI["Microsoft Fabric · semantic layer and agent"]
+            SM[Semantic model<br/>Direct Lake + RLS<br/>Prep data for AI]
+            DA[Fabric data agent]
+            EV[Evaluation<br/>7 tuning / 14 held-out<br/>DAX truth · LLM judge]
+            ONT[Ontology]
+        end
+        subgraph Foundry["Microsoft Foundry"]
+            FA[Foundry agent<br/>gpt-5-mini]
+            FIQ[Foundry IQ<br/>methodology + SDAC]
+        end
     end
-    subgraph Gov["Governance & operations"]
-        PV[Purview<br/>Live view, owners]
+
+    subgraph Gov["Governance and cost"]
+        PV[Purview<br/>live view, owners]
         PVE[Purview scans,<br/>glossary, labels]
-        OPS[Capacity Metrics,<br/>alerts, budget]
+        CAP[Capacity Metrics,<br/>alerts, budget]
     end
+
+    subgraph Legend
+        L1[Built and tested]
+        L2[Planned, not enabled]
+    end
+
+    PBI[Power BI report]
+    BLOB[(Blob container<br/>knowledge)]
     CS[Copilot Studio / Teams]
+
     E -->|PySpark notebook| B
     W -->|PySpark notebook| B
-    H -->|Pipeline REST Copy| B
-    S -->|Mirroring + shortcuts| B
-    K -->|Dataflow Gen2| SV
+    H -->|Pipeline Copy · monthly| B
+    S -->|Mirroring| M
+    M -->|OneLake shortcuts| B
+    K -->|OneLake shortcut| B
+    B -->|Dataflow Gen2 · KPI CSV| SV
     B -->|PySpark MERGE| SV
-    SV -->|T-SQL procedures| G
-    G --> SM --> PBI[Power BI]
+    SV -->|"T-SQL procs ·<br/>reconciliation gate"| G
+    G -->|Direct Lake| SM
+    SM --> PBI
     SM --> DA
-    DA -->|Fabric IQ tool, MCP,<br/>user identity| FA
-    BLOB[(Blob container<br/>knowledge)] --> FIQ
-    FIQ -->|MCP, API key| FA
+    EV -->|evaluates| DA
+    DA -->|"Fabric IQ · MCP ·<br/>user identity"| FA
+    BLOB --> FIQ
+    FIQ -->|MCP · API key| FA
     ONT -.-> DA
     FA -.-> CS
     PV --- Fabric
     PVE -.- Fabric
+
     classDef target stroke-dasharray: 5 5,color:#666
-    class ONT,PVE,CS target
+    class ONT,PVE,CS,L2 target
+    style AIF fill:#E8F5EE,stroke:#1F7A52,stroke-width:2px
 ```
 
 *Solid = built and tested. Dashed = recommended for production, not enabled in this lab (enterprise tier, extra licences or preview).*
